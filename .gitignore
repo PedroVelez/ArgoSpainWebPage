@@ -1,0 +1,11 @@
+*.*~
+*.log
+ActualizaPaginaWebArgoEs*log
+**/Data/Data*
+**/Data/Informe*
+*/GetData/*.log
+**/Html/*html
+**/Html/*geojson
+**/informes/*
+**/Log/*.log
+.DS_Store
