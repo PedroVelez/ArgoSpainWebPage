@@ -46,7 +46,7 @@ fprintf(fid,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Ul
 fprintf(fid,'Hasta la fecha %d perfiles han sido realizados por las boyas del programa <b>Argo Espa&ntilde;a</b>\n',sum(NTotalPerfiles));
 fprintf(fid,'</div>\n');
 fprintf(fid,'</p>\n');
-fprintf(fid,'<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6LISJw-1t__vXB--zDZr3Gr3_b5hhhZE&callback=initialize"></script> \n');
+fprintf(fid,'<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=%s&callback=initialize"></script> \n',APIkey);
 fprintf(fid,'\n');
 fprintf(fid,'<script type="text/javascript" id="script"> \n');
 fprintf(fid,'function initialize() {\n');

@@ -54,7 +54,7 @@ fprintf(fid,'<style>\n');
 fprintf(fid,'	body { font-family: Arial, sans-serif; }\n');
 fprintf(fid,'	#map_canvas { width:%dpx; height: %dpx;  }\n',GMTamanoArgoIb(1),GMTamanoArgoIb(2));
 fprintf(fid,'</style>\n');
-fprintf(fid,'<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB6LISJw-1t__vXB--zDZr3Gr3_b5hhhZE&callback=initialize"></script> \n');
+fprintf(fid,'<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=%s&callback=initialize"></script> \n',APIkey);
 fprintf(fid,'\n');
 fprintf(fid,'<script type="text/javascript" id="script"> \n');
 fprintf(fid,'function initialize() {\n');
