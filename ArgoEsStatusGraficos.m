@@ -8,7 +8,7 @@ ArgoEsOpciones
 %Visible=1;
 %DirOutGraph='.../PaginaWeb/ArgoEsGraficos';
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
-%DiasAnalisis=11;
+%DiasAnalisis=11
 %ClimatologyFile='./Data/WOA05.mat';
 %SubeFTP=1;
 

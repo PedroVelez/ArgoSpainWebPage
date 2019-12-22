@@ -4,7 +4,7 @@ FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
 PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
-DirArgoData=/Users/pvb/Data/Argo
+DirArgoData=/Users/pvb/Dropbox/Oceanografia/Data/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt
 /bin/rm -f $PaginaWebDir/Log/GetArgo.log

@@ -3,7 +3,7 @@
 
 %% Input Directories and files
 %Directory that contains the argo float data, and the Argo geo data
-DirArgoData='/Users/pvb/Data/Argo';
+DirArgoData='/Users/pvb/Dropbox/Oceanografia/Data/Argo';
 
 %Directory with the geographical data and the floats
 DataDirGeo=fullfile(DirArgoData,'geo','atlantic_ocean');
