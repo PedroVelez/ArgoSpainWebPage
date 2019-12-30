@@ -67,7 +67,6 @@ GMTamanoArgoEs=[800,390];
 %API key
 APIkey='AIzaSyByge8_WrV1nhoZEwGGhxlu08eGHwjZ40I';
 
-
 %% ArgoEsStatusGraficos
-POSBorder=2;  %Margen adicional para el mapa de la trayectoria
-DiasAnalisis=100.0; %Days to look for to update the figures
+POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
+DiasAnalisis=10.0; %Days to look for to update the figures
