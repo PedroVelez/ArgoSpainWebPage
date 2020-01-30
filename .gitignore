@@ -9,3 +9,4 @@ ActualizaPaginaWebArgoEs*log
 **/informes/*
 **/Log/*.log
 .DS_Store
+.AppleDouble

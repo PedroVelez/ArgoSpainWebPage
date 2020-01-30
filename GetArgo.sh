@@ -3,8 +3,8 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
-PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
-DirArgoData=/Users/pvb/Dropbox/Oceanografia/Data/Argo
+PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
+DirArgoData=$HOME/Dropbox/Oceanografia/Data/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt
 /bin/rm -f $PaginaWebDir/Log/GetArgo.log
@@ -46,14 +46,14 @@ for dacboya in $(cat $PaginaWebDir/FloatsArgoEs.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   echo $dacboyaT
-  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 #Boyas Interest
 #No se hace en background para noabrir multiples instacinas de FTP
 for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 
 #Boyas Argo Espana
@@ -75,5 +75,5 @@ done
 #ArgoGreyList
 #---------------------------------------
 #Descarga grey list
-/usr/local/bin/wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
+wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
 #/usr/local/bin/wget --passive -np -N -nH -r -Q602M -a $DirArgoData/log/GetArgoGreyList.txt -b --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt >> $PaginaWebDir/Log/GetArgo.log
