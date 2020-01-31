@@ -58,7 +58,7 @@ then
   fi
 
 #Update Ib GoogleMap
-   printf "  Update Ib GoogleMap\n"
+   printf "  Updating Ib GoogleMap\n"
    if [ $Verbose -eq 1 ]
    then
      $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoIbStatusGM;exit'
@@ -67,7 +67,7 @@ then
    fi
 
 #Update ArgoEs GoogleMap
-   printf "  Update ArgoEs GoogleMap\n"
+   printf "  Updating ArgoEs GoogleMap\n"
    if [ $Verbose -eq 1 ]
    then
     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGM;exit'
@@ -76,7 +76,7 @@ then
    fi
 
   #Update Update Argo Atlatic GoogleMap
-   printf "  Update Argo Atlatic GoogleMap\n"
+   printf "  Updating Argo Atlatic GoogleMap\n"
    if [ $Verbose -eq 1 ]
    then
      $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoStatus;exit'
@@ -85,7 +85,7 @@ then
    fi
 
  #Update ArgoEs figures
-   printf "  Update ArgoEs figures\n"
+   printf "  Updating ArgoEs figures\n"
    if [ $Verbose -eq 1 ]
    then
     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit'
@@ -121,6 +121,7 @@ fi
 #Borra ficheros ArgoEsGraficos
 if [ $SoloSube == 0 ]
 then
+   printf "  Deleting Graficos\n"
    /bin/rm -f $PaginaWebDir/Html/ArgoEsGraficos/* >> $DirLog/ActualizaPaginaWebArgoEsBorra.log
 fi
 
