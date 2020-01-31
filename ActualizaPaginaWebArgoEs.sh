@@ -3,12 +3,16 @@
 Verbose=0
 SoloSube=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
 
-PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
+MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
+
+PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
 DirLog=$PaginaWebDir/Log
 
-MatVersion=/Applications/MATLAB_R2019a.app/bin/matlab
+#------------------------------------
+#Inicio
+#------------------------------------
 
-/bin/rm -f $DirLog/*.log
+/bin/rm -f $DirLog/ActualizaPaginaWebArgoEs*.log
 
 printf ">>>> Updating PaginaWebArgoEs \n"
 printf "  Verbose $Verbose SoloSube $SoloSube \n"
@@ -24,7 +28,7 @@ printf "  DirLog      $DirLog \n"
  then
    $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;GetArgoGreyList2mat;exit'
  else
-   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
   fi
 
 #------------------------------------
@@ -42,7 +46,7 @@ then
   then
   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsLeeDatos;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
   fi
 
 #Update Ib GoogleMap
@@ -51,7 +55,7 @@ then
   then
   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoIbStatusGM;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
   fi
 
 #Update ArgoEs GoogleMap
@@ -60,8 +64,17 @@ then
   then
   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGM;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
   fi
+
+  #Update Update Argo Atlatic GoogleMap
+    printf "  Update Argo Atlatic GoogleMap\n"
+    if [ $Verbose -eq 1 ]
+    then
+    $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit'
+    else
+    $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
+    fi
 
  #Update ArgoEs figures
   printf "  Update ArgoEs figures\n"
@@ -69,18 +82,9 @@ then
   then
   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGraficos;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
-
-#Update Update Argo Atlatic GoogleMap
-  printf "  Update Argo Atlatic GoogleMap\n"
-  if [ $Verbose -eq 1 ]
-  then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit'
-  else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
   fi
 
-  fi
 fi
 
 #------------------------------------
@@ -110,7 +114,7 @@ fi
 #Borra ficheros ArgoEsGraficos
 if [ $SoloSube == 0 ]
 then
-  /bin/rm -f $PaginaWebDir/Html/ArgoEsGraficos/* >> $DirLog/ActualizaPaginaWebArgoEs.log
+  /bin/rm -f $PaginaWebDir/Html/ArgoEsGraficos/* >> $DirLog/ActualizaPaginaWebArgoEsBorra.log
 fi
 
 #------------------------------------
@@ -124,7 +128,7 @@ then
   then
   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsEnviaInforme;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEs.log
+  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
   fi
 fi
 
