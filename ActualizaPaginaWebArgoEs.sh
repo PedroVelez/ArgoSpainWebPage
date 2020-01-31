@@ -3,10 +3,16 @@
 Verbose=0
 SoloSube=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
 
-MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
-
 PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
 DirLog=$PaginaWebDir/Log
+
+strval=$(uname -a)
+if [[ $strval == *Okapi* ]];
+then
+  MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
+else
+  MatVersion=matlab
+fi
 
 #------------------------------------
 #Inicio
@@ -26,9 +32,9 @@ printf "  DirLog      $DirLog \n"
  printf "  Updating grey list\n"
  if [ $Verbose -eq 1 ]
  then
-   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;GetArgoGreyList2mat;exit'
+   $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;GetArgoGreyList2mat;exit'
  else
-   $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
+   $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
   fi
 
 #------------------------------------
@@ -44,45 +50,45 @@ then
   printf "  Updating data sets\n"
   if [ $Verbose -eq 1 ]
   then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsLeeDatos;exit'
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsLeeDatos;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
   fi
 
 #Update Ib GoogleMap
   printf "  Update Ib GoogleMap\n"
   if [ $Verbose -eq 1 ]
   then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoIbStatusGM;exit'
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoIbStatusGM;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
   fi
 
 #Update ArgoEs GoogleMap
   printf "  Update ArgoEs GoogleMap\n"
   if [ $Verbose -eq 1 ]
   then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGM;exit'
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGM;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
   fi
 
   #Update Update Argo Atlatic GoogleMap
     printf "  Update Argo Atlatic GoogleMap\n"
     if [ $Verbose -eq 1 ]
     then
-    $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit'
+    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoStatus;exit'
     else
-    $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
+    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
     fi
 
  #Update ArgoEs figures
   printf "  Update ArgoEs figures\n"
   if [ $Verbose -eq 1 ]
   then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGraficos;exit'
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
   fi
 
 fi
@@ -126,9 +132,9 @@ then
   cd $PaginaWebDir
   if [ $Verbose -eq 1 ]
   then
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsEnviaInforme;exit'
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsEnviaInforme;exit'
   else
-  $MatVersion -nodisplay -nosplash -r 'cd /Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs;ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
+  $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
   fi
 fi
 
