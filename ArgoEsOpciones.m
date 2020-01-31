@@ -65,7 +65,7 @@ GMZoomArgoEs=1;
 GMTamanoArgoEs=[800,390];
 
 %API key
-GoogleMapsAPIKey
+load GoogleMapsAPIKey
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
