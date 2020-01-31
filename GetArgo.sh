@@ -6,8 +6,7 @@ FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
 DirArgoData=/Users/pvb/Dropbox/Oceanografia/Data/Argo
 
-/bin/rm -f $DirArgoData/log/*.txt
-/bin/rm -f $PaginaWebDir/Log/GetArgo.log
+/bin/rm -f $PaginaWebDir/Log/*.log
 
 #---------------------------------------
 #Get Region
@@ -25,9 +24,9 @@ if [ "$monthb" -lt 10 ]; then
     monthb=0$monthb
 fi
 
-/usr/local/bin/wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$month/*
-/usr/local/bin/wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$monthb/*
-/usr/local/bin/wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$montha/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$month/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth1.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$monthb/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth2.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$montha/*
 
 #---------------------------------------
 #Crea listas de Argo a apartir del google spreadsheets
@@ -46,14 +45,15 @@ for dacboya in $(cat $PaginaWebDir/FloatsArgoEs.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   echo $dacboyaT
-  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoES.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
+
 #Boyas Interest
 #No se hace en background para noabrir multiples instacinas de FTP
 for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 
 #Boyas Argo Espana
@@ -75,5 +75,5 @@ done
 #ArgoGreyList
 #---------------------------------------
 #Descarga grey list
-/usr/local/bin/wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
+wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGreyList.log -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
 #/usr/local/bin/wget --passive -np -N -nH -r -Q602M -a $DirArgoData/log/GetArgoGreyList.txt -b --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt >> $PaginaWebDir/Log/GetArgo.log
