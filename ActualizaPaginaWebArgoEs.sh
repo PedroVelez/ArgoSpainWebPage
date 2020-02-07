@@ -85,7 +85,7 @@ then
    fi
 
  #Update ArgoEs figures
-   printf "  Updating ArgoEs figures\n"
+   printf "  Updating and upload ArgoEs figures\n"
    if [ $Verbose -eq 1 ]
    then
     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit'
@@ -121,7 +121,7 @@ fi
 #Borra ficheros ArgoEsGraficos
 if [ $SoloSube == 0 ]
 then
-   printf "  Deleting Graficos\n"
+   printf "  Deleting local copy of ArgoEs figures\n"
    /bin/rm -f $PaginaWebDir/Html/ArgoEsGraficos/* >> $DirLog/ActualizaPaginaWebArgoEsBorra.log
 fi
 
