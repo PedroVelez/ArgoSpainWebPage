@@ -45,11 +45,7 @@ for dacboya in $(cat $PaginaWebDir/FloatsArgoEs.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   echo $dacboyaT
-<<<<<<< HEAD
-  /usr/local/bin/wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoES.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
-=======
-  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
->>>>>>> d07203e652fb419d675a2c4ed6ba92b827e8eb1b
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoES.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 
 #Boyas Interest
@@ -57,11 +53,7 @@ done
 for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-<<<<<<< HEAD
   wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
-=======
-  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
->>>>>>> d07203e652fb419d675a2c4ed6ba92b827e8eb1b
 done
 
 #Boyas Argo Espana
@@ -83,9 +75,4 @@ done
 #ArgoGreyList
 #---------------------------------------
 #Descarga grey list
-<<<<<<< HEAD
 wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGreyList.log -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
-=======
-wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
->>>>>>> d07203e652fb419d675a2c4ed6ba92b827e8eb1b
-#/usr/local/bin/wget --passive -np -N -nH -r -Q602M -a $DirArgoData/log/GetArgoGreyList.txt -b --cut-dirs 4 -P $DirArgoData/ $FtpArgoData/ar_greylist.txt >> $PaginaWebDir/Log/GetArgo.log
