@@ -34,9 +34,9 @@ printf "  DirLog       $DirLog \n"
  printf "  Updating grey list\n"
 if [ $Verbose -eq 1 ]
 then
-   $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;GetArgoGreyList2mat;exit'
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'GetArgoGreyList2mat;exit'
 else
-   $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
 fi
 
 #------------------------------------
@@ -52,45 +52,45 @@ then
   printf "  Updating data sets\n"
   if [ $Verbose -eq 1 ]
   then
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsLeeDatos;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsLeeDatos;exit'
   else
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
   fi
 
 #Update Ib GoogleMap
    printf "  Updating Ib GoogleMap\n"
    if [ $Verbose -eq 1 ]
    then
-     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoIbStatusGM;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoIbStatusGM;exit'
    else
-     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
    fi
 
 #Update ArgoEs GoogleMap
    printf "  Updating ArgoEs GoogleMap\n"
    if [ $Verbose -eq 1 ]
    then
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGM;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGM;exit'
    else
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
    fi
 
-  #Update Update Argo Atlatic GoogleMap
-   printf "  Updating Argo Atlatic GoogleMap\n"
-   if [ $Verbose -eq 1 ]
-   then
-     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoStatus;exit'
-   else
-     $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
+#Update Update Argo Atlatic GoogleMap
+  printf "  Updating Argo Atlatic GoogleMap\n"
+  if [ $Verbose -eq 1 ]
+  then
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoStatus;exit'
+  else
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
    fi
 
- #Update ArgoEs figures
-   printf "  Updating and upload ArgoEs figures\n"
+#Update ArgoEs figures
+  printf "  Updating and upload ArgoEs figures\n"
    if [ $Verbose -eq 1 ]
    then
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGraficos;exit'
    else
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
    fi
 fi
 
@@ -134,9 +134,9 @@ then
   cd $PaginaWebDir
   if [ $Verbose -eq 1 ]
   then
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsEnviaInforme;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsEnviaInforme;exit'
   else
-    $MatVersion -nodisplay -nosplash -r 'cd $PaginaWebDir;ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
   fi
 fi
 
