@@ -1,9 +1,9 @@
 #!/bin/bash
 
 Verbose=0
-SoloSube=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
+JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
 
-PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
+PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
 DirLog=$PaginaWebDir/Log
 
 strval=$(uname -a)
@@ -20,10 +20,10 @@ fi
 #Inicio
 #------------------------------------
 
-/bin/rm -f $DirLog/ActualizaPaginaWebArgoEs*.log
+/bin/rm -f $DirLog/ArgoSpainWebPage*.log
 
-printf ">>>> Updating PaginaWebArgoEs \n"
-printf "  Verbose $Verbose SoloSube $SoloSube \n"
+printf ">>>> Updating ArgoSpainWebArgo \n"
+printf "  Verbose $Verbose JustUpload $JustUpload \n"
 printf "  PaginaWebDir $PaginaWebDir \n"
 printf "  DirLog       $DirLog \n"
 
@@ -36,13 +36,13 @@ if [ $Verbose -eq 1 ]
 then
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'GetArgoGreyList2mat;exit'
 else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'GetArgoGreyList2mat;exit' >> $DirLog/ActualizaPaginaWebArgoEsGreyList.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'GetArgoGreyList2mat;exit' >> $DirLog/ArgoSpainWebPage_GreyList.log
 fi
 
 #------------------------------------
 # Update the files for the web page
 #------------------------------------
-if [ $SoloSube == 0 ]
+if [ $JustUpload == 0 ]
 then
    /bin/rm -f $PaginaWebDir/Log/ErrorArgoEsLeeDatos.mat
    /bin/rm -f $PaginaWebDir/Data/DataArgoEs.mat
@@ -52,9 +52,9 @@ then
   printf "  Updating data sets\n"
   if [ $Verbose -eq 1 ]
   then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsLeeDatos;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsReadData;exit'
   else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsLeeDatos;exit' >> $DirLog/ActualizaPaginaWebArgoEsLeeDatos.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsReadData;exit' >> $DirLog/ArgoSpainWebPage_ReadData.log
   fi
 
 #Update Ib GoogleMap
@@ -63,7 +63,7 @@ then
    then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoIbStatusGM;exit'
    else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoIbStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsIBGM.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoIbStatusGM;exit' >> $DirLog/ArgoSpainWebPage_IbStatusGM.log
    fi
 
 #Update ArgoEs GoogleMap
@@ -72,7 +72,7 @@ then
    then
     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGM;exit'
    else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGM;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEGM.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGM;exit' >> $DirLog/ArgoSpainWebPage_EsAEGM.log
    fi
 
 #Update Update Argo Atlatic GoogleMap
@@ -81,16 +81,16 @@ then
   then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoStatus;exit'
   else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoStatus;exit' >> $DirLog/ActualizaPaginaWebArgoEsATGM.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoStatus;exit' >> $DirLog/ArgoSpainWebPage_StatusGM.log
    fi
 
 #Update ArgoEs figures
   printf "  Updating and upload ArgoEs figures\n"
    if [ $Verbose -eq 1 ]
    then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGraficos;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatus;exit'
    else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatusGraficos;exit' >> $DirLog/ActualizaPaginaWebArgoEsAEFigures.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsStatus;exit' >> $DirLog/ArgoSpainWebPage_EsStatus.log
    fi
 fi
 
@@ -119,7 +119,7 @@ fi
 #/usr/local/bin/ncftpput -a OceanografiaES /html/argo/datos/ArgoEsGraficos *.html >> #$DirLog/ActualizaPaginaWebArgoEs.log
 
 #Borra ficheros ArgoEsGraficos
-if [ $SoloSube == 0 ]
+if [ $JustUpload == 0 ]
 then
    printf "  Deleting local copy of ArgoEs figures\n"
    /bin/rm -f $PaginaWebDir/Html/ArgoEsGraficos/* >> $DirLog/ActualizaPaginaWebArgoEsBorra.log
@@ -129,14 +129,14 @@ fi
 # Send reports by email
 #------------------------------------
 printf "  Send reports by email \n"
-if [ $SoloSube == 0 ]
+if [ $JustUpload == 0 ]
 then
   cd $PaginaWebDir
   if [ $Verbose -eq 1 ]
   then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsEnviaInforme;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsSendReport;exit'
   else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsEnviaInforme;exit' >> $DirLog/ActualizaPaginaWebArgoEsEnvioMail.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'ArgoEsSendReport;exit' >> $DirLog/ArgoSpainWebPage_EsSendReport.log
   fi
 fi
 
@@ -144,7 +144,7 @@ fi
 # Copy data to the remote server
 #------------------------------------
 #printf "  Copy data to the remote server \n"
-#if [ $SoloSube == 0 ]
+#if [ $JustUpload == 0 ]
 #then
 #  cp $PaginaWebDir/Data/DataArgoEs.mat /Volumes/GDOYE$/Proyectos/Argo/DelayedMode/Data
 #fi

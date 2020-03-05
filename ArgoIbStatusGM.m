@@ -1,9 +1,9 @@
 clear all;close all
-%Crea el mapa de las posiciones numeradas en la cuenca iberica argoibpositionsname.ps
-%Crea el documento argoibstatus.html que conteine una tabla con enlaces a todas las boyas del area iberica
+%This script create the google maps with the positions of all Argo floats
+%active in the canary basin, and it creates the file  FileHtmlArgoIbStatus (argoibstatus.html)
 
-%% Read configuration
-ArgoEsOpciones
+%% Read options
+ArgoEsOptions
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -31,7 +31,7 @@ ArgoEsOpciones
 DataArgoEs=load(strcat(PaginaWebDir,'/Data/DataArgoEs.mat'),'WMO','activa','FechaUltimoPerfil');
 DataArgoIn=load(strcat(PaginaWebDir,'/Data/DataArgoIn.mat'),'WMO','activa','FechaUltimoPerfil');
 
-%Cuento numero de perfiles de Argo Espana
+%lo
 NTotalPerfiles=0;
 for ifloat=1:length(DataArgoEs.WMO)
     FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))),'HIDf');
@@ -380,9 +380,9 @@ else
 end
 
 if Incremento~=0
-    Informe=sprintf('ArgoIbStatus - Activos Iberian Basin %03d (%d) [%s,%s]\n     Ultimo perfil %s\n     Actualizado %s',length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('ArgoIbStatus - Active floats Iberian Basin %03d (%d) [%s,%s]\n     Last profile %s\n     Updated on %s',length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 else
-    Informe=sprintf('ArgoIbStatus - Activos Iberian Basin %03d [%s,%s]\n     Ultimo perfil %s\n     Actualizado %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('ArgoIbStatus - Active floats Iberian Basin %03d [%s,%s]\n     Las profile %s\n     Updated on %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 end
 if exist('ME')
     Informe=sprintf('%s\n >>>>>> Error ArgoIbStatusGM.m %s line %d\n     %s <<<<<<',Informe,ME.message,ME.stack(1).line,datestr(now));

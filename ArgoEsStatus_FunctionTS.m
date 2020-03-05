@@ -1,4 +1,4 @@
-function ArgoEsStatusGraficos_FunctionTS(OneFloatData,GlobalDS,Limits,hPosition);
+function ArgoEsStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hPosition);
 %Colors
 cl=parula;
 color=linspace(1,64,size(OneFloatData.sals,2));

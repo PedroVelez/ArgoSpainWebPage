@@ -2,7 +2,7 @@
 clear all;close all
 
 %% Read configuration
-ArgoEsOpciones
+ArgoEsOptions
 
 % Verbose=1;
 % InterDiasEmision=30; %Dias sin emision a partir de los cuales una boya ha dejado de operar

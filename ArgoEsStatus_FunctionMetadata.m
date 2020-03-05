@@ -1,4 +1,4 @@
-function MD=ArgoEsStatusGraficos_FunctionMetadata(WMO,DirArgoData)
+function MD=ArgoEsStatus_FunctionMetadata(WMO,DirArgoData)
 %     TransmisionSystem: 'ARGOS'
 %     PlatformID: '4797'
 %     PlatformModel: ' APEX APF9A 6609'

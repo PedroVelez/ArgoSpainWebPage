@@ -1,4 +1,4 @@
-function ArgoEsStatusGraficos_FunctionSections(OneFloatData,Limits);
+function ArgoEsStatus_FunctionSections(OneFloatData,Limits);
 
 % Limites de los ejes
 hT1P=[0.06 0.83 0.807  0.13];
