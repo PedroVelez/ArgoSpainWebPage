@@ -3,7 +3,7 @@ clear all;close all
 %programa Argo Espana y Argo Interest
 
 %% Read configuration
-ArgoEsOpciones
+ArgoEsOptions
 
 %Visible=1;
 %DirOutGraph='.../PaginaWeb/ArgoEsGraficos';
@@ -79,12 +79,12 @@ for NumDatSet=NumberOfDatSets
     for ifloat=1:1:size(DataArgoEs.WMO,2)
         if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
             fprintf('     > WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
-            [FileOutA,FileOutAz,FileOutB,FileOutC]=ArgoEsStatusGraficos_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
-            FileOutFHtml=ArgoEsStatusGraficos_WebPage(DataArgoEs.WMO(ifloat),GlobalDS);
+            [FileOutA,FileOutAz,FileOutB,FileOutC]=ArgoEsStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
+            FileOutFHtml=ArgoEsStatus_WebPage(DataArgoEs.WMO(ifloat),GlobalDS);
             if SubeFTP==1
                 fprintf('uploading files to ftp.\n')
                 binary(ftpobj)
-                
+                 
                 mput(ftpobj,FileOutA);
                 mput(ftpobj,FileOutAz);
                 mput(ftpobj,FileOutB);
@@ -98,6 +98,6 @@ for NumDatSet=NumberOfDatSets
         close(ftpobj)
     end
     %Report for each dataset
-    ArgoEsStatusGraficos_Report
+    ArgoEsStatus_Report
 end
 fprintf('      %s <<<<< \n',mfilename)

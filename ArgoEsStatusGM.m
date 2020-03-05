@@ -3,7 +3,7 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-ArgoEsOpciones
+ArgoEsOptions
 TrajectorySpanArgo=now-datenum(2005,1,1);
 % %GoogleMap
 % GMCentroArgoEs=[30,-16];
@@ -258,7 +258,7 @@ fprintf(fid,'</TR>\n');
 %Lee los datos de las boyas para poder crear la tabla de datos
 %iactiva=0;iinactiva=0;inodesplegada=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
-    MD=ArgoEsStatusGraficos_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
+    MD=ArgoEsStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
     if DataArgoEs.activa(ifloat)>=1 %Activa o Inactiva con datos
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         if DataArgoEs.activa(ifloat)==1
@@ -323,9 +323,9 @@ else
     Incremento=0;
 end
 if Incremento~=0
-    Informe=sprintf('ArgoEsStatusGM - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Ultimo perfil %s\n     Actualizado %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('ArgoEsStatusGM - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 else
-    Informe=sprintf('ArgoEsStatusGM - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Ultimo perfil %s\n     Actualizado %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('ArgoEsStatusGM - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 end
 iactiva=DataArgoEs.iactiva;
 juldsAS=DataArgoEs.FechaUltimoPerfil;

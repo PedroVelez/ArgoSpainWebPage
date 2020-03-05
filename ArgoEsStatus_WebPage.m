@@ -1,4 +1,4 @@
-function  FileOutFHtml=ArgoEsStatusGraficos_WebPage(WMO,GlobalDS)
+function  FileOutFHtml=ArgoEsStatus_WebPage(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.DirOutGraph='./Html/ArgoEsGraficos';
@@ -8,7 +8,7 @@ end
 fprintf('web page, ')
 
 %% Read Metada data
-MD=ArgoEsStatusGraficos_FunctionMetadata(WMO,GlobalDS.DirArgoData);
+MD=ArgoEsStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData);
 
 %% Escribe pagina web
 FileOutFHtml=sprintf('%s/%07d.html',GlobalDS.DirOutGraph,WMO);

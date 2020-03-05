@@ -11,13 +11,13 @@ DataDirFloats=fullfile(DirArgoData,'Floats');
 
 %Directory where the matlab scripts than update the Argo web page area
 %located
-PaginaWebDir=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs');
+PaginaWebDir=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
 
 %Directory with list of floats for each national program to monitor
-DirFloatLists=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs');
+DirFloatLists=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
 
 %Climatolyfile
-ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs/Data/WOA05.mat');
+ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/Data/WOA05.mat');
 
 %% Output Directories and files
 %Directory to output the graphic files
