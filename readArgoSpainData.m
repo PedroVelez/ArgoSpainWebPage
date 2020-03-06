@@ -1,8 +1,8 @@
-%Read the data from the Argo Spaon data set
+% Read the data from the Argo Spaon data set
 clear all;close all
 
 %% Read configuration
-ArgoEsOptions
+configArgoSpainWebpage
 
 % Verbose=1;
 % InterDiasEmision=30; %Dias sin emision a partir de los cuales una boya ha dejado de operar
@@ -14,22 +14,22 @@ ArgoEsOptions
 
 %% Inicio
 fprintf('>>>>> %s\n',mfilename)
-for NumDatSet=NumberOfDatSets
-    DataSetName=DataSetNameM(NumDatSet,:);
+for NumDatSet = NumberOfDatSets
+    DataSetName = DataSetNameM{NumDatSet};
     
     %Reading floats in the DataSet
     fprintf('     > Reading %s\n',DataSetName)
-    i1=0;
-    boyasDataSet=[];
-    fid=fopen(strcat(DirFloatLists,'/Floats',DataSetName,'.dat'));
-    while feof(fid)==0
-        linea=fgetl(fid);
+    i1 = 0;
+    boyasDataSet = [];
+    fid = fopen(strcat(DirFloatLists,'/floats',DataSetName,'.dat'));
+    while feof(fid) == 0
+        linea=  fgetl(fid);
         boyasDSt=str2double(linea(strfind(linea,'/')+1:end));
         fileM=sprintf('%s/%07d/%07d_meta.nc',DataDirFloats,boyasDSt,boyasDSt);
         fileTe=sprintf('%s/%07d/%07d_tech.nc',DataDirFloats,boyasDSt,boyasDSt);
         if exist(fileM,'file')>0 && exist(fileTe,'file')>0
             i1=i1+1;
-            boyasDataSet(i1)=boyasDSt;
+            boyasDataSet(i1) = boyasDSt;
         end
     end
     
@@ -37,14 +37,14 @@ for NumDatSet=NumberOfDatSets
     Age=boyasDataSet.*0;
     ibData=0;
     for ibO=1:size(boyasDataSet,2)
-        fileT=sprintf('%s/%07d/%07d_Rtraj.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
-        fileM=sprintf('%s/%07d/%07d_meta.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
-        fileTe=sprintf('%s/%07d/%07d_tech.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
-        fileHi=sprintf('%s/%07d/profiles/',DataDirFloats,boyasDataSet(ibO));
+        fileT = sprintf('%s/%07d/%07d_Rtraj.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
+        fileM = sprintf('%s/%07d/%07d_meta.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
+        fileTe = sprintf('%s/%07d/%07d_tech.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
+        fileHi = sprintf('%s/%07d/profiles/',DataDirFloats,boyasDataSet(ibO));
         %Verifica si hay un .mat reciente con los datos
-        ReadNCData=1;
+        ReadNCData = 1;
         if  exist(sprintf('%s/%07d.mat',DataDirFloats,boyasDataSet(ibO)),'file')==2 && ForceDataUpdate==0
-            FloatData=load(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'FechaUltimoPerfilf');
+            FloatData = load(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'FechaUltimoPerfilf');
             FechaUltimoPerfilMat=FloatData.FechaUltimoPerfilf;
             if (now-FloatData.FechaUltimoPerfilf)>4*InterDiasEmision
                 ReadNCData=0;
@@ -56,12 +56,12 @@ for NumDatSet=NumberOfDatSets
         if  exist(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'file') && ForceDataUpdate==0 && ReadNCData==0
             fprintf('     > %07d mat file %s, ',boyasDataSet(ibO),DataSetName);
             ibData=ibData+1;
-            FloatData=load(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)));
-            WMO(ibData)=FloatData.WMOf;
-            HID{ibData}=FloatData.HIDf;
-            MTD{ibData}=FloatData.MTDf;
-            TED{ibData}=FloatData.TEDf;
-            TRD{ibData}=FloatData.TRDf;
+            FloatData =load(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)));
+            WMO(ibData) = FloatData.WMOf;
+            HID{ibData} = FloatData.HIDf;
+            MTD{ibData} = FloatData.MTDf;
+            TED{ibData} = FloatData.TEDf;
+            TRD{ibData} = FloatData.TRDf;
             FechaUltimoPerfil(ibData)=FloatData.FechaUltimoPerfilf;
             FechaPrimerPerfil(ibData)=FloatData.FechaPrimerPerfilf;
             UltimoVoltaje(ibData)=FloatData.UltimoVoltajef;
@@ -71,14 +71,14 @@ for NumDatSet=NumberOfDatSets
             fprintf('last profile %s\n',datestr(nanmax(HID{ibData}.julds)))
         elseif exist(fileM,'file')>0 && exist(fileTe,'file')>0 && exist(fileHi,'file')>0
             try
-                Profs=ReadArgoFloatProfilesDM(fileHi,Verbose);
+                Profs=readArgoFloatProfilesDM(fileHi,Verbose);
                 fprintf('     >> Updating %07d  with nc file %s, ',boyasDataSet(ibO),DataSetName);
                 ibData=ibData+1;
-                WMO(ibData)=boyasDataSet(ibO);
-                activa(ibData)=2; %No esta activa pero tiene datos
-                MTD{ibData}=ReadArgoMetaFile(fileM);
+                WMO(ibData) = boyasDataSet(ibO);
+                activa(ibData) = 2; %No esta activa pero tiene datos
+                MTD{ibData} = readArgoMetaFile(fileM);
                 try
-                    TED{ibData}=ReadArgoTechFile(fileTe);
+                    TED{ibData} = readArgoTechFile(fileTe);
                 catch ME
                     TED{ibData}=[];
                     fprintf('>>>>>> Problem with techincal files for %07d  with nc file %s. ', ...
@@ -86,7 +86,7 @@ for NumDatSet=NumberOfDatSets
                 end
                 if exist(fileT,'file')>0
                     try
-                        TRD{ibData}=ReadArgoTrayectoryFile(fileT);
+                        TRD{ibData} = ReadArgoTrayectoryFile(fileT);
                     catch ME
                         fprintf('>>>>>> Problem with Trayectory files for %07d  with nc file %s. ', ...
                             boyasDataSet(ibO),DataSetName);
@@ -172,34 +172,21 @@ for NumDatSet=NumberOfDatSets
     end
     
     % Ordeno por ultimo perfil
-    [FechaUltimoPerfil,IndiceOrdena] =sort(FechaUltimoPerfil,'descend');
-    WMO=WMO(IndiceOrdena);
-    activa=activa(IndiceOrdena);
-    UltimoVoltaje=UltimoVoltaje(IndiceOrdena);
-    UltimoSurfaceOffset=UltimoSurfaceOffset(IndiceOrdena);
-    FechaPrimerPerfil=FechaPrimerPerfil(IndiceOrdena);
-    Age=Age(IndiceOrdena);
-    
-    %for ibData=1:length(IndiceOrdena)
-    %    HID2{ibData}=HID{IndiceOrdena(ibData)};
-    %    TRD2{ibData}=TRD{IndiceOrdena(ibData)};
-    %    MTD2{ibData}=MTD{IndiceOrdena(ibData)};
-    %    TED2{ibData}=TED{IndiceOrdena(ibData)};
-    %end
-    %HID=HID2;
-    %TRD=TRD2;
-    %MTD=MTD2;
-    %TED=TED2;
-    %clear HID2 TRD2 MTD2 TED2
-    
-    UltimoVoltaje(UltimoVoltaje==0)=NaN;
-    iactiva=length(find(activa==1));
-    iinactiva=length(find(activa==2));
-    inodesplegada=length(find(activa==0));
+    [FechaUltimoPerfil,IndiceOrdena] = sort(FechaUltimoPerfil,'descend');
+    WMO = WMO(IndiceOrdena);
+    activa = activa(IndiceOrdena);
+    UltimoVoltaje = UltimoVoltaje(IndiceOrdena);
+    UltimoSurfaceOffset = UltimoSurfaceOffset(IndiceOrdena);
+    FechaPrimerPerfil = FechaPrimerPerfil(IndiceOrdena);
+    Age = Age(IndiceOrdena);
+    UltimoVoltaje(UltimoVoltaje == 0) = NaN;
+    iactiva =length(find(activa == 1));
+    iinactiva =length(find(activa == 2));
+    inodesplegada =length(find(activa == 0));
     fprintf('     > Writing %s\n',DataSetName)
     
     %Saving the data
-    save(strcat(PaginaWebDir,'/Data/Data',DataSetName),'WMO','activa','FechaUltimoPerfil', ...
+    save(strcat(PaginaWebDir,'/data/data',DataSetName),'WMO','activa','FechaUltimoPerfil', ...
         'FechaPrimerPerfil','InterDiasEmision','UltimoVoltaje','UltimoSurfaceOffset','iactiva', ...
         'iinactiva','inodesplegada','Age')
     clear HID TRD TED MTD WMO activa FechaUltimoPerfil FechaPrimerPerfil UltimoVoltaje

@@ -17,49 +17,50 @@ PaginaWebDir=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWeb
 DirFloatLists=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
 
 %Climatolyfile
-ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/Data/WOA05.mat');
+ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
 %Directory to output the graphic files
-DirOutGraph=strcat(PaginaWebDir,'/Html/ArgoEsGraficos');
+DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
-FileHtmlArgoEsStatus=strcat(PaginaWebDir,'/Html/','argoesstatusgm.html');
-FileHtmlArgoIbStatus=strcat(PaginaWebDir,'/Html/','argoibstatusgm.html');
-FileHtmlArgoStatus=strcat(PaginaWebDir,'/Html/','ArgoStatus.html');
+FileHtmlArgoEsStatus=strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
+FileHtmlArgoIbStatus=strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
+FileHtmlArgoStatus=strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
 
 %% General settings
 Verbose=0;
 Visible=0;      %Flag to outpun in the screen the figures
 SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
 NumberOfDatSets=[1 2]; %Number of DataSets to monitor
-DataSetNameM=['ArgoEs';'ArgoIn'];  %Names of the DataSets to monitor
+DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
+DataSetNameM{2} = 'ArgoInterest';  
 
-%% ArgoEsLeeDatos
+%% readArgoSpainData
 InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
 ForceDataUpdate=0;   %1 to force to re-read the netcdf files
 
-%% ArgoIbStatusGM ArgoEsStatusGM ArgoStatusGM
+%% createArgoRegionGMap createArgoSpainGMap ArgoStatusGM
 %Time interval
 FechaI=now-30;
 FechaF=now;
 TrajectorySpanArgo=180; %en dias
 
 %Geographical Regions
-%Area de influencia espanola
+%Region
 lat_minIB= 15.00; lat_maxIB=54;
 lon_minIB=-45;    lon_maxIB=38;
-%Atlantico
+%Atlantic
 lat_min=-65;    lat_max=65;
 lon_min=-80;    lon_max=40;
 
-%Google Map ArgoIB
+%Google Map createArgoRegionGMap
 GMCentroArgoIb=[39,-16];
 GMZoomArgoIb=4;
 GMTamanoArgoIb=[700,650]; %Ancho,Alto
 TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
 
-%Google Map ArgoEsStatusGM
+%Google Map createArgoSpainGMap
 GMCentroArgoEs=[30,-16];
 GMZoomArgoEs=1;
 GMTamanoArgoEs=[800,390];
@@ -69,4 +70,7 @@ GoogleMapsAPIKey
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=10.0; %Days to look for to update the figures
+DiasAnalisis=2.0; %Days to look for to update the figures
+
+%% About sending reports
+sendEmail=0;

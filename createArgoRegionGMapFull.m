@@ -3,7 +3,8 @@ clear all;close all
 %Crea el documento argoibstatus.html que conteine una tabla con enlaces a todas las boyas del area iberica
 
 %% Read configuration
-ArgoEsOptions
+configArgoSpainWebpage
+
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -28,8 +29,8 @@ ArgoEsOptions
 
 %% Inicio
 %Read data
-DataArgoIn=load(strcat(PaginaWebDir,'/Data/DataArgoIn.mat'),'WMO','TRD','activa','FechaUltimoPerfil','HID');
-DataArgoEs=load(strcat(PaginaWebDir,'/Data/DataArgoEs.mat'),'WMO','TRD','MTD','activa','FechaUltimoPerfil','HID');
+DataArgoIn=load(strcat(PaginaWebDir,'/data/dataArgoInterest.mat'),'WMO','TRD','activa','FechaUltimoPerfil','HID');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','TRD','MTD','activa','FechaUltimoPerfil','HID');
 
 %Cuento numero de perfiles de Argo Espana
 NTotalPerfiles=0;
@@ -41,7 +42,7 @@ end
 fprintf('>>>>> %s\n',mfilename)
 ntper=0;
 ntperes=0;
-FileNameInforme=strcat(PaginaWebDir,'/Data/Informe',mfilename,'.mat');
+FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
 fid = fopen(FileHtmlArgoStatus,'w');
 fprintf('     > Writting Google Earth file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
@@ -52,14 +53,10 @@ fprintf(fid,'<meta name="viewport" content="initial-scale=1.0, user-scalable=no"
 fprintf(fid,'<meta http-equiv="content-type" content="text/html; charset=UTF-8"/> \n');
 fprintf(fid,'<style>\n');
 fprintf(fid,'	body { font-family: Arial, sans-serif; }\n');
-%fprintf(fid,'	#map { width:%dpx; height: %dpx;  }\n',GMTamanoArgoIb(1),GMTamanoArgoIb(2));
 fprintf(fid,'	#map { width:100%%; height: 100vh;}\n');
 fprintf(fid,'</style>\n\n');
 
-%fprintf(fid,'<script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script> \n\n');
 fprintf(fid,'<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCyoCNgbQyVljpQ_jG5vFTs9uVmpemBI68&callback=initMap"></script> \n\n');
-
-
 fprintf(fid,'<script type="text/javascript" id="script"> \n\n');
 
 %% Initialize the map and set up control
@@ -198,7 +195,7 @@ for ifecha=FechaF:-1:FechaI
     file=sprintf('%s/%04d/%02d/%04d%02d%02d_prof.nc',DataDirGeo,anho,mes,anho,mes,dia);
     if exist(file,'file')>0
         fprintf('>>>>>>> %02d/%02d/%04d \n',dia,mes,anho)
-        [platform,julds,lats,lons,pres,sals,tems,stapar,project,cycle,nprof,nparam,info]=ReadArgoDailyFileDM(file);
+        [platform,julds,lats,lons,pres,sals,tems,stapar,project,cycle,nprof,nparam,info] = readArgoDailyFileDM(file);
         nproftest=size(lats,1);
         if nproftest ~= nprof f
             fprintf('>>>>>>>>>>>>>>>>>>>>>>> Error con nprof sigo con el valor obtenido con size\n')
@@ -295,7 +292,7 @@ fprintf(fid,'   var marker = new google.maps.Marker({\n');
 fprintf(fid,'      position: new google.maps.LatLng(perfilador[2], perfilador[3]),\n');
 fprintf(fid,'      map: map,\n');
 fprintf(fid,'      icon: buoyred,\n');
-fprintf(fid,'      infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'',\n');
+fprintf(fid,'      infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'',\n');
 fprintf(fid,'      title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5]});\n');
 fprintf(fid,'   google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'  }else if (perfilador[0] == 2) {	\n');
@@ -303,7 +300,7 @@ fprintf(fid,'   var marker = new google.maps.Marker({\n');
 fprintf(fid,'      position: new google.maps.LatLng(perfilador[2], perfilador[3]),\n');
 fprintf(fid,'      map: map,\n');
 fprintf(fid,'      icon: buoywhitered,\n');
-fprintf(fid,'      infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'',\n');
+fprintf(fid,'      infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'',\n');
 fprintf(fid,'      title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5]});\n');
 fprintf(fid,'	google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'  }else{	\n');
