@@ -3,8 +3,9 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-ArgoEsOptions
-TrajectorySpanArgo=now-datenum(2005,1,1);
+configArgoSpainWebpage
+
+% TrajectorySpanArgo=now-datenum(2005,1,1);
 % %GoogleMap
 % GMCentroArgoEs=[30,-16];
 % GMZoomArgoEs=1;
@@ -13,7 +14,7 @@ TrajectorySpanArgo=now-datenum(2005,1,1);
 % FileHtmlArgoEsStatus='argoesstatusgm.html';
 
 %% Read Data
-DataArgoEs=load(strcat(PaginaWebDir,'/Data/DataArgoEs.mat'),'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
 
 %Cuento numero de perfiles
 NTotalPerfiles=0;
@@ -24,7 +25,7 @@ NTotalPerfiles=0;
 %end
 
 fprintf('>>>>> %s\n',mfilename)
-FileNameInforme=strcat(PaginaWebDir,'/Data/Informe',mfilename,'.mat');
+FileNameInforme=strcat(PaginaWebDir,'/Data/report',mfilename,'.mat');
 
 fid = fopen(FileHtmlArgoEsStatus,'w');
 fprintf('     > Writting Google Earth file \n');
@@ -130,14 +131,14 @@ for ifloat=1:size(DataArgoEs.WMO,2)
     end
 end
 
-%% Ultima posicion [Flag,Platform, lat, lon, project]
-%Cuentos los perfiles realizados
+%% last position [Flag,Platform, lat, lon, project]
+%number of profiles done
 fprintf(fid,' //Datos de ultima poscion de las las boyas\n');
 fprintf(fid,'	var perfiladores = [\n');
 for ifloat=1:size(DataArgoEs.WMO,2)
-    if DataArgoEs.activa(ifloat)==1 %Activa
-        FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
-        NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
+    if DataArgoEs.activa(ifloat)==1 %Active
+        FloatData = load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
+        NTotalPerfiles = [NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
         fprintf(fid,'           [1,%s,%4.2f,%4.2f,''%s''], \n',deblank(FloatData.HIDf.platform(end,:)),FloatData.HIDf.lats(end),FloatData.HIDf.lons(end),deblank(FloatData.MTDf.PROJECT_NAME));
     elseif DataArgoEs.activa(ifloat)==2 %Inactiva pero con datos
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
@@ -258,7 +259,7 @@ fprintf(fid,'</TR>\n');
 %Lee los datos de las boyas para poder crear la tabla de datos
 %iactiva=0;iinactiva=0;inodesplegada=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
-    MD=ArgoEsStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
+    MD = createArgoSpainStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
     if DataArgoEs.activa(ifloat)>=1 %Activa o Inactiva con datos
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         if DataArgoEs.activa(ifloat)==1
@@ -323,9 +324,9 @@ else
     Incremento=0;
 end
 if Incremento~=0
-    Informe=sprintf('ArgoEsStatusGM - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('createArgoSpainGMap - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 else
-    Informe=sprintf('ArgoEsStatusGM - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('createArgoSpainGMap - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 end
 iactiva=DataArgoEs.iactiva;
 juldsAS=DataArgoEs.FechaUltimoPerfil;

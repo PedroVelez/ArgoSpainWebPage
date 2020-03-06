@@ -1,4 +1,4 @@
-function ArgoEsStatus_FunctionTrajectory(OneFloatData,GlobalDS,Limits,hPosition)
+function createArgoSpainStatus_FunctionTrajectory(OneFloatData,GlobalDS,Limits,hPosition)
 cl=parula;
 
 if exist('hPosition','var') ==1

@@ -3,7 +3,7 @@ clear all;close all
 %active in the canary basin, and it creates the file  FileHtmlArgoIbStatus (argoibstatus.html)
 
 %% Read options
-ArgoEsOptions
+configArgoSpainWebpage
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -28,8 +28,8 @@ ArgoEsOptions
 
 %% Inicio
 %Read data
-DataArgoEs=load(strcat(PaginaWebDir,'/Data/DataArgoEs.mat'),'WMO','activa','FechaUltimoPerfil');
-DataArgoIn=load(strcat(PaginaWebDir,'/Data/DataArgoIn.mat'),'WMO','activa','FechaUltimoPerfil');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','FechaUltimoPerfil');
+DataArgoIn=load(strcat(PaginaWebDir,'/data/dataArgoInterest.mat'),'WMO','activa','FechaUltimoPerfil');
 
 %lo
 NTotalPerfiles=0;
@@ -41,7 +41,7 @@ end
 fprintf('>>>>> %s\n',mfilename)
 ntper=0;
 ntperes=0;
-FileNameInforme=strcat(PaginaWebDir,'/Data/Informe',mfilename,'.mat');
+FileNameInforme=strcat(PaginaWebDir,'/Data/report',mfilename,'.mat');
 fid = fopen(FileHtmlArgoIbStatus,'w');
 fprintf('     > Writting Google Earth file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
@@ -114,10 +114,6 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         lat=FloatData.HIDf.lats;
         julds=FloatData.HIDf.julds;
         
-        %lon=ArgoDataEs.HID{ifloat}.lons;
-        %lat=ArgoDataEs.HID{ifloat}.lats;
-        %julds=ArgoDataEs.HID{ifloat}.julds;
-        
         ind=find(isnan(lon)==0 & isnan(lat)==0);
         lon=lon(ind);
         lat=lat(ind);
@@ -146,9 +142,6 @@ for ifloat=1:size(DataArgoIn.WMO,2)
         lat=FloatData.HIDf.lats;
         julds=FloatData.HIDf.julds;
         
-        %lon=ArgoDataIn.HID{ifloat}.lons;
-        %lat=ArgoDataIn.HID{ifloat}.lats;
-        %julds=ArgoDataIn.HID{ifloat}.julds;
         ind=find(isnan(lon)==0 & isnan(lat)==0);
         lon=lon(ind);
         lat=lat(ind);
@@ -178,7 +171,7 @@ for ifecha=FechaF:-1:FechaI
     file=sprintf('%s/%04d/%02d/%04d%02d%02d_prof.nc',DataDirGeo,anho,mes,anho,mes,dia);
     if exist(file,'file')>0
         fprintf('     > Day %02d/%02d/%04d \n',dia,mes,anho)
-        [platform,julds,lats,lons,pres,sals,tems,stapar,project,cycle,nprof,nparam,info]=ReadArgoDailyFileDM(file);
+        [platform,julds,lats,lons,pres,sals,tems,stapar,project,cycle,nprof,nparam,info] = readArgoDailyFileDM(file);
         nproftest=size(lats,1);
         if nproftest ~= nprof f
             fprintf('>>>>>>>>>>>>>>>>>>>>>>> Error con nprof sigo con el valor obtenido con size\n')
@@ -385,7 +378,7 @@ else
     Informe=sprintf('ArgoIbStatus - Active floats Iberian Basin %03d [%s,%s]\n     Las profile %s\n     Updated on %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 end
 if exist('ME')
-    Informe=sprintf('%s\n >>>>>> Error ArgoIbStatusGM.m %s line %d\n     %s <<<<<<',Informe,ME.message,ME.stack(1).line,datestr(now));
+    Informe = sprintf('%s\n >>>>>> Error createArgoRegionGMap.m %s line %d\n     %s <<<<<<',Informe,ME.message,ME.stack(1).line,datestr(now));
 end
 
 save(FileNameInforme,'Informe','platformes','juldsIB','platdatacentr')

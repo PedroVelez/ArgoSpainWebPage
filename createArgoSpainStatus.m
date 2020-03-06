@@ -3,14 +3,14 @@ clear all;close all
 %programa Argo Espana y Argo Interest
 
 %% Read configuration
-ArgoEsOptions
+configArgoSpainWebpage
 
 %Visible=1;
 %DirOutGraph='.../PaginaWeb/ArgoEsGraficos';
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
 %DiasAnalisis=11
 %ClimatologyFile='./Data/WOA05.mat';
-%SubeFTP=1;
+SubeFTP=0;
 
 %Configuraciones
 GlobalDS.Visible=Visible;
@@ -19,8 +19,8 @@ GlobalDS.DirOutGraph=DirOutGraph;
 GlobalDS.DirArgoData=DirArgoData;
 
 %Coast and Batimetry
-GlobalDS.filecoast='./Data/EspanhaCoast.mat';% Fichero con la costa de la zona
-GlobalDS.filebat='./Data/EspanhaBat.mat';TMP=load(GlobalDS.filebat);
+GlobalDS.filecoast='./data/SpainCoast.mat';% Fichero con la costa de la zona
+GlobalDS.filebat='./data/SpainBat.mat';TMP=load(GlobalDS.filebat);
 GlobalDS.batylon=TMP.batylon;
 GlobalDS.batylat=TMP.batylat;
 GlobalDS.elevations=TMP.elevations;clear TMP
@@ -66,11 +66,11 @@ GlobalDS.RegionmaxAP(3)=700;
 
 %% Inicio
 fprintf('>>>>> %s\n',mfilename)
-for NumDatSet=NumberOfDatSets
-    DataSetName=DataSetNameM(NumDatSet,:);
-    DataArgoEs=load(strcat(PaginaWebDir,'/Data/Data',DataSetName,'.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','UltimoVoltaje');
-    fprintf('     >> Data Set %s\n',DataSetName)
-    if SubeFTP==1
+for NumDatSet = NumberOfDatSets
+    DataSetName = DataSetNameM{NumDatSet};
+    DataArgoEs = load(strcat(PaginaWebDir,'/data/data',DataSetName,'.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','UltimoVoltaje');
+    fprintf('     >> Dataset %s\n',DataSetName)
+    if SubeFTP == 1
         ftpobj=FtpOceanografia;
         cd(ftpobj,'/html/argo/datos/ArgoEsGraficos');
     end
@@ -78,13 +78,13 @@ for NumDatSet=NumberOfDatSets
     %Figures and web page for each active float
     for ifloat=1:1:size(DataArgoEs.WMO,2)
         if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
-            fprintf('     > WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
-            [FileOutA,FileOutAz,FileOutB,FileOutC]=ArgoEsStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
-            FileOutFHtml=ArgoEsStatus_WebPage(DataArgoEs.WMO(ifloat),GlobalDS);
-            if SubeFTP==1
+            fprintf('     \n> WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
+            [FileOutA,FileOutAz,FileOutB,FileOutC] = createArgoSpainStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
+            FileOutFHtml = createArgoSpainStatus_WebPage(DataArgoEs.WMO(ifloat),GlobalDS);
+            if SubeFTP == 1
                 fprintf('uploading files to ftp.\n')
                 binary(ftpobj)
-                 
+                
                 mput(ftpobj,FileOutA);
                 mput(ftpobj,FileOutAz);
                 mput(ftpobj,FileOutB);
@@ -94,10 +94,10 @@ for NumDatSet=NumberOfDatSets
             end
         end
     end
-    if SubeFTP==1
+    if SubeFTP == 1
         close(ftpobj)
     end
     %Report for each dataset
-    ArgoEsStatus_Report
+    createArgoSpainStatus_Report
 end
 fprintf('      %s <<<<< \n',mfilename)

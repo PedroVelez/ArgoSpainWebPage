@@ -1,4 +1,4 @@
-function ArgoEsStatus_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
+function createArgoSpainStatus_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
 cl=parula;
 
 %Geographical limits

@@ -3,7 +3,7 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
-PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
+PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
 DirArgoData=$HOME/Dropbox/Oceanografia/Data/Argo
 
 /bin/rm -f $PaginaWebDir/Log/*.log
@@ -41,7 +41,7 @@ wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeo
 #---------------------------------------
 #Argo Espana
 #No se hace en background para no abrir multiples instacinas de FTP
-for dacboya in $(cat $PaginaWebDir/FloatsArgoEs.dat)
+for dacboya in $(cat $PaginaWebDir/floatsArgoSpain.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   echo $dacboyaT
@@ -50,7 +50,7 @@ done
 
 #Boyas Interest
 #No se hace en background para noabrir multiples instacinas de FTP
-for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
+for dacboya in $(cat $PaginaWebDir/floatsArgoInterest.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"

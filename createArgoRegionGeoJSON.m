@@ -3,7 +3,7 @@ clear all;close all
 %Crea el documento argoibstatus.html que conteine una tabla con enlaces a todas las boyas del area iberica
 
 %% Read configuration
-ArgoEsOpciones
+configArgoSpainWebpage
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -68,7 +68,7 @@ for ifloat=1:size(AE.WMO,2)
             for i1=1:length(lon)
                 TrajectoryAS.features{iTrajectoryAS}.geometry.coordinates{i1}=[lon(i1),lat(i1)];
             end
-            
+
         end
     end
 end

@@ -1,7 +1,7 @@
 %% Writting Report
 
 %Read previous report
-FileNameInforme=strcat(PaginaWebDir,'/Data/Informe',DataSetName,'StatusGraficos.mat');
+FileNameInforme=strcat(PaginaWebDir,'/Data/report',DataSetName,'Status.mat');
 
 if exist(FileNameInforme,'file')>0
     InformeOld=load(FileNameInforme);
@@ -27,16 +27,16 @@ elseif Incremento>0
     for idif=1:length(IWMO)
         IT=[IT sprintf('%d ',IWMO(idif))];
     end
-    Informe1=sprintf('%sStatusGraficos - Activos (%d,+%d)\n',DataSetName,DataArgoEs.iactiva,Incremento);
-    Informe5=sprintf('     Nuevos activos: %s\n',IT);
+    Informe1=sprintf('%sStatusFloats - Activos (%d,+%d)\n',DataSetName,DataArgoEs.iactiva,Incremento);
+    Informe5=sprintf('     New active: %s\n',IT);
 elseif Incremento<0 && DataArgoEs.iactiva>0
     IWMO=setdiff(DataArgoEs.WMO,InformeOld.WMO);
     IT=[];
     for idif=1:length(IWMO)
         IT=[IT sprintf('%d ',IWMO(idif))];
     end
-    Informe1=sprintf('%sStatusGraficos - Activos (%d,-%d)\n',DataSetName,DataArgoEs.iactiva,Incremento);
-    Informe5=sprintf('     Nuevos inactivos: %s\n',IT);
+    Informe1=sprintf('%sStatus Floats - Activos (%d,-%d)\n',DataSetName,DataArgoEs.iactiva,Incremento);
+    Informe5=sprintf('     New inactive: %s\n',IT);
 end
 Informe2=sprintf('     Ultimo perfil %s\n',datestr(DataArgoEs.FechaUltimoPerfil(1)));
 if ~isempty(PUDT)

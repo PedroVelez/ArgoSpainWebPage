@@ -1,15 +1,16 @@
-%Este script lee envia un correo-e sobre  la pagina web
 clear all
+%This script send by email the report of the updated webpage
 
-ArgoEsOpciones
+%% Read options
+sendArgoSpainReport.m
 
 [DayNumber,DayName] = weekday(now);
 
 %try
-R1=load(strcat(PaginaWebDir,'/Data/InformeArgoIbStatusGM'));
-R2=load(strcat(PaginaWebDir,'/Data/InformeArgoEsStatusGM'));
-R3=load(strcat(PaginaWebDir,'/Data/InformeArgoEsStatusGraficos'));
-R4=load(strcat(PaginaWebDir,'/Data/InformeArgoInStatusGraficos'));
+R1=load(strcat(PaginaWebDir,'/Data/reportcreateArgoRegionGMap'));
+R2=load(strcat(PaginaWebDir,'/Data/reportcreateArgoSpainGMap'));
+R3=load(strcat(PaginaWebDir,'/Data/reportArgoEsStatus'));
+R4=load(strcat(PaginaWebDir,'/Data/reportArgoInStatus'));
 
 %EnviaCorreoArgo('pedro.velez@ieo.es',sprintf('Web actualizada %s',datestr(now)),sprintf('%s\n\n%s\n\n%s\n\n%s\n\nhttp://www.argoespana.es',R1.Informe,R2.Informe,R3.Informe,R4.Informe))
 
