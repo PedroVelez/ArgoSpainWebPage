@@ -9,7 +9,7 @@ configArgoSpainWebpage
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
 %DiasAnalisis=11
 %ClimatologyFile='./Data/WOA05.mat';
-SubeFTP=0;
+%SubeFTP=0;
 
 %Configuraciones
 GlobalDS.Visible=Visible;
@@ -69,13 +69,14 @@ for NumDatSet = NumberOfDatSets
     DataSetName = DataSetNameM{NumDatSet};
     DataArgoEs = load(strcat(PaginaWebDir,'/data/data',DataSetName,'.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','UltimoVoltaje');
     fprintf('     >> Dataset %s\n',DataSetName)
+
     if SubeFTP == 1
         ftpobj=FtpOceanografia;
         cd(ftpobj,'/html/argo/datos/floats');
     end
     
     %Figures and web page for each active float
-    for ifloat=1:1:size(DataArgoEs.WMO,2)
+    for ifloat = 1:1:size(DataArgoEs.WMO,2)
         if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
             fprintf('     \n> WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
             [FileOutA,FileOutAz,FileOutB,FileOutC] = createArgoSpainStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);

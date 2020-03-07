@@ -20,7 +20,8 @@ else
     m_coast('patch',[.7 .6 .4],'edgecolor',[.7 .6 .4]);
 end
 m_grid('xtick',3,'ytick',3,'fontsize',7,'color',[0.5 0.5 0.5])
-color=linspace(1,64,length(OneFloatData.lons));
+color=linspace(1,length(cl),length(OneFloatData.lons));
+
 if isfield(OneFloatData,'CTD0')==1
     m_plot(OneFloatData.CTD0.long,OneFloatData.CTD0.lati,'MarkerFaceColor',cl(1,:),'marker','s','MarkerEdgeColor','k','markersize',6);
 end
