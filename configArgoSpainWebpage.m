@@ -47,10 +47,10 @@ FechaF=now;
 TrajectorySpanArgo=180; %en dias
 
 %Geographical Regions
-%Area de influencia espanola
+%Region
 lat_minIB= 15.00; lat_maxIB=54;
 lon_minIB=-45;    lon_maxIB=38;
-%Atlantico
+%Atlantic
 lat_min=-65;    lat_max=65;
 lon_min=-80;    lon_max=40;
 
@@ -70,4 +70,4 @@ GoogleMapsAPIKey
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=10.0; %Days to look for to update the figures
+DiasAnalisis=2.0; %Days to look for to update the figures
