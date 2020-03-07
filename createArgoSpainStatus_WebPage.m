@@ -1,7 +1,7 @@
 function  FileOutFHtml=createArgoSpainStatus_WebPage(WMO,GlobalDS)
 
 if nargin==1
-    GlobalDS.DirOutGraph='./Html/ArgoEsGraficos';
+    GlobalDS.DirOutGraph='./html/floats';
     GlobalDS.DirArgoData='/Users/pvb/Data/Argo';
 end
 

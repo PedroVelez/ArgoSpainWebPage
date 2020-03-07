@@ -6,7 +6,6 @@ clear all;close all
 configArgoSpainWebpage
 
 %Visible=1;
-%DirOutGraph='.../PaginaWeb/ArgoEsGraficos';
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
 %DiasAnalisis=11
 %ClimatologyFile='./Data/WOA05.mat';
@@ -72,7 +71,7 @@ for NumDatSet = NumberOfDatSets
     fprintf('     >> Dataset %s\n',DataSetName)
     if SubeFTP == 1
         ftpobj=FtpOceanografia;
-        cd(ftpobj,'/html/argo/datos/ArgoEsGraficos');
+        cd(ftpobj,'/html/argo/datos/floats');
     end
     
     %Figures and web page for each active float

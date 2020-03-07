@@ -14,7 +14,7 @@ if nargin==1
     GlobalDS.RegionLatLimits{1}=[90 -90 -90 90];
     GlobalDS.POSBorder=2;
     GlobalDS.Visible=1;
-    GlobalDS.DirOutGraph='./Html/ArgoEsGraficos';
+    GlobalDS.DirOutGraph='./html/floats';
     GlobalDS.DirArgoData='/Users/pvb/Dropbox/Oceanografia/Data/Argo';
 end
 

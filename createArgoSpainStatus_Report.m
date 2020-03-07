@@ -14,7 +14,7 @@ end
 PUD=find(DataArgoEs.FechaUltimoPerfil>=now-DiasAnalisis);
 PUDT=[];
 for ipud=1:length(PUD)
-    PUDT=[PUDT sprintf('        http://www.oceanografia.es/argo/datos/ArgoEsGraficos/%7d.html\n',DataArgoEs.WMO(PUD(ipud)))];
+    PUDT=[PUDT sprintf('        http://www.oceanografia.es/argo/datos/floats/%7d.html\n',DataArgoEs.WMO(PUD(ipud)))];
 end
 
 %Write the new report
@@ -47,7 +47,7 @@ end
 
 if strcmp(DataSetName,'ArgoEs')
     if isnan(nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)))==0
-        Informe4=sprintf('     Voltaje minimo %4.2f v\n       http://www.oceanografia.es/argo/datos/ArgoEsGraficos/%7d.html\n',nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),DataArgoEs.WMO(find(DataArgoEs.UltimoVoltaje==nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),1)));
+        Informe4=sprintf('     Voltaje minimo %4.2f v\n       http://www.oceanografia.es/argo/datos/floats/%7d.html\n',nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),DataArgoEs.WMO(find(DataArgoEs.UltimoVoltaje==nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),1)));
     else
         Informe4='';
     end

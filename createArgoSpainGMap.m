@@ -157,7 +157,7 @@ fprintf(fid,'        var marker = new google.maps.Marker({\n');
 fprintf(fid,'        	position: new google.maps.LatLng(perfilador[2], perfilador[3]),\n');
 fprintf(fid,'        	map: map,\n');
 fprintf(fid,'        	icon: buoyred,\n');
-fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
+fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
 fprintf(fid,'        	title: perfilador[4]+'' WMO ''+perfilador[1]});\n');
 fprintf(fid,'		google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'	  }else{	\n');
@@ -165,7 +165,7 @@ fprintf(fid,'    	var marker = new google.maps.Marker({\n');
 fprintf(fid,'        	position: myLatLng,\n');
 fprintf(fid,'        	map: map,\n');
 fprintf(fid,'        	icon: buoywhite,\n');
-fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
+fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
 fprintf(fid,'        	title: perfilador[4]+'' WMO ''+perfilador[1]});\n');
 fprintf(fid,'		google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'	  }//if \n');
@@ -265,7 +265,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         if DataArgoEs.activa(ifloat)==1
             fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"><div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
@@ -278,7 +278,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/ArgoEsGraficos/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"><div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
