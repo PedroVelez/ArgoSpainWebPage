@@ -6,7 +6,7 @@ FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
 DirArgoData=$HOME/Dropbox/Oceanografia/Data/Argo
 
-/bin/rm -f $PaginaWebDir/Log/*.log
+/bin/rm -f $PaginaWebDir/log/*.log
 
 #---------------------------------------
 #Get Region
