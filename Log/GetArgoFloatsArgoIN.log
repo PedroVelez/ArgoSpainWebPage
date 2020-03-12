@@ -1,0 +1,210 @@
+--2020-03-12 23:36:50--  ftp://ftp.ifremer.fr/ifremer/argo/dac/bodc/6901914/*
+           => ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/.listing’
+Resolving ftp.ifremer.fr (ftp.ifremer.fr)... 134.246.142.21
+Connecting to ftp.ifremer.fr (ftp.ifremer.fr)|134.246.142.21|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /ifremer/argo/dac/bodc/6901914 ... done.
+==> PASV ... done.    ==> LIST ... done.
+
+     0K                                                        1,43M=0s
+
+2020-03-12 23:36:51 (1,43 MB/s) - ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/.listing’ saved [478]
+
+Removed ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/.listing’.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/6901914_Rtraj.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/6901914_meta.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/6901914_prof.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/6901914_tech.nc’ -- not retrieving.
+--2020-03-12 23:36:51--  ftp://ftp.ifremer.fr/ifremer/argo/dac/bodc/6901914/profiles/*
+           => ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/.listing’
+==> CWD (1) /ifremer/argo/dac/bodc/6901914/profiles ... done.
+==> PASV ... done.    ==> LIST ... done.
+
+     0K .......... ...                                          179K=0,07s
+
+2020-03-12 23:36:52 (179 KB/s) - ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/.listing’ saved [13405]
+
+Removed ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/.listing’.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_001.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_002.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_003.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_004.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_005.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_006.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_007.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_008.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_009.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_010.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_011.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_012.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_013.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_014.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_015.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_016.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_017.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_018.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_019.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_020.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_021.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_022.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_023.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_024.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_025.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_026.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_027.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_028.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_029.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_030.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_031.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_032.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_033.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_034.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_035.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_036.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_037.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_038.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_039.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_040.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_041.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_042.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_043.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_044.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_045.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_046.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_047.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_048.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_049.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_050.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_051.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_052.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_053.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_054.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_055.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_056.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_057.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_058.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_059.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_060.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_061.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_062.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_063.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_064.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_065.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_066.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_067.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_068.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_069.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_070.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_071.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_072.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_073.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_074.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_075.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_076.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_077.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_078.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_079.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_080.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_081.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_082.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_083.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_084.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_085.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_086.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_087.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_088.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_089.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_090.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_091.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_092.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_093.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_094.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_095.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_096.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_097.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_098.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_099.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_100.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_101.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_102.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_103.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_104.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_105.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_106.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_107.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_108.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_109.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_110.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_111.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_112.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_113.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_114.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_115.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_116.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_117.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_118.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_119.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_120.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_121.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_122.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_123.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_124.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_125.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_126.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_127.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_128.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_129.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_130.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_131.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_132.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_133.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_134.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_135.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_136.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_137.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_138.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_139.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_140.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_141.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_142.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_143.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_144.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_145.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_146.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_147.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_148.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_149.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_150.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_151.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_152.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_153.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_154.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_155.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_156.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_157.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_158.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_159.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_160.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_161.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_162.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_163.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_164.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_165.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_166.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_167.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_168.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_169.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_170.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_171.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_172.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_173.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_174.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_175.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_176.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_177.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_178.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_179.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_180.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_181.nc’ -- not retrieving.
+Remote file no newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901914/profiles/R6901914_182.nc’ -- not retrieving.

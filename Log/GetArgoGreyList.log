@@ -1,0 +1,31 @@
+--2020-03-12 23:36:52--  ftp://ftp.ifremer.fr/ifremer/argo/ar_greylist.txt
+           => ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/.listing’
+Resolving ftp.ifremer.fr (ftp.ifremer.fr)... 134.246.142.21
+Connecting to ftp.ifremer.fr (ftp.ifremer.fr)|134.246.142.21|:21... connected.
+Logging in as anonymous ... Logged in!
+==> SYST ... done.    ==> PWD ... done.
+==> TYPE I ... done.  ==> CWD (1) /ifremer/argo ... done.
+==> PASV ... done.    ==> LIST ... done.
+
+     0K ..                                                     94,9K=0,02s
+
+2020-03-12 23:36:52 (94,9 KB/s) - ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/.listing’ saved [2128]
+
+Removed ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/.listing’.
+Remote file is newer than local file ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/ar_greylist.txt’ -- retrieving.
+
+--2020-03-12 23:36:52--  ftp://ftp.ifremer.fr/ifremer/argo/ar_greylist.txt
+           => ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/ar_greylist.txt’
+==> CWD not required.
+==> PASV ... done.    ==> RETR ar_greylist.txt ... done.
+Length: 150495 (147K)
+
+     0K .......... .......... .......... .......... .......... 34%  150K 1s
+    50K .......... .......... .......... .......... .......... 68%  397K 0s
+   100K .......... .......... .......... .......... ......    100%  756K=0,5s
+
+2020-03-12 23:36:53 (282 KB/s) - ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/ar_greylist.txt’ saved [150495]
+
+FINISHED --2020-03-12 23:36:53--
+Total wall clock time: 1,6s
+Downloaded: 1 files, 147K in 0,5s (271 KB/s)
