@@ -1,9 +1,0 @@
---2020-03-12 23:28:43--  ftp://ftp.ifremer.fr/ifremer/argo/dac/coriolis/6901281/*
-           => ‘/home/pvb/Dropbox/Oceanografia/Data/Argo/Floats/6901281/.listing’
-Resolving ftp.ifremer.fr (ftp.ifremer.fr)... 134.246.142.21
-Connecting to ftp.ifremer.fr (ftp.ifremer.fr)|134.246.142.21|:21... connected.
-Logging in as anonymous ... Logged in!
-==> SYST ... done.    ==> PWD ... done.
-==> TYPE I ... done.  ==> CWD (1) /ifremer/argo/dac/coriolis/6901281 ... 
-No such directory ‘ifremer/argo/dac/coriolis/6901281’.
-
