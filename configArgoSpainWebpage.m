@@ -17,7 +17,7 @@ PaginaWebDir=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWeb
 DirFloatLists=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
 
 %Climatolyfile
-ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/Data/WOA05.mat');
+ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
 %Directory to output the graphic files

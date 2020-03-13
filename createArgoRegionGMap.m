@@ -41,7 +41,7 @@ end
 fprintf('>>>>> %s\n',mfilename)
 ntper=0;
 ntperes=0;
-FileNameInforme=strcat(PaginaWebDir,'/Data/report',mfilename,'.mat');
+FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
 fid = fopen(FileHtmlArgoIbStatus,'w');
 fprintf('     > Writting Google Earth file \n');
 fprintf(fid,'<!DOCTYPE html> \n');

@@ -1,7 +1,7 @@
 %% Writting Report
 
 %Read previous report
-FileNameInforme=strcat(PaginaWebDir,'/Data/report',DataSetName,'Status.mat');
+FileNameInforme=strcat(PaginaWebDir,'/data/report',DataSetName,'Status.mat');
 
 if exist(FileNameInforme,'file')>0
     InformeOld=load(FileNameInforme);

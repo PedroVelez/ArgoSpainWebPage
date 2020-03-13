@@ -7,10 +7,10 @@ configArgoSpainWebpage
 [DayNumber,DayName] = weekday(now);
 
 %try
-R1=load(strcat(PaginaWebDir,'/Data/reportcreateArgoRegionGMap'));
-R2=load(strcat(PaginaWebDir,'/Data/reportcreateArgoSpainGMap'));
-R3=load(strcat(PaginaWebDir,'/Data/reportArgoEsStatus'));
-R4=load(strcat(PaginaWebDir,'/Data/reportArgoInStatus'));
+R1=load(strcat(PaginaWebDir,'/data/reportcreateArgoRegionGMap'));
+R2=load(strcat(PaginaWebDir,'/data/reportcreateArgoSpainGMap'));
+R3=load(strcat(PaginaWebDir,'/data/reportArgoEsStatus'));
+R4=load(strcat(PaginaWebDir,'/data/reportArgoInStatus'));
 
 %EnviaCorreoArgo('pedro.velez@ieo.es',sprintf('Web actualizada %s',datestr(now)),sprintf('%s\n\n%s\n\n%s\n\n%s\n\nhttp://www.argoespana.es',R1.Informe,R2.Informe,R3.Informe,R4.Informe))
 

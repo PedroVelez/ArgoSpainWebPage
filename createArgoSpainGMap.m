@@ -25,7 +25,7 @@ NTotalPerfiles=0;
 %end
 
 fprintf('>>>>> %s\n',mfilename)
-FileNameInforme=strcat(PaginaWebDir,'/Data/report',mfilename,'.mat');
+FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
 
 fid = fopen(FileHtmlArgoEsStatus,'w');
 fprintf('     > Writting Google Earth file \n');
