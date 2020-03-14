@@ -6,7 +6,7 @@ PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
 DirArgoData=/data/pvb/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt
-/bin/rm -f $PaginaWebDir/Log/GetArgo.log
+/bin/rm -f $PaginaWebDir/log/GetArgo.log
 
 #---------------------------------------
 #Get Region
