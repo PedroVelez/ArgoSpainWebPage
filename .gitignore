@@ -1,6 +1,6 @@
 *.*~
 **/data/data*
-**/data/report*
+**/data/report*.mat
 **/html/floats/*
 **/html/*html
 **/html/*geojson

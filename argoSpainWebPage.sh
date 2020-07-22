@@ -148,4 +148,11 @@ fi
 #  cp $PaginaWebDir/data/dataArgoEs.mat /Volumes/GDOYE$/Proyectos/Argo/DelayedMode/data
 #fi
 
+#------------------------------------
+# TelegramBot
+#------------------------------------
+URL="https://api.telegram.org/bot$ArgoEsBotTOKEN/sendMessage"
+MENSAJE=`cat $HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/report.txt`
+curl -s -X POST $URL -d chat_id=$ArgoEsBotID -d text="$MENSAJE"
+
 printf "<<<<< Updated ArgoSpainWebArgo \n"

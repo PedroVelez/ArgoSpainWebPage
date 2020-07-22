@@ -20,3 +20,7 @@ catch ME
     EnviaCorreoArgo('pedro.velez@ieo.es',MensajeError)
 end
 end
+
+fid=fopen('./data/report.txt','w');
+fprintf(fid,'**SST Report** %s \n %s\n\n%s\n\n%s\n\n%s\n\nhttp://www.argoespana.es',datestr(now),R1.Informe,R2.Informe,R3.Informe,R4.Informe);
+fclose(fid);
