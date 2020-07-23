@@ -1,4 +1,5 @@
 #!/bin/bash
+source $HOME/.bashrc
 
 Verbose=0
 JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
