@@ -67,6 +67,15 @@ then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit' > $DirLog/createArgoRegionGMap.log
    fi
 
+#Update Ib leaflet
+   printf "  Updating google map for Argo ion the region\n"
+   if [ $Verbose -eq 1 ]
+   then
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit'
+   else
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit' > $DirLog/createArgoRegionLLet.log
+   fi
+   
 #Update ArgoEs GoogleMap
    printf "  Updating google map for Argo Spain the region\n"
    if [ $Verbose -eq 1 ]
