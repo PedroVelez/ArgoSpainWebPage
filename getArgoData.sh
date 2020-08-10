@@ -24,9 +24,9 @@ if [ "$monthb" -lt 10 ]; then
     monthb=0$monthb
 fi
 
-wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$month/*
-wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth1.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$monthb/*
-wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth2.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$montha/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$month/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth1.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$monthb/*
+wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGeoMonth2.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$montha/*
 
 #---------------------------------------
 #Crea listas de Argo a apartir del google spreadsheets
@@ -45,7 +45,7 @@ for dacboya in $(cat $PaginaWebDir/floatsArgoSpain.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   echo $dacboyaT
-  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoFloatsArgoES.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoES.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 
 #Boyas Interest
@@ -53,7 +53,7 @@ done
 for dacboya in $(cat $PaginaWebDir/floatsArgoInterest.dat)
 do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
+  wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
 
 #Boyas Argo Espana
@@ -61,18 +61,18 @@ done
 #do
 #  dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
 #  echo $dacboyaT
-#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/log/GetArgo.log
+#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/Log/GetArgo.log
 #done
 #
 #Boyas Interest
 #for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
 #do
 #  dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/log/GetArgo.log
+#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/Log/GetArgo.log
 #done
 
 #---------------------------------------
 #ArgoGreyList
 #---------------------------------------
 #Descarga grey list
-wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGreyList.log -P $DirArgoData/ $FtpArgoData/ar_greylist.txt
+wget --passive -np -N -nH -r -Q602M --cut-dirs 4 -o $PaginaWebDir/Log/GetArgoGreyList.log -P $DirArgoData/ $FtpArgoData/ar_greylist.txt

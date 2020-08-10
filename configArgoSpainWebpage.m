@@ -24,9 +24,10 @@ ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpain
 DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
-FileHtmlArgoEsStatus=strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
-FileHtmlArgoIbStatus=strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
-FileHtmlArgoStatus=strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
+FileHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
+FilellHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
+FileHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
+FileHtmlArgoStatus     =strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
 
 %% General settings
 Verbose=0;
