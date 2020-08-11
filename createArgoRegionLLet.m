@@ -51,14 +51,21 @@ fprintf(fid,'<head> \n');
 fprintf(fid,'	<title>Argo Espa&ntilde;a</title> \n');
 fprintf(fid,'	<meta charset="utf-8" /> \n');
 fprintf(fid,'	<meta name="viewport" content="width=device-width, initial-scale=1.0"> \n');
+%Leaflet libraries
 fprintf(fid,'    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/> \n');
 fprintf(fid,'    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script> \n');
+%Full screen control
+fprintf(fid,'    <script src=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js''></script>\n');
+fprintf(fid,'    <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'' rel=''stylesheet'' />\n');
 fprintf(fid,'</head> \n');
 fprintf(fid,'<body> \n');
-fprintf(fid,'<div id="mapid" style="width: 800px; height: 800px;"></div> \n');
+fprintf(fid,'<div align="center">\n');
+fprintf(fid,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',GMTamanoArgoIb(1),GMTamanoArgoIb(2));
+fprintf(fid,'</div> \n');
 fprintf(fid,'<script> \n');
 fprintf(fid,'// Initialize the map and set up control \n');
-fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([39.00, -16.00], 4); \n');
+fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n',GMCentroArgoIb(1),GMCentroArgoIb(2),GMZoomArgoIb);
+fprintf(fid,'     mymap.addControl(new L.Control.Fullscreen());\n');
 fprintf(fid,'//Tiles \n');
 fprintf(fid,'   L.tileLayer(''https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'', { \n');
 fprintf(fid,'       attribution: ''Tiles &copy ESRI''}).addTo(mymap); \n');
@@ -95,7 +102,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
                 fprintf(fid,'			[%7.4f,%7.4f],\n',lat(ii),lon(ii));
             end
             fprintf(fid,'		];\n');
-            fprintf(fid,'var polyline = L.polyline(TrayectoriaCoordinates,{color: ''#FFFAFA'',opacity: 0.6,weight: 2.00}).addTo(mymap)\n');
+            fprintf(fid,'var polyline = L.polyline(TrayectoriaCoordinates,{color: ''#FF0000'',opacity: 0.6,weight: 2.00}).addTo(mymap)\n');
         end
     end
 end
@@ -250,9 +257,9 @@ fprintf(fid,' //Funcion para crear el titulo\n');
 fprintf(fid,'	var titulo = L.control({position: ''topright''});\n');
 fprintf(fid,'	titulo.onAdd = function (map) {\n');
 fprintf(fid,'	    var div = L.DomUtil.create(''div'', ''info legend'');\n');
-fprintf(fid,'			div.innerHTML = ''<b>Cobertura del programa Argo en las aguas que rodean Espa&ntilde;a el 12-Mar-2020 a las 16:52:00</b> <br />'' +\n');
-fprintf(fid,'	                        ''<b>Hasta la fecha 11166 perfiles oceanogr&aacute;ficos han sido medidos por las boyas del programa <b>Argo Espa&ntilde;a</b><br />'' +\n');
-fprintf(fid,'	                        ''<b>Pulse en el icono de un perfilador para acceder a informaci&oacute;n m&aacute;s detallada sobre los datos medidos </b><br />'';\n');
+fprintf(fid,'			div.innerHTML  = ''<b>Cobertura del programa Argo %s el %s a las %s</b> <br/>'' +\n',TituloArgoIbStatus,datestr(LastJday,1),datestr(LastJday,13));
+fprintf(fid,'	                         ''<b>Hasta la fecha %d perfiles oceanogr&aacute;ficos han sido medidos por las boyas del programa <b>Argo Espa&ntilde;a</b><br />'' +\n',sum(NTotalPerfiles));
+fprintf(fid,'	                         ''<b>Pulse en el icono de un perfilador para acceder a informaci&oacute;n m&aacute;s detallada sobre los datos medidos </b><br />'';\n');
 fprintf(fid,'  			div.style.color = ''white'';\n');
 fprintf(fid,'			div.style.fontSize = ''12px'';\n');
 fprintf(fid,'		    div.style.paddingLeft = ''0px'';\n');
