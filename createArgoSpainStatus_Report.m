@@ -37,6 +37,9 @@ elseif Incremento<0 && DataArgoEs.iactiva>0
     end
     Informe1=sprintf('%sStatus Floats - Activos (%d,-%d)\n',DataSetName,DataArgoEs.iactiva,Incremento);
     Informe5=sprintf('     New inactive: %s\n',IT);
+else
+    Informe1=sprintf('%sStatusGraficos - Activos (%d)   \n',DataSetName,DataArgoEs.iactiva);
+    Informe5='';
 end
 Informe2=sprintf('     Ultimo perfil %s\n',datestr(DataArgoEs.FechaUltimoPerfil(1)));
 if ~isempty(PUDT)
