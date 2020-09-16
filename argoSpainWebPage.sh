@@ -75,7 +75,7 @@ then
    else
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit' > $DirLog/createArgoRegionLLet.log
    fi
-   
+
 #Update ArgoEs GoogleMap
    printf "  Updating google map for Argo Spain the region\n"
    if [ $Verbose -eq 1 ]
@@ -84,6 +84,15 @@ then
    else
     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit' > $DirLog/createArgoSpainGMap.log
    fi
+
+#Table de estadistica de ArgoEs
+  printf "  Updating able de estadistica de ArgoEs\n"
+  if [ $Verbose -eq 1 ]
+  then
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit'
+  else
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit' > $DirLog/createArgoSpainTable.log
+  fi
 
 #Update Update Argo Atlatic GoogleMap
   printf "  Updating google map for Argo in the Atlantic\n"

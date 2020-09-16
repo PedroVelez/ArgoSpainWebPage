@@ -10,12 +10,21 @@ configArgoSpainWebpage
 CoberturaArgoGlobal=4000;
 
 
-
 %% Begin
 fprintf('>>>>> %s\n',mfilename)
 
-BoyasActivaArgoEs=25;
+% Read Data
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
+BoyasActivaArgoEs=DataArgoEs.iactiva;;
 
+%Numerto total de perfiles medidos
+NTotalPerfiles=0;
+for ifloat=1:length(DataArgoEs.WMO)
+    FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))),'HIDf');
+    NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
+end
+
+%Create web page
 fid = fopen(FileTableArgoEsStatus,'w');
 fprintf('     > Writting Google Earth file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
@@ -66,7 +75,7 @@ fprintf(fid,'<center> \n');
 fprintf(fid,'<table> \n');
 fprintf(fid,'  <tr> \n');
 fprintf(fid,'    <th>%d</th> \n',BoyasActivaArgoEs);
-fprintf(fid,'    <th>10,993</th> \n');
+fprintf(fid,'    <th>%d</th> \n',sum(NTotalPerfiles));
 fprintf(fid,'    <th>%3.1f%%</th> \n',BoyasActivaArgoEs/CoberturaArgoGlobal*100);
 fprintf(fid,'  </tr> \n');
 fprintf(fid,'  <tr> \n');
