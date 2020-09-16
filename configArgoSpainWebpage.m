@@ -25,9 +25,11 @@ DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
 FileHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
+FileTableArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatustable.html');
 FilellHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
 FileHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
 FileHtmlArgoStatus     =strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
+
 
 %% General settings
 Verbose=0;
