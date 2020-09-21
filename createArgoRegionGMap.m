@@ -14,7 +14,8 @@ configArgoSpainWebpage
 % lon_minIB=-45;    lon_maxIB=38;
 % lat_min=-65;    lat_max=65;
 % lon_min=-80;    lon_max=40;
-%
+%exit
+
 % %Google Map
 % GMCentroArgoIb=[39,-16];
 % GMZoomArgoIb=4;

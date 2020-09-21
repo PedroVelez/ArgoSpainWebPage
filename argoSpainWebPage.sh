@@ -14,7 +14,7 @@ then
 fi
 if [[ $strval == *vibrio* ]];
 then
-  MatVersion=/home/pvb/Matlab/Matlab2019b/bin/matlab
+  MatVersion=/home/argo/Matlab/bin/matlab
 fi
 
 #------------------------------------
