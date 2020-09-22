@@ -107,3 +107,7 @@ outftp=mput(ftpobj,FileTableArgoEsStatus);
 
 
 fprintf('%s <<<<< \n',mfilename)
+fprintf('Archivo modificado y actualizado en el servidor')
+
+
+%PARRAFO DE PRUEBA PARA COMPROBAR FUNCIONAMIENTO DE GIT PUSH
