@@ -17,6 +17,7 @@ DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'activa','iactiva
 BoyasActivaArgoEs=DataArgoEs.iactiva;
 
 %Numerto total de perfiles medidos
+NTotalPerfiles=0;
 for ifloat=1:length(DataArgoEs.WMO)
     FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))),'HIDf');
     NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
