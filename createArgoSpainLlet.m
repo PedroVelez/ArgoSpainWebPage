@@ -41,7 +41,6 @@ fprintf(fid,'</head> \n');
 fprintf(fid,'<body> \n');
 fprintf(fid,'<div align="center">\n');
 %Add current status of tthe Argo Spain Contribution 
-fprintf(fid,'// Add current status of tthe Argo Spain Contribution \n');
 fprintf(fid,'<p>\n');
 fprintf(fid,'Cobertura del programa <b>Argo Espa&ntilde;a</b> el %s a las %s <br />\n',datestr(now,1),datestr(now,13));
 fprintf(fid,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Ultimo perfil recibido el %s <br />\n',DataArgoEs.iactiva,DataArgoEs.inodesplegada,DataArgoEs.iinactiva,datestr(max(DataArgoEs.FechaUltimoPerfil)) );
