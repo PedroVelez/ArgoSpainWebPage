@@ -25,9 +25,12 @@ DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
 FileHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
+FilellHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusll.html');
+
 FileTableArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatustable.html');
 FilellHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
 FileHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
+FilellHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
 FileHtmlArgoStatus     =strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
 
 
@@ -64,9 +67,9 @@ GMTamanoArgoIb=[700,650]; %Ancho,Alto
 TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
 
 %Google Map createArgoSpainGMap
-GMCentroArgoEs=[30,-16];
+GMCentroArgoEs=[20,0];
 GMZoomArgoEs=1;
-GMTamanoArgoEs=[800,390];
+GMTamanoArgoEs=[600,350];
 
 %API key
 GoogleMapsAPIKey

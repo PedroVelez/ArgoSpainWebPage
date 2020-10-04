@@ -44,7 +44,7 @@ ntper=0;
 ntperes=0;
 FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
 fid = fopen(FileHtmlArgoIbStatus,'w');
-fprintf('     > Writting Google Earth file \n');
+fprintf('     > Writting leaflet file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
 fprintf(fid,'<html> \n');
 fprintf(fid,'<head> \n');
@@ -212,7 +212,6 @@ for ifecha=FechaF:-1:FechaI
                         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
                         fprintf(fid,'   [1,%s,%4.2f,%4.2f,''%s'',''%s'',''%s'',''%s''], \n',deblank(platform(np,:)),lats(np),lons(np),FloatData.MTDf.PROJECT_NAME,datestr(julds(np)),SurfaceValue,BottonValue);
                     elseif ~isempty(find(DataArgoIn.WMO==platformes(ntper), 1))
-
                         fprintf(fid,'   [2,%s,%4.2f,%4.2f,''%s'',''%s'',''%s'',''%s''], \n',deblank(platform(np,:)),lats(np),lons(np),deblank(project(np,:)),datestr(julds(np)),SurfaceValue,BottonValue);
                     else
                         fprintf(fid,'   [0,%s,%4.2f,%4.2f,''%s'',''%s'',''%s'',''%s''], \n',deblank(platform(np,:)),lats(np),lons(np),deblank(project(np,:)),datestr(julds(np)),SurfaceValue,BottonValue);
