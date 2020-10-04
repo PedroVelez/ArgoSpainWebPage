@@ -59,16 +59,25 @@ then
   fi
 
 #Update Ib GoogleMap
-   printf "  Updating google map for Argo in the region\n"
-   if [ $Verbose -eq 1 ]
-   then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit'
-   else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit' > $DirLog/createArgoRegionGMap.log
-   fi
+#   printf "  Updating google map for Argo in the region\n"
+#   if [ $Verbose -eq 1 ]
+#   then
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit'
+#   else
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit' > $DirLog/createArgoRegionGMap.log
+#   fi
+#Update ArgoEs GoogleMap
+#   printf "  Updating google map for Argo Spain\n"
+#   if [ $Verbose -eq 1 ]
+#   then
+#    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit'
+#   else
+#    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit' > $DirLog/createArgoSpainGMap.log
+#   fi
 
-#Update Ib leaflet
-   printf "  Updating leaflet for Argo in the region\n"
+
+#Updating leaflet map for Argo in the region
+   printf "  Updating leaflet map for Argo in the region\n"
    if [ $Verbose -eq 1 ]
    then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit'
@@ -76,17 +85,8 @@ then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit' > $DirLog/createArgoRegionLLet.log
    fi
 
-#Update ArgoEs GoogleMap
-   printf "  Updating google map for Argo Spain\n"
-   if [ $Verbose -eq 1 ]
-   then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit'
-   else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit' > $DirLog/createArgoSpainGMap.log
-   fi
-
-  #Update ArgoEs GoogleMap
-    printf "  Updating leaflet for Argo Spain\n"
+#Updating leaflet map for Argo Spain
+    printf "  Updating leaflet map for Argo Spain\n"
     if [ $Verbose -eq 1 ]
     then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLlet;exit'
@@ -94,22 +94,13 @@ then
      cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLlet;exit' > $DirLog/createArgoSpainLlet.log
     fi
 
-#Table de estadistica de ArgoEs
-  printf "  Updating able de estadistica de ArgoEs\n"
+#Updating table with the statistics of Argo Spain
+  printf "  Updating table with the statistics of Argo Spain\n"
   if [ $Verbose -eq 1 ]
   then
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit'
   else
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit' > $DirLog/createArgoSpainTable.log
-  fi
-
-#Update Update Argo Atlatic GoogleMap
-  printf "  Updating google map for Argo in the Atlantic\n"
-  if [ $Verbose -eq 1 ]
-  then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit'
-  else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit' > $DirLog/createArgoRegionGMapFull.log
   fi
 
 #Update ArgoEs figures
@@ -121,6 +112,16 @@ then
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainStatus;exit' > $DirLog/createArgoSpainStatus.log
   fi
 fi
+
+#Update Update Argo Atlatic GoogleMap
+#  printf "  Updating google map for Argo in the Atlantic\n"
+#  if [ $Verbose -eq 1 ]
+#  then
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit'
+#  else
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit' > $DirLog/createArgoRegionGMapFull.log
+#  fi
+
 #------------------------------------
 # Upload status (html) files to the web server
 #------------------------------------
