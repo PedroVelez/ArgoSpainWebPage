@@ -40,10 +40,10 @@ fprintf(fid,'    <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-f
 fprintf(fid,'</head> \n');
 fprintf(fid,'<body> \n');
 fprintf(fid,'<div align="center">\n');
-%Add current status of tthe Argo Spain Contribution 
+%Add current status of tthe Argo Spain Contribution
 fprintf(fid,'<p>\n');
 fprintf(fid,'Cobertura del programa <b>Argo Espa&ntilde;a</b> el %s a las %s <br />\n',datestr(now,1),datestr(now,13));
-fprintf(fid,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Ultimo perfil recibido el %s <br />\n',DataArgoEs.iactiva,DataArgoEs.inodesplegada,DataArgoEs.iinactiva,datestr(max(DataArgoEs.FechaUltimoPerfil)) );
+fprintf(fid,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Último dato recibido el %s <br />\n',DataArgoEs.iactiva,DataArgoEs.inodesplegada,DataArgoEs.iinactiva,datestr(max(DataArgoEs.FechaUltimoPerfil)) );
 fprintf(fid,'Hasta la fecha %d perfiles han sido realizados por las boyas del programa <b>Argo Espa&ntilde;a</b>\n',sum(NTotalPerfiles));
 fprintf(fid,'</p>\n');
 
@@ -141,12 +141,12 @@ fprintf(fid,'		]; \n');
 fprintf(fid,'// Marcador de posicion de las boyas\n');
 fprintf(fid,'	for (var i = 0; i < perfiladores.length; i++) {\n');
 fprintf(fid,'		var perfilador = perfiladores[i];\n');
-fprintf(fid,'		if(perfilador[0] == 0){\n');
+fprintf(fid,'		if(perfilador[0] == 1){\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoyred,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
 fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
-fprintf(fid,'		}else if (perfilador[0] == 1) {\n');
+fprintf(fid,'		}else if (perfilador[0] == 0) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoywhite,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
@@ -168,10 +168,7 @@ fprintf(fid,' //Funcion para crear el titulo\n');
 fprintf(fid,'	var titulo = L.control({position: ''topright''});\n');
 fprintf(fid,'	titulo.onAdd = function (map) {\n');
 fprintf(fid,'	    var div = L.DomUtil.create(''div'', ''info legend'');\n');
-fprintf(fid,'			div.innerHTML  = '''' \n');
-%fprintf(fid,'			div.innerHTML  = ''<b>Cobertura del programa Argo %s el %s a las %s</b> <br/>'' +\n',TituloArgoIbStatus,datestr(LastJday,1),datestr(LastJday,13));
-%fprintf(fid,'	                         ''<b>Hasta la fecha %d perfiles oceanogr&aacute;ficos han sido medidos por las boyas del programa <b>Argo Espa&ntilde;a</b><br />'' +\n',sum(NTotalPerfiles));
-%fprintf(fid,'	                         ''<b>Pulse en el icono de un perfilador para acceder a informaci&oacute;n m&aacute;s detallada sobre los datos medidos </b><br />'';\n');
+fprintf(fid,'			div.innerHTML  = '''' ;\n', DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada);
 fprintf(fid,'  			div.style.color = ''white'';\n');
 fprintf(fid,'			div.style.fontSize = ''12px'';\n');
 fprintf(fid,'		    div.style.paddingLeft = ''0px'';\n');
