@@ -30,7 +30,7 @@ FileHtmlArgoIbStatus=FilellHtmlArgoIbStatus;
 
 %% Inicio
 %Read data
-DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','FechaUltimoPerfil');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','iactiva','FechaUltimoPerfil');
 DataArgoIn=load(strcat(PaginaWebDir,'/data/dataArgoInterest.mat'),'WMO','activa','FechaUltimoPerfil');
 
 NTotalPerfiles=0;
@@ -256,9 +256,8 @@ fprintf(fid,' //Funcion para crear el titulo\n');
 fprintf(fid,'	var titulo = L.control({position: ''topright''});\n');
 fprintf(fid,'	titulo.onAdd = function (map) {\n');
 fprintf(fid,'	    var div = L.DomUtil.create(''div'', ''info legend'');\n');
-fprintf(fid,'			div.innerHTML  = ''<b>Cobertura del programa Argo %s el %s a las %s</b> <br/>'' +\n',TituloArgoIbStatus,datestr(LastJday,1),datestr(LastJday,13));
-fprintf(fid,'	                         ''<b>Hasta la fecha %d perfiles oceanogr&aacute;ficos han sido medidos por las boyas del programa <b>Argo Espa&ntilde;a</b><br />'' +\n',sum(NTotalPerfiles));
-fprintf(fid,'	                         ''<b>Pulse en el icono de un perfilador para acceder a informaci&oacute;n m&aacute;s detallada sobre los datos medidos </b><br />'';\n');
+%fprintf(fid,'			div.innerHTML  = ''<b>Cobertura del programa Argo %s el %s a las %s</b> <br/>'' +\n',TituloArgoIbStatus,datestr(LastJday,1),datestr(LastJday,13));
+fprintf(fid,'	        div.innerHTML  = ''<b>Argo Espa&ntilde;a: %d boyas; %d perfiles oceanogr&aacute;ficos medidos <b> [%s %s]</b><br />'';\n',DataArgoEs.iactiva,sum(NTotalPerfiles),datestr(LastJday,1),datestr(LastJday,13));
 fprintf(fid,'  			div.style.color = ''white'';\n');
 fprintf(fid,'			div.style.fontSize = ''12px'';\n');
 fprintf(fid,'		    div.style.paddingLeft = ''0px'';\n');

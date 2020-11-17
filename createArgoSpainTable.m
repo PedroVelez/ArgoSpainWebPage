@@ -27,8 +27,6 @@ end
 %% Begin
 fprintf('>>>>> %s\n',mfilename)
 
-BoyasActivaArgoEs=25;
-
 fid = fopen(FileTableArgoEsStatus,'w');
 fprintf('     > Writting Google Earth file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
