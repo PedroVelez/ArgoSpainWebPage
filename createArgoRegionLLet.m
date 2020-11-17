@@ -78,7 +78,7 @@ fprintf(fid,'           popupAnchor:  [-3, -76] \n');
 fprintf(fid,'       } \n');
 fprintf(fid,'   }); \n');
 fprintf(fid,'   var buoyred = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyaroja.png''}), \n');
-fprintf(fid,'       buoywhitered = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyablancaroja.png''}), \n');
+fprintf(fid,'       buoyyellow = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyablancaroja.png''}), \n');
 fprintf(fid,'       buoywhite = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyablanca.png''}); \n');
 %% Trajectoria de las Argo Espana
 fprintf(fid,'  // Trayectorias de las boyas ArgoEspana\n');
@@ -229,7 +229,7 @@ fprintf(fid,'		if(perfilador[0] == 0){\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoywhite,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://fleetmonitoring.euro-argo.eu/float/''+perfilador[1]+''" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}else if (perfilador[0] == 1) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoyred,\n');
@@ -237,7 +237,7 @@ fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5]
 fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}else if (perfilador[0] == 2) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
-fprintf(fid,'			icon: buoywhitered,\n');
+fprintf(fid,'			icon: buoyyellow,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
 fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}\n');
