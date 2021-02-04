@@ -3,7 +3,7 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 
 PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
-DirArgoData=/data/pvb/Argo
+DirArgoData=/data/shareddata/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt
 /bin/rm -f $PaginaWebDir/log/GetArgo.log
@@ -13,7 +13,7 @@ DirArgoData=/data/pvb/Argo
 #---------------------------------------
 basin=atlantic_ocean
 
-/usr/bin/wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/*
+/usr/bin/wget --passive -N -np -nH -r --cut-dirs 4 -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/*
 
 #---------------------------------------
 #ArgoGreyList

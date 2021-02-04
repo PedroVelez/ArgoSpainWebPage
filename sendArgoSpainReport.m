@@ -7,8 +7,8 @@ configArgoSpainWebpage
 [DayNumber,DayName] = weekday(now);
 
 %try
-R1=load(strcat(PaginaWebDir,'/data/reportcreateArgoRegionGMap'));
-R2=load(strcat(PaginaWebDir,'/data/reportcreateArgoSpainGMap'));
+R1=load(strcat(PaginaWebDir,'/data/reportcreateArgoRegionLLet'));
+R2=load(strcat(PaginaWebDir,'/data/reportcreateArgoSpainLLet'));
 R3=load(strcat(PaginaWebDir,'/data/reportArgoSpainStatus'));
 R4=load(strcat(PaginaWebDir,'/data/reportArgoInterestStatus'));
 

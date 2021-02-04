@@ -1,5 +1,5 @@
 #!/bin/bash
-source $HOME/.bashrc
+source $HOME/.telegram
 
 Verbose=0
 JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
@@ -14,7 +14,7 @@ then
 fi
 if [[ $strval == *vibrio* ]];
 then
-  MatVersion=/home/argo/Matlab/bin/matlab
+  MatVersion=/home/pvb/Matlab/bin/matlab
 fi
 
 #------------------------------------
@@ -89,9 +89,9 @@ then
     printf "  Updating leaflet map for Argo Spain\n"
     if [ $Verbose -eq 1 ]
     then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLlet;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLLet;exit'
     else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLlet;exit' > $DirLog/createArgoSpainLlet.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLLet;exit' > $DirLog/createArgoSpainLlet.log
     fi
 
 #Updating table with the statistics of Argo Spain
@@ -182,6 +182,6 @@ fi
 #------------------------------------
 URL="https://api.telegram.org/bot$ArgoEsBotTOKEN/sendMessage"
 MENSAJE=`cat $HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/report.txt`
-curl -s -X POST $URL -d chat_id=$ArgoEsBotID -d text="$MENSAJE" -d parse_mode=html
+curl -s -X POST $URL -d chat_id=$ArgoEsChannel -d text="$MENSAJE" -d parse_mode=html
 
 printf "<<<<< Updated ArgoSpainWebArgo \n"

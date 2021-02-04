@@ -76,7 +76,7 @@ GoogleMapsAPIKey
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=2.0; %Days to look for to update the figures
+DiasAnalisis=1.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=0;
