@@ -8,19 +8,31 @@ configArgoSpainWebpage
 %CoberturaArgoGlobal
 CoberturaArgoGlobal=4000;
 
+%CoberturaArgoMed
+CoberturaArgoMed=100;
 
 %% Begin
 fprintf('>>>>> %s\n',mfilename)
 
 % Read Data
-DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'), ... 
+    'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
 BoyasActivaArgoEs=DataArgoEs.iactiva;
 
-%Numerto total de perfiles medidos
+%Numero total de perfiles medidos
 NTotalPerfiles=0;
 for ifloat=1:length(DataArgoEs.WMO)
-    FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))),'HIDf');
+    FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
     NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
+end
+
+%Numero total de perfiles medidos en el Med
+BoyasActivaArgoEsMed=0;
+for ifloat=1:length(DataArgoEs.WMO)
+    FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
+    if strcmp(FloatData.MTDf.FLOAT_OWNER,'SOCIB')
+    BoyasActivaArgoEsMed = BoyasActivaArgoEsMed + 1;
+    end
 end
 
 
@@ -84,11 +96,13 @@ fprintf(fid,'<tr>   \n');
 fprintf(fid,'    <th>%d</th> \n',BoyasActivaArgoEs);
 fprintf(fid,'    <th>%d</th> \n',sum(NTotalPerfiles));
 fprintf(fid,'    <th>%3.1f%%</th> \n',BoyasActivaArgoEs/CoberturaArgoGlobal*100);
+fprintf(fid,'    <th>%3.1f%%</th> \n',BoyasActivaArgoEsMed/CoberturaArgoMed*100);
 fprintf(fid,'</tr>   \n');
 fprintf(fid,'<tr>   \n');
 fprintf(fid,'<td>PERFILADORES</td>   \n');
 fprintf(fid,'<td>PERFILES OCEANOGR&Aacute;FICOS</td>   \n');
 fprintf(fid,'<td>COBERTURA GLOBAL</td>   \n');
+fprintf(fid,'<td>COBERTURA MEDITERR&Aacute;NEA</td>   \n');
 fprintf(fid,'</tr>   \n');
 fprintf(fid,'</table>  \n');
 fprintf(fid,'</div>  \n');

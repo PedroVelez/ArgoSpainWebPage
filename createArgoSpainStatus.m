@@ -80,7 +80,7 @@ for NumDatSet = NumberOfDatSets
         if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
             fprintf('     \n> WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
             [FileOutA,FileOutAz,FileOutB,FileOutC] = createArgoSpainStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
-            FileOutFHtml = createArgoSpainStatus_WebPage(DataArgoEs.WMO(ifloat),GlobalDS);
+            FileOutFHtml = createArgoSpainStatus_FunctionWebPage(DataArgoEs.WMO(ifloat),GlobalDS);
             if SubeFTP == 1
                 fprintf('uploading files to ftp.\n')
                 binary(ftpobj)
@@ -98,6 +98,6 @@ for NumDatSet = NumberOfDatSets
         close(ftpobj)
     end
     %Report for each dataset
-    createArgoSpainStatus_Report
+    createArgoSpainStatus_FunctionReport
 end
 fprintf('      %s <<<<< \n',mfilename)

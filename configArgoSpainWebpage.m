@@ -44,7 +44,7 @@ DataSetNameM{2} = 'ArgoInterest';
 
 %% readArgoSpainData
 InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
-ForceDataUpdate=0;   %1 to force to re-read the netcdf files
+ForceDataUpdate=1;   %1 to force to re-read the netcdf files
 
 %% createArgoRegionGMap createArgoSpainGMap ArgoStatusGM
 %Time interval
@@ -72,11 +72,11 @@ GMZoomArgoEs=1;
 GMTamanoArgoEs=[600,350];
 
 %API key
-GoogleMapsAPIKey
+%GoogleMapsAPIKey
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=1.1; %Days to look for to update the figures
+DiasAnalisis=1000.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=0;

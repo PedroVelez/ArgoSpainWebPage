@@ -1,13 +1,10 @@
 clc;clear all;close all
+
 %% Convert the argogrey list file to .mat
+configArgoSpainWebpage
 
-load Globales;global GlobalSU
-
-
-datadir=strcat(GlobalSU.ArgoData,'/');
-
-if exist(strcat(datadir,'ar_greylist.txt'),'file')
-    fid=fopen(strcat(datadir,'ar_greylist.txt'));
+if exist(fullfile(DirArgoData,'ar_greylist.txt'),'file')
+    fid=fopen(fullfile(DirArgoData,'ar_greylist.txt'));
     str=fgets(fid);
     i=0;
     while feof(fid)==0
@@ -36,7 +33,7 @@ if exist(strcat(datadir,'ar_greylist.txt'),'file')
     end
     
     fprintf('     getArgoGreyList %d floats <<<<<\n',i)
-    save(strcat(datadir,'ar_greylist'),'platform','paramete','dateinic')
+    save(strcat(DirArgoData,'ar_greylist'),'platform','paramete','dateinic')
 else
     fprintf('>>>>> No ArgoGreyList file found <<<<< \n',i)
 end
