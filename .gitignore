@@ -1,5 +1,6 @@
 *.*~
 *._*
+*.log
 **/data/data*
 **/data/report*.mat
 **/html/floats/*
