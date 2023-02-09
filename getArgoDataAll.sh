@@ -2,7 +2,7 @@
 
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 
-PaginaWebDir=/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs
+PaginaWebDir=/Users/pvb/Proyectos/PaginaWebArgoEs
 DirArgoData=/data/shareddata/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt

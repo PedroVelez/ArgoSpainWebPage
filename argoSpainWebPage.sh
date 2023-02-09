@@ -1,24 +1,38 @@
 #!/bin/bash
-source $HOME/.telegram
 
 Verbose=0
 JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
-
-PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
-DirLog=$PaginaWebDir/log
 
 strval=$(uname -a)
 if [[ $strval == *Okapi* ]];
 then
   MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
+  DirRaiz=$HOME/Dropbox/Oceanografia
+  DirArgoData=$DirRaiz/Oceanografia/Data/Argo
+  DirArgoDataCopy=/data/shareddata/Argo
 fi
+
 if [[ $strval == *vibrio* ]];
 then
   MatVersion=/home/pvb/Matlab/bin/matlab
+  DirRaiz=$HOME/Dropbox/Oceanografia
+  DirArgoData=$DirRaiz/Oceanografia/Data/Argo
+  DirArgoDataCopy=/data/shareddata/Argo
 fi
 
+if [[ $strval == *rossby* ]];
+then
+  MatVersion=/usr/bin/matlab
+  DirRaiz=$HOME
+  DirArgoData=$DirRaiz/Data/Argo
+  DirArgoDataCopy=/data/shareddata/Argo
+fi
+
+PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
+DirLog=$PaginaWebDir/log
+
 #------------------------------------
-#Inicio
+# Inicio
 #------------------------------------
 
 /bin/rm -f $DirLog/ArgoSpainWebPage*.log
@@ -27,6 +41,7 @@ printf ">>>> Updating ArgoSpainWebArgo \n"
 printf "  Verbose $Verbose JustUpload $JustUpload \n"
 printf "  PaginaWebDir $PaginaWebDir \n"
 printf "  DirLog       $DirLog \n"
+printf "  DirRaiz      $DirRaiz \n"
 
 
 #------------------------------------
@@ -74,7 +89,6 @@ then
 #   else
 #    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit' > $DirLog/createArgoSpainGMap.log
 #   fi
-
 
 #Updating leaflet map for Argo in the region
    printf "  Updating leaflet map for Argo in the region\n"
@@ -169,19 +183,19 @@ then
 fi
 
 #------------------------------------
-# Copy data to the remote server
+# Copy Argo data to a diferente location
 #------------------------------------
-#printf "  Copy data to the remote server \n"
-#if [ $JustUpload == 0 ]
-#then
-#  cp $PaginaWebDir/data/dataArgoEs.mat /Volumes/GDOYE$/Proyectos/Argo/DelayedMode/data
-#fi
+#printf "  Copy data to a remote location \n"
+#rsync -vrh $DirArgoData/ $DirArgoDataCopy/
 
 #------------------------------------
 # TelegramBot
 #------------------------------------
+source $HOME/.telegram
+
 URL="https://api.telegram.org/bot$ArgoEsBotTOKEN/sendMessage"
-MENSAJE=`cat $HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/report.txt`
+#MENSAJE=`cat $HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/report.txt`
+MENSAJE=`cat $HOME/Proyectos/ArgoSpainWebpage/data/report.txt`
 curl -s -X POST $URL -d chat_id=$ArgoEsChannel -d text="$MENSAJE" -d parse_mode=html
 
 printf "<<<<< Updated ArgoSpainWebArgo \n"

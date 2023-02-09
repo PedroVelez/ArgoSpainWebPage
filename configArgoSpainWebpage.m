@@ -1,9 +1,9 @@
-% ArgoEsOpciones
-% Here are the variables used by the different programs
+load Globales
+%Here are the variables used by the different programs
 
 %% Input Directories and files
 %Directory that contains the argo float data, and the Argo geo data
-DirArgoData=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Data/Argo');
+DirArgoData=GlobalSU.ArgoData;
 
 %Directory with the geographical data and the floats
 DataDirGeo=fullfile(DirArgoData,'geo','atlantic_ocean');
@@ -11,27 +11,26 @@ DataDirFloats=fullfile(DirArgoData,'Floats');
 
 %Directory where the matlab scripts than update the Argo web page area
 %located
-PaginaWebDir=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
+PaginaWebDir=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage');
 
-%Directory with list of floats for each national program to monitor
-DirFloatLists=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage');
+%Directory with list of floats for each program to monitor
+DirFloatLists=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage');
 
-%Climatolyfile
-ClimatologyFile=strcat(getenv('HOME'),'/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/WOA05.mat');
+%Climatoly file
+ClimatologyFile=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
 %Directory to output the graphic files
 DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
-FileHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
-FilellHtmlArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatusll.html');
-
-FileTableArgoEsStatus =  strcat(PaginaWebDir,'/html/','argoesstatustable.html');
-FilellHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
-FileHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
-FilellHtmlArgoIbStatus   =strcat(PaginaWebDir,'/html/','argoibstatusll.html');
-FileHtmlArgoStatus     =strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
+FileHtmlArgoEsStatus   = strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
+FilellHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatusll.html');
+FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
+FilellHtmlArgoIbStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
+FileHtmlArgoIbStatus   = strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
+FilellHtmlArgoIbStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
+FileHtmlArgoStatus     = strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
 
 
 %% General settings
@@ -76,7 +75,7 @@ GMTamanoArgoEs=[600,350];
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=1000.1; %Days to look for to update the figures
+DiasAnalisis=1.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=0;

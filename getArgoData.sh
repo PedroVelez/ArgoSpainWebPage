@@ -3,8 +3,11 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
-PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
-DirArgoData=$HOME/Dropbox/Oceanografia/Data/Argo
+PaginaWebDir=$HOME/Proyectos/ArgoSpainWebpage
+DirArgoData=/data/shareddata/Argo
+#PaginaWebDir=$HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage
+#DirArgoData=$HOME/Dropbox/Oceanografia/Data/Argo
+DirArgoDataCopy=/data/shareddata/Argo
 
 /bin/rm -f $PaginaWebDir/log/*.log
 

@@ -21,6 +21,7 @@ for NumDatSet = NumberOfDatSets
     fprintf('     > Reading %s\n',DataSetName)
     i1 = 0;
     boyasDataSet = [];
+    fprintf('     > Reading %s\n',strcat(DirFloatLists,'/floats',DataSetName,'.dat'))
     fid = fopen(strcat(DirFloatLists,'/floats',DataSetName,'.dat'));
     while feof(fid) == 0
         linea=  fgetl(fid);
