@@ -48,11 +48,10 @@ end
 
 
 %Acceso a los datosfprintf
-fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/co-argoFloats/float?ptfCode=%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
+%fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/co-argoFloats/float?ptfCode=%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
 
 %EuroArgo at sea monitoring
-%fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/argoMonitoring/float/%7d">EuroArgo at Sea Monitoring</a></h3></div>\n',MD.WMOFloat);
-fprintf(fid,'<h3><div align="center"><a href=" https://fleetmonitoring.euro-argo.eu/float/%7d">EuroArgo at Sea Monitoring</a></h3></div>\n',MD.WMOFloat);
+fprintf(fid,'<h3><div align="center"><a href=" https://fleetmonitoring.euro-argo.eu/float/%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
 
 
 %Tabla con informacion
