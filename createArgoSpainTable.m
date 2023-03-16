@@ -56,7 +56,7 @@ fprintf(fid,'font-weight: bold;  \n');
 fprintf(fid,'border-collapse: collapse; \n');
 fprintf(fid,'font-family: Montserrat;  \n');
 fprintf(fid,'}  \n');
-fprintf(fid,'@font-face { font-family: "Montserrat"; src: url(''Montserrat.ttf''); format(''truetype'') } \n');
+fprintf(fid,'@font-face { font-family: "Montserrat"; src: url("https://github.com/PedroVelez/ArgoSpainWebPage/blob/master/icons/Montserrat-Regular.ttf"); } \n');
 fprintf(fid,'     h1 {  \n');
 fprintf(fid,'font-family: Montserrat  \n');
 fprintf(fid,'}  \n');
