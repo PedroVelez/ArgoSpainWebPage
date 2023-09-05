@@ -1,5 +1,5 @@
 clear all;close all
-%Crea la pagina argoesstatus.html con el google mapa de las posiciones de
+%Crea la pagina argoesstatus.html con el mapa creado con Ladlet de las posiciones de
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration

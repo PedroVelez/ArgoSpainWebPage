@@ -19,8 +19,8 @@ fprintf(fid,'<head>\n');
 fprintf(fid,'<title>Argo Espa&ntilde;a %07d</title> \n',MD.WMOFloat);
 fprintf(fid,'<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">\n');
 fprintf(fid,'<style type="text/css">\n');
-fprintf(fid,'<!--.style8 {font-size: 10px; font-weight: normal;font-family: Arial, Helvetica, sans-serif; }-->\n');
-fprintf(fid,'<!--.style9 {font-size: 10px; font-weight: bold; font-family: Arial, Helvetica, sans-serif; }-->\n');
+fprintf(fid,'<!--.style8 {font-size: 10px; font-weight: normal;font-family: Georgia, Arial, Helvetica, sans-serif; }-->\n');
+fprintf(fid,'<!--.style9 {font-size: 10px; font-weight: bold; font-family: Goergia, Arial, Helvetica, sans-serif; }-->\n');
 fprintf(fid,'</style>\n');
 fprintf(fid,'</head>\n');
 fprintf(fid,'<body>\n');
@@ -48,11 +48,10 @@ end
 
 
 %Acceso a los datosfprintf
-fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/co-argoFloats/float?ptfCode=%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
+%fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/co-argoFloats/float?ptfCode=%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
 
 %EuroArgo at sea monitoring
-%fprintf(fid,'<h3><div align="center"><a href="http://www.ifremer.fr/argoMonitoring/float/%7d">EuroArgo at Sea Monitoring</a></h3></div>\n',MD.WMOFloat);
-fprintf(fid,'<h3><div align="center"><a href=" https://fleetmonitoring.euro-argo.eu/float/%7d">EuroArgo at Sea Monitoring</a></h3></div>\n',MD.WMOFloat);
+fprintf(fid,'<h3><div align="center"><a href=" https://fleetmonitoring.euro-argo.eu/float/%7d">Acceso a los datos</a></h3></div>\n',MD.WMOFloat);
 
 
 %Tabla con informacion
