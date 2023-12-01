@@ -24,7 +24,7 @@ configArgoSpainWebpage
 % %Titulo
 % TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
 %
-% FileHtmlArgoStatus='/Users/pvb/Dropbox/Oceanografia/Proyectos/PaginaWebArgoEs/Html/ArgoStatus.html';
+% FileHtmlArgoStatus='/Users/pvb/Dropbox/Oceanografia/Analisis/PaginaWebArgoEs/Html/ArgoStatus.html';
 % DataDirGeo='... /Argo/geo/atlantic_ocean');
 
 %% Inicio

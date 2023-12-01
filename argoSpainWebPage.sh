@@ -19,7 +19,6 @@ then
   DirArgoData=$DirRaiz/Oceanografia/Data/Argo
   DirArgoDataCopy=/data/shareddata/Argo
 fi
-
 if [[ $strval == *rossby* ]];
 then
   MatVersion=/usr/bin/matlab
@@ -28,7 +27,7 @@ then
   DirArgoDataCopy=/data/shareddata/Argo
 fi
 
-PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
+PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
 DirLog=$PaginaWebDir/log
 
 #------------------------------------
@@ -194,8 +193,7 @@ fi
 source $HOME/.telegram
 
 URL="https://api.telegram.org/bot$ArgoEsBotTOKEN/sendMessage"
-#MENSAJE=`cat $HOME/Dropbox/Oceanografia/Proyectos/ArgoSpainWebpage/data/report.txt`
-MENSAJE=`cat $HOME/Proyectos/ArgoSpainWebpage/data/report.txt`
+MENSAJE=`cat $HOME/Analisis/ArgoSpainWebpage/data/report.txt`
 curl -s -X POST $URL -d chat_id=$ArgoEsChannel -d text="$MENSAJE" -d parse_mode=html
 
 printf "<<<<< Updated ArgoSpainWebArgo \n"
