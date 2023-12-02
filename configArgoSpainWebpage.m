@@ -4,8 +4,6 @@ load Globales
 %% Input Directories and files
 %Directory that contains the argo float data, and the Argo geo data
 DirArgoData=GlobalSU.ArgoData;
-
-%Directory with the geographical data and the floats
 DataDirGeo=fullfile(DirArgoData,'geo','atlantic_ocean');
 DataDirFloats=fullfile(DirArgoData,'Floats');
 

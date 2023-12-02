@@ -3,6 +3,8 @@
 Verbose=0
 JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
 
+# Depending on the computer setup the folders
+# And the path of the matlab application
 strval=$(uname -a)
 if [[ $strval == *Okapi* ]];
 then
@@ -11,7 +13,6 @@ then
   DirArgoData=$DirRaiz/Oceanografia/Data/Argo
   DirArgoDataCopy=/data/shareddata/Argo
 fi
-
 if [[ $strval == *vibrio* ]];
 then
   MatVersion=/home/pvb/Matlab/bin/matlab
