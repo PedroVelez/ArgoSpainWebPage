@@ -5,12 +5,12 @@ clear all;close all
 configArgoSpainWebpage
 
 % Verbose=1;
-% InterDiasEmision=30; %Dias sin emision a partir de los cuales una boya ha dejado de operar
+% InterDiasEmision=30;  % Dias sin emision a partir de los cuales una boya ha dejado de operar
 % NumberOfDatSets=[1 2]; %Number of DataSets to monitor
-% DataSetNameM=['ArgoEs';'ArgoIn'];
-% DataDirFloats=' ... /Argo/Floats';
-% DirFloatLists='... /Programas/Argo/GetData';
-% ForceDataUpdate=1;
+% DataSetNameM=['ArgoEs';'ArgoIn']; % Names of the DataSets to monitor
+% DataDirFloats=' ... /Argo/Floats'; % Directory with the geographical data and the floats
+% DirFloatLists='... /Programas/Argo/GetData'; % Directory with list of floats for each program to monitor
+% ForceDataUpdate=1; % Flag to force to re-read the netcdf files
 
 %% Inicio
 fprintf('>>>>> %s\n',mfilename)
