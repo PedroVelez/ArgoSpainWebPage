@@ -4,8 +4,8 @@ FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
 PaginaWebDir=$HOME/Analisis/ArgoSpainWebpage
-DirArgoData=/data/shareddata/Argo
-DirArgoDataCopy=/data/shareddata/Argo
+DirArgoData=/data/pvb/Argo
+DirArgoDataCopy=/data/pvb/Argo
 
 /bin/rm -f $PaginaWebDir/log/*.log
 

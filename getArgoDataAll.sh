@@ -3,7 +3,7 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 
 PaginaWebDir=/Users/pvb/Analisis/PaginaWebArgoEs
-DirArgoData=/data/shareddata/Argo
+DirArgoData=/data/pvb/Argo
 
 /bin/rm -f $DirArgoData/log/*.txt
 /bin/rm -f $PaginaWebDir/log/GetArgo.log

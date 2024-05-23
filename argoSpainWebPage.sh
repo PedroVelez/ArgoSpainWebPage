@@ -11,21 +11,14 @@ then
   MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
   DirRaiz=$HOME/Dropbox/Oceanografia
   DirArgoData=$DirRaiz/Oceanografia/Data/Argo
-  DirArgoDataCopy=/data/shareddata/Argo
-fi
-if [[ $strval == *vibrio* ]];
-then
-  MatVersion=/home/pvb/Matlab/bin/matlab
-  DirRaiz=$HOME/Dropbox/Oceanografia
-  DirArgoData=$DirRaiz/Oceanografia/Data/Argo
-  DirArgoDataCopy=/data/shareddata/Argo
+  DirArgoDataCopy=/data/pvb/Argo
 fi
 if [[ $strval == *rossby* ]];
 then
   MatVersion=/usr/bin/matlab
   DirRaiz=$HOME
   DirArgoData=$DirRaiz/Data/Argo
-  DirArgoDataCopy=/data/shareddata/Argo
+  DirArgoDataCopy=/data/pvb/Argo
 fi
 
 PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
