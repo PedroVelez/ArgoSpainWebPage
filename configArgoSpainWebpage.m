@@ -65,8 +65,8 @@ TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
 
 %Google Map createArgoSpainGMap
 GMCentroArgoEs=[20,0];
-GMZoomArgoEs=1;
-GMTamanoArgoEs=[600,350];
+GMZoomArgoEs=2;
+GMTamanoArgoEs=[800,500];
 
 
 %% Ftp
