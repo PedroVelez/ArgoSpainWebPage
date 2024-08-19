@@ -9,3 +9,4 @@
 **/log/*.log
 .DS_Store
 .AppleDouble
+nohup.out

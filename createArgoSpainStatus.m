@@ -71,8 +71,8 @@ for NumDatSet = NumberOfDatSets
     fprintf('     >> Dataset %s\n',DataSetName)
     
     if SubeFTP == 1
-        ftpobj=FtpOceanografia;
-        cd(ftpobj,'/html/argo/datos/floats');
+        ftpobj=FtpArgoespana;
+        cd(ftpobj,ftp_dir);
     end
     
     %Figures and web page for each active float

@@ -114,8 +114,8 @@ fclose(fid);
 
 %% Ftp the file
 fprintf('     > Uploading  %s \n',FileTableArgoEsStatus);
-ftpobj=FtpOceanografia;
-var=cd(ftpobj,'/html/argo/html_files');
+ftpobj=FtpArgoespana;
+var=cd(ftpobj,ftp_dir);
 outftp=mput(ftpobj,FileTableArgoEsStatus);
 
 
