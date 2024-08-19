@@ -75,14 +75,14 @@ fprintf(fid,'  var titulo = new Titulo(tituloDiv, map);\n');
 fprintf(fid,'  tituloDiv.index = 1;\n');
 fprintf(fid,'  map.controls[google.maps.ControlPosition.TOP_CENTER].push(tituloDiv);\n');
 fprintf(fid,'  //Defino los inconos\n');
-fprintf(fid,'  var buoyred = new google.maps.MarkerImage(''http://www.oceanografia.es/argo/imagenes/boyaroja.png'',\n');
+fprintf(fid,'  var buoyred = new google.maps.MarkerImage(''https://www.argoespana.es/imagenes/boyaroja.png'',\n');
 fprintf(fid,'      // This marker is 20 pixels wide by 32 pixels tall.\n');
 fprintf(fid,'      new google.maps.Size(32,30),\n');
 fprintf(fid,'      // The origin for this image is 0,0.\n');
 fprintf(fid,'      new google.maps.Point(0,0),\n');
 fprintf(fid,'      // The anchor for this image is the base of the flagpole at 0,32.\n');
 fprintf(fid,'      new google.maps.Point(16,20));\n');
-fprintf(fid,'  var buoywhite = new google.maps.MarkerImage(''http://www.oceanografia.es/argo/imagenes/boyablanca.png'',\n');
+fprintf(fid,'  var buoywhite = new google.maps.MarkerImage(''https://www.argoespana.es/imagenes/boyablanca.png'',\n');
 fprintf(fid,'      // This marker is 20 pixels wide by 32 pixels tall.v\n');
 fprintf(fid,'      new google.maps.Size(32,30),\n');
 fprintf(fid,'      // The origin for this image is 0,0.\n');
@@ -157,7 +157,7 @@ fprintf(fid,'        var marker = new google.maps.Marker({\n');
 fprintf(fid,'        	position: new google.maps.LatLng(perfilador[2], perfilador[3]),\n');
 fprintf(fid,'        	map: map,\n');
 fprintf(fid,'        	icon: buoyred,\n');
-fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
+fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="https://www.argoespana.es/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
 fprintf(fid,'        	title: perfilador[4]+'' WMO ''+perfilador[1]});\n');
 fprintf(fid,'		google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'	  }else{	\n');
@@ -165,7 +165,7 @@ fprintf(fid,'    	var marker = new google.maps.Marker({\n');
 fprintf(fid,'        	position: myLatLng,\n');
 fprintf(fid,'        	map: map,\n');
 fprintf(fid,'        	icon: buoywhite,\n');
-fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
+fprintf(fid,'        	infowindowcontent: ''<center><p>Float <b><a href="https://www.argoespana.es/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br>''+perfilador[4]+''</p></center>'',\n');
 fprintf(fid,'        	title: perfilador[4]+'' WMO ''+perfilador[1]});\n');
 fprintf(fid,'		google.maps.event.addListener(marker, ''click'', function(e) {infowindow.setContent(this.infowindowcontent);infowindow.open(map,this);});\n');
 fprintf(fid,'	  }//if \n');
@@ -190,7 +190,7 @@ fprintf(fid,'  controlText.style.fontSize = ''12px'';\n');
 fprintf(fid,'  controlText.style.paddingLeft = ''1px'';\n');
 fprintf(fid,'  controlText.style.paddingRight = ''1px'';\n');
 fprintf(fid,'  // Add the text\n');
-fprintf(fid,'  controlText.innerHTML = ''<img src="http://www.oceanografia.es/argo/imagenes/LeyendaArgoEs.png" />'';\n');
+fprintf(fid,'  controlText.innerHTML = ''<img src="https://www.argoespana.es/imagenes/LeyendaArgoEs.png" />'';\n');
 fprintf(fid,'  controlUI.appendChild(controlText);\n');
 fprintf(fid,'}\n');
 
@@ -265,7 +265,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         if DataArgoEs.activa(ifloat)==1
             fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"><div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
@@ -278,7 +278,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"><div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"><div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
