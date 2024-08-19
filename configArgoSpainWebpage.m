@@ -68,8 +68,10 @@ GMCentroArgoEs=[20,0];
 GMZoomArgoEs=1;
 GMTamanoArgoEs=[600,350];
 
-%API key
-%GoogleMapsAPIKey
+
+%% Ftp
+ftp_dir='/html/html_files';
+
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria

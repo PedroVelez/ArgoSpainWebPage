@@ -379,7 +379,7 @@ fprintf(fid,'</html>');
 fclose(fid);
 
 %% Ftp
-ftpobj=FtpOceanografia;
-cd(ftpobj,'/html');
+ftpobj=FtpArgoespana;
+cd(ftpobj,ftp_dir);
 mput(ftpobj,FileHtmlArgoStatus);
 close(ftpobj)
