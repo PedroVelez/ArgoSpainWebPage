@@ -65,8 +65,8 @@ fprintf(fid,'           iconAnchor:   [16, 20], \n');
 fprintf(fid,'           popupAnchor:  [-3, -76] \n');
 fprintf(fid,'       } \n');
 fprintf(fid,'   }); \n');
-fprintf(fid,'   var buoyred = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyaroja.png''}), \n');
-fprintf(fid,'       buoywhite = new buoyIcon({iconUrl: ''http://www.oceanografia.es/argo/imagenes/boyablanca.png''}); \n');
+fprintf(fid,'   var buoyred = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyaroja.png''}), \n');
+fprintf(fid,'       buoywhite = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyablanca.png''}); \n');
 
 
 %% Escribo las trajectorias de lasboyas activas
@@ -145,12 +145,12 @@ fprintf(fid,'		if(perfilador[0] == 1){\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoyred,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fid,'		}else if (perfilador[0] == 0) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoywhite,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="http://www.oceanografia.es/argo/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/datos/floats/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fid,'		}\n');
 fprintf(fid,'	}// Marcador de posicion de las boyas\n');
 
@@ -159,7 +159,7 @@ fprintf(fid,'//Funcion para crear la leyenda\n');
 fprintf(fid,'	var legend = L.control({position: ''bottomright''});\n');
 fprintf(fid,'	legend.onAdd = function (map) {\n');
 fprintf(fid,'	    var div = L.DomUtil.create(''div'', ''info legend'');\n');
-fprintf(fid,'       		div.innerHTML = "<img src=http://www.oceanografia.es/argo/imagenes/LeyendaArgoEs.png height=''75''><br>";\n');
+fprintf(fid,'       		div.innerHTML = "<img src=https://www.argoespana.es/imagenes/LeyendaArgoEs.png height=''75''><br>";\n');
 fprintf(fid,'	    return div;\n');
 fprintf(fid,'	};\n');
 fprintf(fid,'	legend.addTo(mymap);\n');
@@ -210,7 +210,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         if DataArgoEs.activa(ifloat)==1
             fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"> <div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"> <div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
@@ -223,7 +223,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fid,'<TR class="style4">\n');
-            fprintf(fid,'<TD width="56"> <div align="center" class="style4"><a href="http://www.oceanografia.es/argo/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
+            fprintf(fid,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="74"> <div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fid,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
