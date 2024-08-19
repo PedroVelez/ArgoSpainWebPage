@@ -75,7 +75,7 @@ ftp_dir='/html/html_files';
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=1.1; %Days to look for to update the figures
+DiasAnalisis=1000.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=0;
