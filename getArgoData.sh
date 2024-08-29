@@ -26,6 +26,13 @@ PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
 /bin/rm -f $PaginaWebDir/log/*.log
 
 #---------------------------------------
+#Crea listas de Argo a apartir del google spreadsheets
+#---------------------------------------
+printf "  Crea listas de Argo a apartir del google spreadsheets\n"
+cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createFloatArgoSpainDat;exit'
+
+
+#---------------------------------------
 #Get Region
 #---------------------------------------
 basin=atlantic_ocean
@@ -44,16 +51,6 @@ fi
 wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$month/*
 wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth1.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$monthb/*
 wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeoMonth2.log -P $DirArgoData/geo/$basin $FtpArgoData/geo/$basin/20$year/$montha/*
-
-#---------------------------------------
-#Crea listas de Argo a apartir del google spreadsheets
-#---------------------------------------
- printf "  Crea listas de Argo a apartir del google spreadsheets\n"
-cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createFloatArgoSpainDat;exit'
-
-
-#En Matlab
-#/Applications/MATLAB_R2016b.app/bin/matlab -nodisplay -nosplash -nojvm -r 'cd /Users/pvb/Dropbox/Oceanografia/LibreriasMatlab/Programas/Argo/GetData/;GetArgoEsInIDs;exit' > $DirArgoData/log/GetArgoEsInIDs.txt
 
 #---------------------------------------
 #Descarga boyas
