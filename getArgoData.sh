@@ -3,9 +3,25 @@
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
 #FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
-PaginaWebDir=$HOME/Analisis/ArgoSpainWebpage
-DirArgoData=/data/pvb/Argo
-DirArgoDataCopy=/data/pvb/Argo
+# Depending on the computer setup the folders
+# And the path of the matlab application
+strval=$(uname -a)
+if [[ $strval == *Okapi* ]];
+then
+  MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
+  DirRaiz=$HOME/Dropbox/Oceanografia
+  DirArgoData=$DirRaiz/Oceanografia/Data/Argo
+  DirArgoDataCopy=/data/pvb/Argo
+fi
+if [[ $strval == *rossby* ]];
+then
+  MatVersion=/usr/bin/matlab
+  DirRaiz=$HOME
+  DirArgoData=$DirRaiz/Data/Argo
+  DirArgoDataCopy=/data/pvb/Argo
+fi
+
+PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
 
 /bin/rm -f $PaginaWebDir/log/*.log
 
@@ -32,8 +48,10 @@ wget --passive -N -np -nH -r -Q601M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoGeo
 #---------------------------------------
 #Crea listas de Argo a apartir del google spreadsheets
 #---------------------------------------
-#En python
-#/Users/pvb/anaconda3/bin/python /Users/pvb/Dropbox/Oceanografia/LibreriasMatlab/Programas/Argo/GetData/GetArgoEsInIDs.py
+ printf "  Crea listas de Argo a apartir del google spreadsheets\n"
+cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createFloatArgoSpainDat;exit'
+
+
 #En Matlab
 #/Applications/MATLAB_R2016b.app/bin/matlab -nodisplay -nosplash -nojvm -r 'cd /Users/pvb/Dropbox/Oceanografia/LibreriasMatlab/Programas/Argo/GetData/;GetArgoEsInIDs;exit' > $DirArgoData/log/GetArgoEsInIDs.txt
 
