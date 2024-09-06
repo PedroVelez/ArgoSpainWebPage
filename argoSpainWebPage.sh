@@ -65,24 +65,6 @@ then
   else
     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'readArgoSpainData;exit' > $DirLog/readArgoSpainData.log
   fi
-
-#Update Ib GoogleMap
-#   printf "  Updating google map for Argo in the region\n"
-#   if [ $Verbose -eq 1 ]
-#   then
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit'
-#   else
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMap;exit' > $DirLog/createArgoRegionGMap.log
-#   fi
-#Update ArgoEs GoogleMap
-#   printf "  Updating google map for Argo Spain\n"
-#   if [ $Verbose -eq 1 ]
-#   then
-#    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit'
-#   else
-#    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainGMap;exit' > $DirLog/createArgoSpainGMap.log
-#   fi
-
 #Updating leaflet map for Argo in the region
    printf "  Updating leaflet map for Argo in the region\n"
    if [ $Verbose -eq 1 ]
@@ -119,39 +101,6 @@ then
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainStatus;exit' > $DirLog/createArgoSpainStatus.log
   fi
 fi
-
-#Update Update Argo Atlatic GoogleMap
-#  printf "  Updating google map for Argo in the Atlantic\n"
-#  if [ $Verbose -eq 1 ]
-#  then
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit'
-#  else
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionGMapFull;exit' > $DirLog/createArgoRegionGMapFull.log
-#  fi
-
-#------------------------------------
-# Upload status (html) files to the web server
-#------------------------------------
-#Ahora esto se hace desde los scripts
-#printf "  Upload status files to the web server\n"
-#/usr/local/bin/ncftpput -a OceanografiaES /html/argo/html_files  *.html
-##Metodo antiguo usando ncftp
-##cd $PaginaWebDir/Html
-##/usr/local/bin/ncftp OceanografiaEs << ftpEOF > $DirLog/ActualizaPaginaWebArgoEs_SubeficherosHtml.log
-##  cd /html/argo/html_files
-##  put -fa argoibstatusgm.html
-##  put -fa argoesstatusgm.html
-##  quit
-##ftpEOF
-
-#------------------------------------
-# Upload file from ArgoEsGraficos to the web server
-#------------------------------------
-#Ahora esto se hace desde los scripts
-#printf "  Upload files from ArgoEsGraficos to the web server\n"
-#cd $PaginaWebDir/Html/ArgoEsGraficos
-#/usr/local/bin/ncftpput OceanografiaES /html/argo/datos/ArgoEsGraficos *.png >> #$DirLog/ActualizaPaginaWebArgoEs.log
-#/usr/local/bin/ncftpput -a OceanografiaES /html/argo/datos/ArgoEsGraficos *.html >> #$DirLog/ActualizaPaginaWebArgoEs.log
 
 #Borra ficheros ArgoEsGraficos
 if [ $JustUpload == 0 ]
