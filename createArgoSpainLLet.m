@@ -11,8 +11,7 @@ configArgoSpainWebpage
 % GMZoomArgoEs=1;
 % GMTamanoArgoEs=[675,390];
 % %Output file
-% FileHtmlArgoEsStatus='argoesstatusgm.html';
-FileHtmlArgoEsStatus=FilellHtmlArgoEsStatus;
+% FilellHtmlArgoEsStatus;
 
 %% Inicio
 % Read Data

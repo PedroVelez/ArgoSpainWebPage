@@ -22,14 +22,10 @@ ClimatologyFile=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage/data/WOA05.mat');
 DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
 %Names of the outputs files
-FileHtmlArgoEsStatus   = strcat(PaginaWebDir,'/html/','argoesstatusgm.html');
 FilellHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatusll.html');
 FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
 FilellHtmlArgoIbStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
-FileHtmlArgoIbStatus   = strcat(PaginaWebDir,'/html/','argoibstatusgm.html');
 FilellHtmlArgoIbStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
-FileHtmlArgoStatus     = strcat(PaginaWebDir,'/html/','argoibstatusgmfull.html');
-
 
 %% General settings
 Verbose=0;

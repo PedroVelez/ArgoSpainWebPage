@@ -26,8 +26,6 @@ configArgoSpainWebpage
 % FileHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatus.html');
 % DataDirGeo='... /Argo/geo/atlantic_ocean');
 
-FileHtmlArgoIbStatus=FilellHtmlArgoIbStatus;
-
 %% Inicio
 %Read data
 DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','iactiva','FechaUltimoPerfil');
