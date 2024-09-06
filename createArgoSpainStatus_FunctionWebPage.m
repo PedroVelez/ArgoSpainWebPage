@@ -1,4 +1,4 @@
-function  FileOutFHtml=createArgoSpainStatus_WebPage(WMO,GlobalDS)
+function  FileOutFHtml=createArgoSpainStatus_FunctionWebPage(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.DirOutGraph='./html/floats';

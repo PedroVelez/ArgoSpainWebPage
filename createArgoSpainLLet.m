@@ -197,8 +197,8 @@ fprintf(fid,'<TD width="106"><div align="center" class="style1" ><div align="cen
 fprintf(fid,'<TD width="106"><div align="center" class="style1" ><div align="center"><strong>&Uacute;ltimo perfil </strong></div></div></TD>\n');
 fprintf(fid,'<TD width="45"> <div align="center" class="style1" ><div align="center"><strong>Edad</strong></div></div></TD>\n');
 fprintf(fid,'<TD width="100"><div align="center" class="style1" ><div align="center"><strong>Tipo boya </strong></div></div></TD>\n');
-fprintf(fid,'<TD width="50"> <div align="center" class="style1" ><div align="center"><strong>Voltaje</strong></div></div></TD>\n');
-fprintf(fid,'<TD width="50"> <div align="center" class="style1" ><div align="center"><strong>Surface offset</strong></div></div></TD>\n');
+%fprintf(fid,'<TD width="50"> <div align="center" class="style1" ><div align="center"><strong>Voltaje</strong></div></div></TD>\n');
+%fprintf(fid,'<TD width="50"> <div align="center" class="style1" ><div align="center"><strong>Surface offset</strong></div></div></TD>\n');
 fprintf(fid,'</TR>\n');
 
 %Lee los datos de las boyas para poder crear la tabla de datos
@@ -217,8 +217,8 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(end),22));
             fprintf(fid,'<TD width="45"> <div align="center"  class="style4">%s</span></div></TD>',MD.Age);
             fprintf(fid,'<TD width="100"><div align="center" class="style4">%12s</span></div></TD>',MD.PlatformModel);
-            fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoVoltaje(ifloat));
-            fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoSurfaceOffset(ifloat));
+            %fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoVoltaje(ifloat));
+            %fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoSurfaceOffset(ifloat));
             fprintf(fid,'</TR>');
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
@@ -230,8 +230,8 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fid,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(end),22));
             fprintf(fid,'<TD width="45"> <div align="center" class="style4">%s</span></div></TD>',MD.Age);
             fprintf(fid,'<TD width="100"><div align="center" class="style4">%12s</span></div></TD>',MD.PlatformModel);
-            fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoVoltaje(ifloat));
-            fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoSurfaceOffset(ifloat));
+            %fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoVoltaje(ifloat));
+            %fprintf(fid,'<TD width="50"> <div align="center" class="style4">%4.2f</span></div></TD>',DataArgoEs.UltimoSurfaceOffset(ifloat));
             fprintf(fid,'</TR>');
         end
     else
@@ -244,8 +244,8 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         fprintf(fid,'<TD width="106"><div align="center" class="style4"> ---- </span></div></TD>');
         fprintf(fid,'<TD width="45"><div align="center"  class="style4"> ---- </span></div></TD>');
         fprintf(fid,'<TD width="100"><div align="center" class="style4"> ---- </span></div></TD>');
-        fprintf(fid,'<TD width="50"><div align="center" class="style4"> ---- </span></div></TD>');
-        fprintf(fid,'<TD width="50"><div align="center" class="style4"> ---- </span></div></TD>');
+        %fprintf(fid,'<TD width="50"><div align="center" class="style4"> ---- </span></div></TD>');
+        %fprintf(fid,'<TD width="50"><div align="center" class="style4"> ---- </span></div></TD>');
         fprintf(fid,'</TR>');
     end
 end
