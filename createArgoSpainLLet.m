@@ -147,12 +147,12 @@ fprintf(fHTML,'		if(perfilador[0] == 1){\n');
 fprintf(fHTML,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fHTML,'			icon: buoyred,\n');
 fprintf(fHTML,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/html_files/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fHTML,'		}else if (perfilador[0] == 0) {\n');
 fprintf(fHTML,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fHTML,'			icon: buoywhite,\n');
 fprintf(fHTML,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/html_files/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fHTML,'		}\n');
 fprintf(fHTML,'	}// Marcador de posicion de las boyas\n');
 
@@ -267,7 +267,7 @@ fclose(fTxt);
 %% Ftp the file
 fprintf('     > Uploading  %s, %s \n',FileHtmlArgoEsStatus,strrep(FileHtmlArgoEsStatus,'.html','.txt'));
 ftpobj=FtpArgoespana;
-cd(ftpobj,ftp_dir);
+cd(ftpobj,ftp_dir_html);
 mput(ftpobj,FileHtmlArgoEsStatus);
 mput(ftpobj,strrep(FileHtmlArgoEsStatus,'.html','.txt'));
 

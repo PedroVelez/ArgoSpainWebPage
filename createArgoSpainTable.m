@@ -115,7 +115,7 @@ fclose(fid);
 %% Ftp the file
 fprintf('     > Uploading  %s \n',FileTableArgoEsStatus);
 ftpobj=FtpArgoespana;
-var=cd(ftpobj,ftp_dir);
+var=cd(ftpobj,ftp_dir_html);
 outftp=mput(ftpobj,FileTableArgoEsStatus);
 
 

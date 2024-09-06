@@ -68,10 +68,9 @@ GMCentroArgoEs=[20,0];
 GMZoomArgoEs=2;
 GMTamanoArgoEs=[800,500];
 
-
 %% Ftp
-ftp_dir='/html/html_files';
-
+ftp_dir='/html/float';
+ftp_dir_html='/html';
 
 %% ArgoEsStatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria

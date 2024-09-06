@@ -14,7 +14,7 @@ end
 PUD=find(DataArgoEs.FechaUltimoPerfil>=now-DiasAnalisis);
 PUDT=[];
 for ipud=1:length(PUD)
-    PUDT=[PUDT sprintf('        https://www.argoespana.es/html_files/%7d.html\n',DataArgoEs.WMO(PUD(ipud)))];
+    PUDT=[PUDT sprintf('        https://www.argoespana.es/float/%7d.html\n',DataArgoEs.WMO(PUD(ipud)))];
 end
 
 %Write the new report
@@ -50,7 +50,7 @@ end
 
 if strcmp(DataSetName,'ArgoEs')
     if isnan(nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)))==0
-        Informe4=sprintf('     Voltaje minimo %4.2f v\n       https://www.argoespana.es/html_files/%7d.html\n',nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),DataArgoEs.WMO(find(DataArgoEs.UltimoVoltaje==nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),1)));
+        Informe4=sprintf('     Voltaje minimo %4.2f v\n       https://www.argoespana.es/float/%7d.html\n',nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),DataArgoEs.WMO(find(DataArgoEs.UltimoVoltaje==nanmin(DataArgoEs.UltimoVoltaje(DataArgoEs.activa==1)),1)));
     else
         Informe4='';
     end
