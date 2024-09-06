@@ -43,7 +43,7 @@ end
 %informe de DMQC
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeDMQC.pdf'));
 if exist(fileReport,'file')==2
-    fprintf(fid,'<h3><div align="center"><a href="https://www.argoespana.es/Informes/%7dInformeDMQC.pdf">Acceso al informe de Delayed Mode Quiality Control</a></h3></div>\n',MD.WMOFloat);
+    fprintf(fid,'<h3><div align="center"><a href="https://www.argoespana.es/Informes/%7dInformeDMQC.pdf">Acceso al informe de Delayed Mode Quality Control</a></h3></div>\n',MD.WMOFloat);
 end
 
 
