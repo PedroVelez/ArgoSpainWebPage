@@ -3,7 +3,7 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-configArgoSpainWebpage
+configWebpage
 
 %CoberturaArgoGlobal
 CoberturaArgoGlobal=4000;

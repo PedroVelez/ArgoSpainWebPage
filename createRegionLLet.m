@@ -3,7 +3,7 @@ clear all;close all
 %active in the canary basin, and it creates the file  FileHtmlArgoIbStatus (argoibstatus.html)
 
 %% Read options
-configArgoSpainWebpage
+configWebpage
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;

@@ -1,4 +1,4 @@
-function  FileOutFHtml=createArgoSpainStatus_FunctionWebPage(WMO,GlobalDS)
+function  FileOutFHtml=createDataSetStatus_FunctionWebPage(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.DirOutGraph='./html/floats';
@@ -8,7 +8,7 @@ end
 fprintf('web page, ')
 
 %% Read Metada data
-MD=createArgoSpainStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData);
+MD=createDataSetStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData);
 
 %% Escribe pagina web
 FileOutFHtml=sprintf('%s/%07d.html',GlobalDS.DirOutGraph,WMO);

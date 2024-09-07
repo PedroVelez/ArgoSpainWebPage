@@ -1,4 +1,4 @@
-function [FileOutA,FileOutAz,FileOutB,FileOutC]=createArgoSpainStatus_FunctionFigures(WMO,GlobalDS)
+function [FileOutA,FileOutAz,FileOutB,FileOutC]=createDataSetStatus_FunctionFigures(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.Regionnombre{1}='GLOB';
@@ -127,9 +127,9 @@ figureA=figure('visible','off','clipping','on');
 if GlobalDS.Visible==1
     set(gcf,'visible','on')
 end
-createArgoSpainStatus_FunctionTrajectory(OneFloatData,GlobalDS,Limits,hTraPosition);
-createArgoSpainStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hTSPosition);
-createArgoSpainStatus_FunctionProfiles(OneFloatData,Limits);
+createDataSetStatus_FunctionTrajectory(OneFloatData,GlobalDS,Limits,hTraPosition);
+createDataSetStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hTSPosition);
+createDataSetStatus_FunctionProfiles(OneFloatData,Limits);
 FileOutA=sprintf('%s/%sA.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutA)
 
@@ -138,7 +138,7 @@ figureA_Zoom=figure('visible','off','clipping','on');
 if GlobalDS.Visible==1
     set(gcf,'visible','on')
 end
-createArgoSpainStatus_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
+createDataSetStatus_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
 FileOutAz=sprintf('%s/%sA_Zoom.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutAz)
 
@@ -147,7 +147,7 @@ figureB=figure('visible','off');
 if GlobalDS.Visible==1
     set(gcf,'visible','on')
 end
-createArgoSpainStatus_FunctionSections(OneFloatData,Limits);
+createDataSetStatus_FunctionSections(OneFloatData,Limits);
 FileOutB=sprintf('%s/%sB.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutB)
 
@@ -156,7 +156,7 @@ figure03=figure('visible','off');
 if GlobalDS.Visible==1
     set(gcf,'visible','on')
 end
-createArgoSpainStatus_FunctionTechnicalData
+createDataSetStatus_FunctionTechnicalData
 FileOutC=sprintf('%s/%sC.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutC)
 if GlobalDS.Visible==0

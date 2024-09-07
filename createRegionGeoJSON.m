@@ -3,7 +3,7 @@ clear all;close all
 %Crea el documento argoibstatus.html que conteine una tabla con enlaces a todas las boyas del area iberica
 
 %% Read configuration
-configArgoSpainWebpage
+configWebpage
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;

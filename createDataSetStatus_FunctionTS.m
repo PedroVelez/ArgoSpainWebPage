@@ -1,4 +1,4 @@
-function createArgoSpainStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hPosition);
+function createDataSetStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hPosition);
 %Colors
 cl=parula;
 color=linspace(1,length(cl),size(OneFloatData.sals,2));

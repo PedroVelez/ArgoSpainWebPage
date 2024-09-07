@@ -69,18 +69,18 @@ then
    printf "  Updating leaflet map for Argo in the region\n"
    if [ $Verbose -eq 1 ]
    then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionLLet;exit'
    else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoRegionLLet;exit' > $DirLog/createArgoRegionLLet.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionLLet;exit' > $DirLog/createRegionLLet.log
    fi
 
 #Updating leaflet map for Argo Spain
     printf "  Updating leaflet map for Argo Spain\n"
     if [ $Verbose -eq 1 ]
     then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLLet;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetLLet;exit'
     else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainLLet;exit' > $DirLog/createArgoSpainLlet.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetLLet;exit' > $DirLog/createDataSetLlet.log
     fi
 
 #Updating table with the statistics of Argo Spain
@@ -89,20 +89,20 @@ then
   then
    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit'
   else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit' > $DirLog/createArgoSpainTable.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit' > $DirLog/createTable.log
   fi
 
 #Update ArgoEs figures
   printf "  Updating and upload webpages for the ArgoSpain and ArgoInterest figures\n"
   if [ $Verbose -eq 1 ]
   then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainStatus;exit'
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit'
   else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainStatus;exit' > $DirLog/createArgoSpainStatus.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit' > $DirLog/createDataSetStatus.log
   fi
 fi
 
-#Borra ficheros ArgoEsGraficos
+#Borra ficheros DataSetGraficos
 if [ $JustUpload == 0 ]
 then
    printf "  Deleting local copy of ArgoEs figures\n"
@@ -118,9 +118,9 @@ then
   cd $PaginaWebDir
   if [ $Verbose -eq 1 ]
   then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendArgoSpainReport;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit'
   else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendArgoSpainReport;exit' > $DirLog/sendArgoSpainReport.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit' > $DirLog/sendDataSetReport.log
   fi
 fi
 

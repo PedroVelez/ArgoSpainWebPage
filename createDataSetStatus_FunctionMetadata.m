@@ -1,4 +1,4 @@
-function MD=createArgoSpainStatus_FunctionMetadata(WMO,DirArgoData)
+function MD=createDataSetStatus_FunctionMetadata(WMO,DirArgoData)
 %     TransmisionSystem: 'ARGOS'
 %     PlatformID: '4797'
 %     PlatformModel: ' APEX APF9A 6609'

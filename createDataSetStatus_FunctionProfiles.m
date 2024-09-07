@@ -1,4 +1,4 @@
-function createArgoSpainStatus_FunctionProfiles(OneFloatData,Limits)
+function createDataSetStatus_FunctionProfiles(OneFloatData,Limits)
 %Colors
 cl=parula;
 color=linspace(1,length(cl),size(OneFloatData.sals,2));

@@ -3,7 +3,7 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-configArgoSpainWebpage
+configWebpage
 
 % TrajectorySpanArgo=now-datenum(2005,1,1);
 % %GoogleMap
