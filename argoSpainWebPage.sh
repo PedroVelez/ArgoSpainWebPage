@@ -69,27 +69,27 @@ then
    printf "  Updating leaflet map for Argo in the region\n"
    if [ $Verbose -eq 1 ]
    then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionLLet;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit'
    else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionLLet;exit' > $DirLog/createRegionLLet.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit' > $DirLog/createRegionMapLLet.log
    fi
 
 #Updating leaflet map for Argo Spain
     printf "  Updating leaflet map for Argo Spain\n"
     if [ $Verbose -eq 1 ]
     then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetLLet;exit'
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetMapLLet;exit'
     else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetLLet;exit' > $DirLog/createDataSetLlet.log
+     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetMapLLet;exit' > $DirLog/createDataSetMapLLet.log
     fi
 
 #Updating table with the statistics of Argo Spain
   printf "  Updating table with the statistics of Argo Spain\n"
   if [ $Verbose -eq 1 ]
   then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit'
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetTable;exit'
   else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit' > $DirLog/createTable.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetTable;exit' > $DirLog/createDataSetTable.log
   fi
 
 #Update ArgoEs figures

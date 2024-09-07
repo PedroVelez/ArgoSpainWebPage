@@ -17,7 +17,7 @@ try
 EnviaCorreoArgo('pvelezbelchi@gmail.com',sprintf('Web actualizada %s',datestr(now)),sprintf('%s\n\n%s\n\n%s\n\n%s\n\nhttp://www.argoespana.es',R1.Informe,R2.Informe,R3.Informe,R4.Informe))
 catch ME
     MensajeError=sprintf('Error al enviar el informe tras actuaizar la web el %s',datestr(now)),sprintf('EnviaInforme - %s line %d',ME.message,ME.stack(1).line,datestr(now));
-    EnviaCorreoArgo('pedro.velez@ieo.es',MensajeError)
+    EnviaCorreoArgo('pedro.velez@ieo.csic.es',MensajeError)
 end
 end
 

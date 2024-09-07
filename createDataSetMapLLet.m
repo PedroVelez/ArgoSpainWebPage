@@ -207,7 +207,7 @@ fprintf(fTxt,'Estado; WMO; Proyecto; Primer perfil; ultimo perfil; Edad; Tipo de
 %Lee los datos de las boyas para poder crear la tabla de datos
 %iactiva=0;iinactiva=0;inodesplegada=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
-    MD = createArgoSpainStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
+    MD = createDataSetStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
     if DataArgoEs.activa(ifloat)>=1 %Activa o Inactiva con datos
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         if DataArgoEs.activa(ifloat)==1
