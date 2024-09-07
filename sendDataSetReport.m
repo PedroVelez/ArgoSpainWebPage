@@ -2,7 +2,7 @@ clear all
 %This script send by email the report of the updated webpage
 
 %% Read options
-configArgoSpainWebpage
+configWebPage
 
 [DayNumber,DayName] = weekday(now);
 

@@ -3,10 +3,10 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-configWebpage
+configWebPage
 
-%CoberturaArgoGlobal
-CoberturaArgoGlobal=4000;
+%CoberturaArgoGlobal, para calcular el porcentajes
+CoberturaArgoGlobal=4000; 
 
 %CoberturaArgoMed
 CoberturaArgoMed=100;

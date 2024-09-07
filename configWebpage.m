@@ -1,30 +1,31 @@
 load Globales
-%Here are the variables used by the different programs
+% Here are the variables used by the different programs
 
 %% Input Directories and files
-%Directory that contains the argo float data, and the Argo geo data
+% Directory that contains the argo float data, and the Argo geo data
 DirArgoData=GlobalSU.ArgoData;
 DataDirGeo=fullfile(DirArgoData,'geo','atlantic_ocean');
 DataDirFloats=fullfile(DirArgoData,'Floats');
 
-%Directory where the matlab scripts than update the Argo web page area
-%located
+% Directory where the matlab scripts than update the Argo web page area
+% located
 PaginaWebDir=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage');
 
-%Directory with list of floats for each program to monitor
+% Directory with list of floats for each program to monitor
 DirFloatLists=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage');
 
-%Climatoly file
+% Climatoly file
 ClimatologyFile=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
-%Directory to output the graphic files
+% Directory to output the graphic files
 DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 
-%Names of the outputs files
+% Names of the outputs files
+FileHtmlRegionStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
 FileHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatusll.html');
 FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
-FileHtmlArgoIbStatus = strcat(PaginaWebDir,'/html/','argoibstatusll.html');
+
 
 %% General settings
 Verbose=0;
@@ -44,7 +45,7 @@ FechaI=now-30;
 FechaF=now;
 TrajectorySpanArgo=90; %en dias
 
-%Geographical Regions
+%Geographical Region
 %Region
 lat_minIB= 15.00; lat_maxIB=54;
 lon_minIB=-45;    lon_maxIB=38;
@@ -52,11 +53,10 @@ lon_minIB=-45;    lon_maxIB=38;
 lat_min=-65;    lat_max=65;
 lon_min=-80;    lon_max=40;
 
-%Google Map createArgoRegionGMap
+%Map createArgoRegionMap
 GMCentroArgoIb=[39,-16];
 GMZoomArgoIb=4;
 GMTamanoArgoIb=[700,650]; %Ancho,Alto
-TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
 
 %Google Map createArgoSpainGMap
 GMCentroArgoEs=[20,0];

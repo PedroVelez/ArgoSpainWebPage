@@ -1,9 +1,10 @@
 clear all;close all
-%This script create the google maps with the positions of all Argo floats
-%active in the canary basin, and it creates the file  FileHtmlArgoIbStatus (argoibstatus.html)
+%This script create the map with the positions of all Argo floats
+%active in the Regio, and it creates the file  FileHtmlRegionStatus (argoibstatus.html)
 
 %% Read options
-configWebpage
+configWebPage
+
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -20,10 +21,7 @@ configWebpage
 % GMZoomArgoIb=4;
 % GMTamanoArgoIb=[700,650];
 %
-% %Titulo
-% TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
-%
-% FileHtmlArgoIbStatus =strcat(PaginaWebDir,'/html/','argoibstatus.html');
+% FileHtmlRegionStatus =strcat(PaginaWebDir,'/html/','argoibstatus.html');
 % DataDirGeo='... /Argo/geo/atlantic_ocean');
 
 %% Inicio
@@ -41,7 +39,7 @@ fprintf('>>>>> %s\n',mfilename)
 ntper=0;
 ntperes=0;
 FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
-fid = fopen(FileHtmlArgoIbStatus,'w');
+fid = fopen(FileHtmlRegionStatus,'w');
 fprintf('     > Writting leaflet file \n');
 fprintf(fid,'<!DOCTYPE html> \n');
 fprintf(fid,'<html> \n');
@@ -270,10 +268,10 @@ fprintf(fid,'</html>\n');
 fclose(fid);
 
 %% Ftp the file
-fprintf('     > Uploading  %s \n',FileHtmlArgoIbStatus);
+fprintf('     > Uploading  %s \n',FileHtmlRegionStatus);
 ftpobj=FtpArgoespana;
 cd(ftpobj,ftp_dir_html);
-mput(ftpobj,FileHtmlArgoIbStatus);
+mput(ftpobj,FileHtmlRegionStatus);
 
 %% Writting Informe
 % Para el infome Selecciono solo aquellos dentro de la region IB

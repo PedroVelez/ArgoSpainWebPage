@@ -3,8 +3,7 @@ clear all;close all
 %programa Argo Espana y Argo Interest
 
 %% Read configuration
-configWebpage
-
+configWebPage
 %Visible=1;
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
 %DiasAnalisis=11

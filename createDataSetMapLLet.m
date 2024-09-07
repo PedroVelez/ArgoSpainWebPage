@@ -3,15 +3,15 @@ clear all;close all
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
-configWebpage
+configWebPage
 
 % TrajectorySpanArgo=now-datenum(2005,1,1);
-% %GoogleMap
+%% Map
 % GMCentroArgoEs=[30,-16];
 % GMZoomArgoEs=1;
 % GMTamanoArgoEs=[675,390];
-% %Output file
-% FilellHtmlArgoEsStatus;
+%% Output file
+% FileHtmlArgoEsStatus;
 
 %% Inicio
 % Read Data

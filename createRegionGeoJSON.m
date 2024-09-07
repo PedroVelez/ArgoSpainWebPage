@@ -3,7 +3,8 @@ clear all;close all
 %Crea el documento argoibstatus.html que conteine una tabla con enlaces a todas las boyas del area iberica
 
 %% Read configuration
-configWebpage
+configWebPage
+
 % %Time Span
 % FechaI=now-30;
 % FechaF=now;
@@ -15,15 +16,7 @@ configWebpage
 % lat_min=-65;    lat_max=65;
 % lon_min=-80;    lon_max=40;
 %
-% %Google Map
-% GMCentroArgoIb=[39,-16];
-% GMZoomArgoIb=4;
-% GMTamanoArgoIb=[675,550];
 %
-% %Titulo
-% TituloArgoIbStatus='en las aguas que rodean Espa&ntilde;a';
-%
-% FileHtmlArgoIbStatus='argoibstatusgm.html';
 % DataDirGeo='... /Argo/geo/atlantic_ocean');
 
 %% Inicio
@@ -40,7 +33,6 @@ end
 ntper=0;
 ntperes=0;
 FileNameInforme=strcat(PaginaWebDir,'/Data/Informe',mfilename,'.mat');
-
 
 %% Trajectoria de las Argo Espana
 iTrajectoryAS=0;
@@ -73,10 +65,6 @@ for ifloat=1:size(AE.WMO,2)
     end
 end
 
-%var states = [{
-%    "type": "Feature",
-%    "properties": {"party": "Republican"},
-%    "geometry": {"type": "Polygon","coordinates": [[[-97.22,  48.98],[-96.58,  45.94],[-104.03, 45.94],[-104.05, 48.99]]]}}
 
 %% Trajectoria de las Argo Interes
 fprintf('  // Trayectorias de las boyas Argo Interes\n');
