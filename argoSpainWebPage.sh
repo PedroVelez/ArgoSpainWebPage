@@ -61,9 +61,9 @@ then
   printf "  Updating data sets, ArgoSpain and ArgoInterest\n"
   if [ $Verbose -eq 1 ]
   then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'readArgoSpainData;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit'
   else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'readArgoSpainData;exit' > $DirLog/readArgoSpainData.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit' > $DirLog/createDataSet.log
   fi
 #Updating leaflet map for Argo in the region
    printf "  Updating leaflet map for Argo in the region\n"
@@ -87,9 +87,9 @@ then
   printf "  Updating table with the statistics of Argo Spain\n"
   if [ $Verbose -eq 1 ]
   then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit'
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit'
   else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createArgoSpainTable;exit' > $DirLog/createArgoSpainTable.log
+   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createTable;exit' > $DirLog/createArgoSpainTable.log
   fi
 
 #Update ArgoEs figures

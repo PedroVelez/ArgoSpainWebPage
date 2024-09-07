@@ -34,7 +34,7 @@ NumberOfDatSets=[1 2]; %Number of DataSets to monitor
 DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
 DataSetNameM{2} = 'ArgoInterest';  
 
-%% readArgoSpainData
+%% createDataSet
 InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
 ForceDataUpdate=1;   %1 to force to re-read the netcdf files
 
