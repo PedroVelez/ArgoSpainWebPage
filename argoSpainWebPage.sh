@@ -17,7 +17,7 @@ if [[ $strval == *rossby* ]];
 then
   MatVersion=/usr/bin/matlab
   DirRaiz=$HOME
-  DirArgoData=$DirRaiz/Data/Argo
+  DirArgoData=/data/pvb/Argo
   DirArgoDataCopy=/data/pvb/Argo
 fi
 

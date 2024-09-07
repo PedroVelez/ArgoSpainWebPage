@@ -42,7 +42,7 @@ ForceDataUpdate=1;   %1 to force to re-read the netcdf files
 %Time interval
 FechaI=now-30;
 FechaF=now;
-TrajectorySpanArgo=180; %en dias
+TrajectorySpanArgo=90; %en dias
 
 %Geographical Regions
 %Region

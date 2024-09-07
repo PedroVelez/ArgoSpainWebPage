@@ -1,4 +1,4 @@
-function [FileOutA,FileOutAz,FileOutB,FileOutC]=createArgoSpainStatus_Figures(WMO,GlobalDS)
+function [FileOutA,FileOutAz,FileOutB,FileOutC]=createArgoSpainStatus_FunctionFigures(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.Regionnombre{1}='GLOB';

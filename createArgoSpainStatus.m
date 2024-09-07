@@ -79,7 +79,7 @@ for NumDatSet = NumberOfDatSets
     for ifloat = 1:1:size(DataArgoEs.WMO,2)
         if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
             fprintf('     \n> WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
-            [FileOutA,FileOutAz,FileOutB,FileOutC] = createArgoSpainStatus_Figures(DataArgoEs.WMO(ifloat),GlobalDS);
+            [FileOutA,FileOutAz,FileOutB,FileOutC] = createArgoSpainStatus_FunctionFigures(DataArgoEs.WMO(ifloat),GlobalDS);
             FileOutFHtml = createArgoSpainStatus_FunctionWebPage(DataArgoEs.WMO(ifloat),GlobalDS);
             if SubeFTP == 1
                 fprintf('uploading files to ftp.\n')
