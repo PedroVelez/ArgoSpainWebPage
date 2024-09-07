@@ -1,7 +1,7 @@
 clc;clear all;close all
 
 %% Convert the argogrey list file to .mat
-configArgoSpainWebpage
+configWebPage
 
 if exist(fullfile(DirArgoData,'ar_greylist.txt'),'file')
     fid=fopen(fullfile(DirArgoData,'ar_greylist.txt'));

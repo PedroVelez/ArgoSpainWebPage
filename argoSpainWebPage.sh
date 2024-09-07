@@ -31,10 +31,12 @@ DirLog=$PaginaWebDir/log
 /bin/rm -f $DirLog/ArgoSpainWebPage*.log
 
 printf ">>>> Updating ArgoSpainWebArgo \n"
-printf "  Verbose $Verbose JustUpload $JustUpload \n"
+printf "  Verbose $Verbose \n"
+printf "  JustUpload $JustUpload \n"
 printf "  PaginaWebDir $PaginaWebDir \n"
 printf "  DirLog       $DirLog \n"
 printf "  DirRaiz      $DirRaiz \n"
+printf "  DirArgoData  $DirArgoData \n"
 
 
 #------------------------------------
@@ -106,7 +108,7 @@ fi
 if [ $JustUpload == 0 ]
 then
    printf "  Deleting local copy of ArgoEs figures\n"
-   /bin/rm -f $PaginaWebDir/html/ArgoEsGraficos/* > $DirLog/deleteFiles.log
+   /bin/rm -f $PaginaWebDir/html/floats/* > $DirLog/deleteFiles.log
 fi
 
 #------------------------------------
