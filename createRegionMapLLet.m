@@ -162,12 +162,12 @@ for ifecha=FechaF:-1:FechaI
                         if isempty(iSV)
                             SurfaceValue='';
                         else
-                            SurfaceValue=sprintf('%3.0fdbar %4.1fC %4.1f',pres(np,iSV),tems(np,iSV),sals(np,iSV));
+                            SurfaceValue=sprintf('Presion %3.0f dbar Temp %4.1fC Sal %4.1f',pres(np,iSV),tems(np,iSV),sals(np,iSV));
                         end
                         if isempty(iBV)
                             BottonValue='';
                         else
-                            BottonValue=sprintf('%3.0fdbar %4.1fC %4.1f',pres(np,iBV),tems(np,iBV),sals(np,iBV));
+                            BottonValue=sprintf('Presion %3.0f dbar Temp %4.1fC Sal %4.1f',pres(np,iBV),tems(np,iBV),sals(np,iBV));
                         end
                         %try
                         if isempty(find(DataArgoEs.WMO==platformes(ntper), 1))==0
@@ -196,12 +196,12 @@ for ifecha=FechaF:-1:FechaI
                     if isempty(iSV)
                         SurfaceValue='';
                     else
-                        SurfaceValue=sprintf('%3.0fdbar %4.1fC %4.1f',pres(np,iSV),tems(np,iSV),sals(np,iSV));
+                        SurfaceValue=sprintf('Presion %3.0f dbar Temp %4.1fC Sal %4.1f',pres(np,iSV),tems(np,iSV),sals(np,iSV));
                     end
                     if isempty(iBV)
                         BottonValue='';
                     else
-                        BottonValue=sprintf('%3.0fdbar %4.1fC %4.1f',pres(np,iBV),tems(np,iBV),sals(np,iBV));
+                        BottonValue=sprintf('Presion %3.0f dbar Temp %4.1fC Sal %4.1f',pres(np,iBV),tems(np,iBV),sals(np,iBV));
                     end
                     if isempty(find(DataArgoEs.WMO==platformes(ntper), 1))==0
                         ntperes=ntperes+1;
@@ -225,17 +225,17 @@ fprintf(fid,'		if(perfilador[0] == 0){\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoywhite,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://fleetmonitoring.euro-argo.eu/float/''+perfilador[1]+''" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://fleetmonitoring.euro-argo.eu/float/''+perfilador[1]+''" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Fecha ultimo dato&nbsp;</b>''+perfilador[5]+''<br><b>Dato superficie&nbsp;</b>''+perfilador[6]+''<br><b>Dato fondo&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}else if (perfilador[0] == 1) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoyred,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Fecha ultimo dato&nbsp;</b>''+perfilador[5]+''<br><b>Dato superficie&nbsp;</b>''+perfilador[6]+''<br><b>Dato fondo&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}else if (perfilador[0] == 2) {\n');
 fprintf(fid,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fid,'			icon: buoyyellow,\n');
 fprintf(fid,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''<br><b>Surface&nbsp;</b>''+perfilador[6]+''<br><b>Botton&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
+fprintf(fid,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Fecha ultimo dato&nbsp;</b>''+perfilador[5]+''<br><b>Dato superficie&nbsp;</b>''+perfilador[6]+''<br><b>Dato fondo&nbsp;</b>''+perfilador[7]+''</p></center>'');\n');
 fprintf(fid,'		}\n');
 fprintf(fid,'	}// Marcador de posicion de las boyas\n');
 
@@ -288,9 +288,9 @@ else
 end
 
 if Incremento~=0
-    Informe=sprintf('ArgoIbStatus - Active floats Iberian Basin %03d (%d) [%s,%s]\n     Last profile %s\n     Updated on %s',length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('ArgoIbStatus - Boyas activas Iberian Basin %03d (%d) [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 else
-    Informe=sprintf('ArgoIbStatus - Active floats Iberian Basin %03d [%s,%s]\n     Las profile %s\n     Updated on %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('ArgoIbStatus - Boyas activas Iberian Basin %03d [%s,%s]\n     Las profile %s\n     actualizado el %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 end
 if exist('ME')
     Informe = sprintf('%s\n >>>>>> Error createArgoRegionGMap.m %s line %d\n     %s <<<<<<',Informe,ME.message,ME.stack(1).line,datestr(now));

@@ -146,12 +146,12 @@ fprintf(fHTML,'		if(perfilador[0] == 1){\n');
 fprintf(fHTML,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fHTML,'			icon: buoyred,\n');
 fprintf(fHTML,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Boya <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Fecha ultimo dato&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fHTML,'		}else if (perfilador[0] == 0) {\n');
 fprintf(fHTML,'			L.marker([perfilador[2], perfilador[3]],{\n');
 fprintf(fHTML,'			icon: buoywhite,\n');
 fprintf(fHTML,'			title: perfilador[4]+'' WMO ''+perfilador[1]+'' ''+perfilador[5],\n');
-fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Float <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Last profile&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
+fprintf(fHTML,'			}).addTo(mymap).bindPopup(''<center><p>Boya <b><a href="https://www.argoespana.es/float/''+perfilador[1]+''.html" target="_blank">''+perfilador[1]+''</a></b><br><b>''+perfilador[4]+''</b><br><br><b>Fecha ultimo dato&nbsp;</b>''+perfilador[5]+''</p></center>'');\n');
 fprintf(fHTML,'		}\n');
 fprintf(fHTML,'	}// Marcador de posicion de las boyas\n');
 
@@ -278,9 +278,9 @@ else
     Incremento=0;
 end
 if Incremento~=0
-    Informe=sprintf('createArgoSpainGMap - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('createArgoSpainGMap - Activos (%d,%d) Inactivos (%d) No desplegados (%d)\n     Fecha ultimo dato %s\n     Updated on %s',DataArgoEs.iactiva,Incremento,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 else
-    Informe=sprintf('createArgoSpainGMap - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Last profile %s\n     Updated on %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
+    Informe=sprintf('createArgoSpainGMap - Activos (%d) Inactivos (%d) No desplegados (%d)\n     Fecha ultimo dato %s\n     Updated on %s',DataArgoEs.iactiva,DataArgoEs.iinactiva,DataArgoEs.inodesplegada,datestr(max(DataArgoEs.FechaUltimoPerfil)),datestr(now));
 end
 iactiva=DataArgoEs.iactiva;
 juldsAS=DataArgoEs.FechaUltimoPerfil;
