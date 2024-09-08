@@ -32,7 +32,7 @@ fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img
 fprintf(fid,'</tr>\n');
 fprintf(fid,'</table>\n');
 
-fprintf(fid,'<h2><strong><div align="center">&nbsp;&nbsp;Profiler WMO %7d</strong></h2></div>\n',MD.WMOFloat);
+fprintf(fid,'<h2><strong><div align="center">&nbsp;&nbsp;Boya %7d</strong></h2></div>\n',MD.WMOFloat);
 
 %informe de lanzamientofileReport
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeLanzamiento.pdf'));
