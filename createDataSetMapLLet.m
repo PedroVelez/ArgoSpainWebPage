@@ -14,17 +14,29 @@ configWebPage
 % FileHtmlArgoEsStatus;
 
 %% Inicio
+fprintf('>>>>> %s\n',mfilename)
+
 % Read Data
 DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'activa','iactiva','iinactiva','inodesplegada','FechaUltimoPerfil','WMO','UltimoVoltaje','UltimoSurfaceOffset');
-
-%Cuento numero de perfiles
-NTotalPerfiles=0;
-
-fprintf('>>>>> %s\n',mfilename)
 FileNameInforme=strcat(PaginaWebDir,'/data/report',mfilename,'.mat');
 fHTML = fopen(FileHtmlArgoEsStatus,'w');
 fTxt = fopen(strrep(FileHtmlArgoEsStatus,'.html','.txt'),'w');
 
+
+% Cuento numero de perfiles
+NTotalPerfiles=0;
+for ifloat=1:size(DataArgoEs.WMO,2)
+    if DataArgoEs.activa(ifloat)==1 %Active
+        FloatData = load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
+        NTotalPerfiles = [NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
+    else
+        FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
+        NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
+    end
+end
+
+
+% Writting leaflet file
 fprintf('     > Writting leaflet file \n');
 fprintf(fHTML,'<!DOCTYPE html> \n');
 fprintf(fHTML,'<html> \n');
@@ -115,7 +127,6 @@ fprintf(fHTML,'   var perfiladores = [ \n');
 for ifloat=1:size(DataArgoEs.WMO,2)
     if DataArgoEs.activa(ifloat)==1 %Active
         FloatData = load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
-        NTotalPerfiles = [NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
         lats=FloatData.HIDf.lats(end);
         lons=FloatData.HIDf.lons(end);
         ind=find(isnan(lats)==0 & isnan(lons)==0);
@@ -126,7 +137,6 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         end
     else
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
-        NTotalPerfiles=[NTotalPerfiles nanmax(FloatData.HIDf.cycle)'];
         lats=FloatData.HIDf.lats(end);
         lons=FloatData.HIDf.lons(end);
         ind=find(isnan(lats)==0 & isnan(lons)==0);
@@ -287,3 +297,4 @@ juldsAS=DataArgoEs.FechaUltimoPerfil;
 WMO=DataArgoEs.WMO;
 save(FileNameInforme,'Informe','iactiva','juldsAS','WMO')
 fprintf('%s <<<<< \n',mfilename)
+
