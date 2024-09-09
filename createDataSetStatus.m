@@ -4,7 +4,7 @@ clear all;close all
 
 %% Read configuration
 configWebPage
-%Visible=1;
+Visible=1;
 %POSBorder=2;  %Margen adicional para el mapa de la trayectoria
 %DiasAnalisis=11
 %ClimatologyFile='./Data/WOA05.mat';

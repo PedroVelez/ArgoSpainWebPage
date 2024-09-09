@@ -94,7 +94,7 @@ if size(OneFloatData.tems,2)>1 && sum(isnan(OneFloatData.tems(:))) ~= length(One
     [cs,h]=contour(OneFloatData.julds,-presiar(Locate(presiar,-Limits.UpperPL(1)):end),temsAic,rangoG(1:1:end),'color',[0.6 0.6 0.6],'linewidth',0.15);hold on
     axis([Limits.minJ Limits.maxJ Limits.DeepPL])
     datetick('x',12,'keepLimits')
-    colormap(jet)
+    colormap(parula)
     caxis([Limits.minT Limits.maxT])
 
     hTC=colorbar;
@@ -161,7 +161,7 @@ if size(OneFloatData.sals,2)>1 && sum(isnan(OneFloatData.sals(:))) ~= length(One
     [cs,h]=contour(OneFloatData.julds,-presiar(Locate(presiar,-Limits.UpperPL(1)):end),salsAic,rangoG(1:1:end),'color',[0.6 0.6 0.6],'linewidth',0.15);hold on
     axis([Limits.minJ Limits.maxJ Limits.DeepPL])
     datetick('x',12,'keepLimits')
-    colormap(jet)
+    colormap(parula)
     caxis([Limits.minS Limits.maxS])
 
     hSC=colorbar;

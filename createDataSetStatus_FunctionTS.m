@@ -55,7 +55,9 @@ for j=2:size(OneFloatData.sals,2)
 end
 %Last profiles
 plot(OneFloatData.sals(:,end),OneFloatData.ptms(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);
-plot(OneFloatData.sals(:,end),OneFloatData.ptms(:,end),'color','k','linewidth',1);
+hlp=plot(OneFloatData.sals(:,end),OneFloatData.ptms(:,end),'color','k','linewidth',1);
+
+legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
 
 colormap(cl)
 if size(OneFloatData.sals,2)==1

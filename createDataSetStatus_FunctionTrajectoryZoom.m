@@ -37,7 +37,10 @@ end
 for j=1:length(OneFloatData.lons)
     m_plot(OneFloatData.lons(j),OneFloatData.lats(j),'color',cl(ceil(color(j)),:),'MarkerFaceColor',cl(ceil(color(j)),:),'MarkerEdgeColor',cl(ceil(color(j)),:),'marker','o','markersize',2);
 end
-m_plot(OneFloatData.lons(end),OneFloatData.lats(end),'MarkerFaceColor',cl(ceil(color(end)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
+hlp=m_plot(OneFloatData.lons(end),OneFloatData.lats(end),'MarkerFaceColor',cl(ceil(color(end)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
+legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)));
+
+
 colormap(cl)
 
 if length(OneFloatData.lons)==1
