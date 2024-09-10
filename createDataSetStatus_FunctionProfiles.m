@@ -40,8 +40,8 @@ end
 %Last profile
 plot(OneFloatData.ptms(:,end),-OneFloatData.pres(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);grid on
 hlp=plot(OneFloatData.ptms(:,end),-OneFloatData.pres(:,end),'color','k','linewidth',1);grid on
-legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
-
+hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+hl.Box='off';
 
 colormap(parula)
 if size(OneFloatData.tems,2)==1
@@ -80,7 +80,8 @@ end
 %Last profile
 plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);grid on
 hlp=plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color','k','linewidth',1);grid on
-legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+hl.Box='off';
 
 colormap(parula)
 if size(OneFloatData.tems,2)==1

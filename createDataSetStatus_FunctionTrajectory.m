@@ -34,8 +34,12 @@ end
 for j=1:length(OneFloatData.lons)
     m_plot(OneFloatData.lons(j),OneFloatData.lats(j),'color',cl(ceil(color(j)),:),'MarkerFaceColor',cl(ceil(color(j)),:),'MarkerEdgeColor',cl(ceil(color(j)),:),'marker','o','markersize',2);
 end
+hfp=m_plot(OneFloatData.lons(1),OneFloatData.lats(1),'MarkerFaceColor',cl(ceil(color(1)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
 hlp=m_plot(OneFloatData.lons(end),OneFloatData.lats(end),'MarkerFaceColor',cl(ceil(color(end)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
-legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)))
+hl=legend([hfp,hlp],sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)));
+
+hl.Box='off';
+keyboard
 
 colormap(cl)
 if length(OneFloatData.lons)==1
