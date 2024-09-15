@@ -1,6 +1,16 @@
 load Globales
 % Here are the variables used by the different programs
 
+%% General settings
+RegionNameS='Ib';
+RegionNameL='Cuenca Iberica-Canaria';
+DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
+DataSetNameM{2} = 'ArgoInterest';  
+Verbose=0;
+Visible=0;      %Flag to outpun in the screen the figures
+SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
+NumberOfDatSets=[1 2]; %Number of DataSets to monitor
+
 %% Input Directories and files
 % Directory that contains the argo float data, and the Argo geo data
 DirArgoData=GlobalSU.ArgoData;
@@ -14,7 +24,7 @@ PaginaWebDir=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage');
 % Directory with list of floats for each program to monitor
 DirFloatLists=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage');
 
-% Climatoly file
+%% Climatoly file
 ClimatologyFile=strcat(GlobalSU.AnaPath,'/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
@@ -25,15 +35,6 @@ DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 FileHtmlRegionStatus = strcat(PaginaWebDir,'/html/','argoregionstatus.html');
 FileHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatus.html');
 FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
-
-
-%% General settings
-Verbose=0;
-Visible=0;      %Flag to outpun in the screen the figures
-SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
-NumberOfDatSets=[1 2]; %Number of DataSets to monitor
-DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
-DataSetNameM{2} = 'ArgoInterest';  
 
 %% createDataSet
 InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar

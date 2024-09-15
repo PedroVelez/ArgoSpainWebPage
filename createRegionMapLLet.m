@@ -288,12 +288,12 @@ else
 end
 
 if Incremento~=0
-    Informe=sprintf('ArgoIbStatus - Boyas activas Iberian Basin %03d (%d) [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('Argo%sStatus - https://www.argoespana.es/argoregionstatus.html \n     Boyas activas en %s %03d (%d) [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,RegionNameL,length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 else
-    Informe=sprintf('ArgoIbStatus - Boyas activas Iberian Basin %03d [%s,%s]\n     Las profile %s\n     actualizado el %s',length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('Argo%sStatus - https://www.argoespana.es/argoregionstatus.html \n     Boyas activas en %s %03d [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,RegionNameL,length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 end
 if exist('ME')
-    Informe = sprintf('%s\n >>>>>> Error createArgoRegionGMap.m %s line %d\n     %s <<<<<<',Informe,ME.message,ME.stack(1).line,datestr(now));
+    Informe = sprintf('%s\n >>>>>> Error %s %s line %d\n     %s <<<<<<',mfilename,Informe,ME.message,ME.stack(1).line,datestr(now));
 end
 
 save(FileNameInforme,'Informe','platformes','juldsIB','platdatacentr')
