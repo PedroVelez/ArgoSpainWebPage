@@ -288,9 +288,9 @@ else
 end
 
 if Incremento~=0
-    Informe=sprintf('Argo%sStatus - https://www.argoespana.es/argoregionstatus.html \n     Boyas activas en %s %03d (%d) [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,RegionNameL,length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('Argo%sStatus - %s/argoregionstatus.html \n     Boyas activas en %s %03d (%d) [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,domainName,RegionNameL,length(unique(platformes)),Incremento,datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 else
-    Informe=sprintf('Argo%sStatus - https://www.argoespana.es/argoregionstatus.html \n     Boyas activas en %s %03d [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,RegionNameL,length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
+    Informe=sprintf('Argo%sStatus - %s/argoregionstatus.html \n     Boyas activas en %s %03d [%s,%s]\n     Fecha ultimo dato %s\n     actualizado el %s',RegionNameS,domainName,RegionNameL,length(unique(platformes)),datestr(FechaI,1),datestr(FechaF,1),datestr(max(juldsIB)),datestr(now));
 end
 if exist('ME')
     Informe = sprintf('%s\n >>>>>> Error %s %s line %d\n     %s <<<<<<',mfilename,Informe,ME.message,ME.stack(1).line,datestr(now));

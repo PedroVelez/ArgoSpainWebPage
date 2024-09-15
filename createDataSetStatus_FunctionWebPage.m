@@ -28,7 +28,7 @@ fprintf(fid,'<body>\n');
 fprintf(fid,'<table width="900"  border="0" align="center" cellpadding="1" cellspacing="1" bordercolor="#999999">\n');
 fprintf(fid,'<tr bordercolor="#999999">\n');
 fprintf(fid,'<th width="403"><div align="left"><a href="https://www.argoespana.es/"><img src="https://www.argoespana.es/imagenes/logoargoes.png" border="0"></div></th>\n');
-fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a><a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
+fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
 fprintf(fid,'</tr>\n');
 fprintf(fid,'</table>\n');
 
@@ -37,13 +37,13 @@ fprintf(fid,'<h2><strong><div align="center">&nbsp;&nbsp;Boya %7d</strong></h2><
 %informe de lanzamientofileReport
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeLanzamiento.pdf'));
 if exist(fileReport,'file')==2
-    fprintf(fid,'<h3><div align="center"><a href="https://www.argoespana.es/Informes/%7dInformeLanzamiento.pdf">Informe de despliegue</a></h3></div>\n',MD.WMOFloat);
+    fprintf(fid,'<h3><div align="center"><a href="%s/Informes/%7dInformeLanzamiento.pdf">Informe de despliegue</a></h3></div>\n',domainName,MD.WMOFloat);
 end
 
 %informe de DMQC
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeDMQC.pdf'));
 if exist(fileReport,'file')==2
-    fprintf(fid,'<h3><div align="center"><a href="https://www.argoespana.es/Informes/%7dInformeDMQC.pdf">Informe de Delayed Mode Quality Control</a></h3></div>\n',MD.WMOFloat);
+    fprintf(fid,'<h3><div align="center"><a href="%s/Informes/%7dInformeDMQC.pdf">Informe de Delayed Mode Quality Control</a></h3></div>\n',domainName,MD.WMOFloat);
 end
 
 

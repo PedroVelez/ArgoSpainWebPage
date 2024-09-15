@@ -2,6 +2,7 @@ load Globales
 % Here are the variables used by the different programs
 
 %% General settings
+domainName='https://www.argoespana.es';
 RegionNameS='Ib';
 RegionNameL='Cuenca Iberica-Canaria';
 DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
