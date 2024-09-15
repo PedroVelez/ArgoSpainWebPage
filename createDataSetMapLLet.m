@@ -224,7 +224,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fTxt,'Activa; %7d; %12s; %s; %s; %s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel);
             fprintf(fHTML,'<TR class="style4">\n');
-            fprintf(fHTML,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
+            fprintf(fHTML,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/float/%d.html" target="_blank">Activa</span></div></TD>',MD.WMOFloat);
             fprintf(fHTML,'<TD width="74"> <div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fHTML,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fHTML,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
@@ -238,7 +238,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
             fprintf(fTxt,'Inactiva; %7d; %12s; %s; %s; %s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel);
             fprintf(fHTML,'<TR class="style4">\n');
-            fprintf(fHTML,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/datos/floats/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
+            fprintf(fHTML,'<TD width="56"> <div align="center" class="style4"><a href="https://www.argoespana.es/float/%d.html" target="_blank">Inactiva</span></div></TD>',MD.WMOFloat);
             fprintf(fHTML,'<TD width="74"> <div align="center" class="style4">%07d</span></div></TD>',MD.WMOFloat);
             fprintf(fHTML,'<TD width="113"><div align="center" class="style4">%12s</span></div></TD>',MD.ProjectName);
             fprintf(fHTML,'<TD width="106"><div align="center" class="style4">%s</span></div></TD>',datestr(FloatData.HIDf.julds(1),22));
