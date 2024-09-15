@@ -11,14 +11,12 @@ then
   MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
   DirRaiz=$HOME/Dropbox/Oceanografia
   DirArgoData=$DirRaiz/Oceanografia/Data/Argo
-  DirArgoDataCopy=/data/pvb/Argo
 fi
 if [[ $strval == *rossby* ]];
 then
   MatVersion=/usr/bin/matlab
   DirRaiz=$HOME
   DirArgoData=/data/pvb/Argo
-  DirArgoDataCopy=/data/pvb/Argo
 fi
 
 PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
@@ -71,21 +69,6 @@ do
   dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
   wget --passive -N -np -nH -r -Q500M --cut-dirs 4 -o $PaginaWebDir/log/GetArgoFloatsArgoIN.log -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*"
 done
-
-#Boyas Argo Espana
-#for dacboya in $(cat $PaginaWebDir/FloatsArgoEs.dat)
-#do
-#  dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-#  echo $dacboyaT
-#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/Log/GetArgo.log
-#done
-#
-#Boyas Interest
-#for dacboya in $(cat $PaginaWebDir/FloatsArgoIn.dat)
-#do
-#  dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`
-#  /usr/local/bin/wget --passive -N -np -nH -r -Q500M -a  $DirArgoData/log/GetArgoFloats$dacboyaT.txt -b --cut-dirs 4 -P $DirArgoData/Floats $FtpArgoData/dac/$dacboya"/*" >> $PaginaWebDir/Log/GetArgo.log
-#done
 
 #---------------------------------------
 #ArgoGreyList

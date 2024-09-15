@@ -127,12 +127,6 @@ then
 fi
 
 #------------------------------------
-# Copy Argo data to a diferente location
-#------------------------------------
-#printf "  Copy data to a remote location \n"
-#rsync -vrh $DirArgoData/ $DirArgoDataCopy/
-
-#------------------------------------
 # TelegramBot
 #------------------------------------
 source $HOME/.telegram
