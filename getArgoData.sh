@@ -29,7 +29,7 @@ PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
 #Crea listas de Argo a apartir del google spreadsheets
 #---------------------------------------
 printf "  Crea listas de Argo a apartir del google spreadsheets\n"
-cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createListArgoSpain;exit'
+cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createLists;exit'
 
 
 #---------------------------------------
