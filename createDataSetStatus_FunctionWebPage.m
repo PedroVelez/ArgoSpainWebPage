@@ -5,6 +5,8 @@ if nargin==1
     GlobalDS.DirArgoData='/Users/pvb/Data/Argo';
 end
 
+configWebPage
+
 fprintf('web page, ')
 
 %% Read Metada data

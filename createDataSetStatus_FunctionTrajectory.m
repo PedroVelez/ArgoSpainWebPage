@@ -39,7 +39,6 @@ hlp=m_plot(OneFloatData.lons(end),OneFloatData.lats(end),'MarkerFaceColor',cl(ce
 hl=legend([hfp,hlp],sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)));
 
 hl.Box='off';
-keyboard
 
 colormap(cl)
 if length(OneFloatData.lons)==1
