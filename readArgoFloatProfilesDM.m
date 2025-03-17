@@ -1,4 +1,5 @@
-function flt = ReadArgoFloatProfilesDM(inpath,Verbose)
+function flt = readArgoFloatProfilesDM(inpath,Verbose)
+
 %function to read in Argo float netcdf files.
 %Second argument is optional and may be single value or vector
 %if no second argument is passed then function loads all available profiles
@@ -36,6 +37,7 @@ for i1 = 1:NR+ND;
         % load the data
         ncp=ncp+1;
         flt_profT= ReadArgoFloatProfile(fullfile(inpath,fname));
+       
         if length(flt_profT)==1
             flt_prof(ncp) = flt_profT(1);
         end
@@ -67,12 +69,10 @@ inprof=1;
 [~,n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimenson ID 8
 
 for inp=1:n_prof
-    
     [~,flt_prof(inprof).n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimenson ID 8
     [~,flt_prof(inprof).n_param]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PARAM')); %Dimenson ID 9
     [~,flt_prof(inprof).n_levels] = netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_LEVELS'));% Dimension ID 10
-    
-    
+
     %% General information on the profile file This section contains information about the whole file.
     flt_prof(inprof).data_type=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATA_TYPE'))';
     flt_prof(inprof).format_version=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'FORMAT_VERSION'))';
@@ -81,7 +81,7 @@ for inp=1:n_prof
     flt_prof(inprof).reference_data_time=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'REFERENCE_DATE_TIME'));
     flt_prof(inprof).date_creation=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATE_CREATION'));
     flt_prof(inprof).date_update=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATE_UPDATE'));
-    
+
     %% General information for each profile
     % Each item of this section has a N_PROF (number of profiles) dimension.
     flt_prof(inprof).platform_number=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PLATFORM_NUMBER'),[0 inprof-1],[7 inprof-1+1]);
@@ -93,7 +93,7 @@ for inp=1:n_prof
     flt_prof(inprof).pi_name=(netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PI_NAME'),[0 inprof-1],[63 inprof-1+1])');
     flt_prof(inprof).station_parameters=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'STATION_PARAMETERS'),[0 0 inprof-1],[15 2 inprof-1+1]);
     isdoxy=0;
-    
+
     SP=flt_prof(inprof).station_parameters';
     for isp=1:size(SP,1)
         if strcmp(SP(isp,1:4),'DOXY')
@@ -105,7 +105,7 @@ for inp=1:n_prof
     flt_prof(inprof).data_centre=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATA_CENTRE'),[0 inprof-1],[1 inprof-1+1]);
     flt_prof(inprof).dc_reference=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DC_REFERENCE'),[0 inprof-1],[31 inprof-1+1]);
     flt_prof(inprof).data_state_indicator=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATA_STATE_INDICATOR'),[0 inprof-1],[3 inprof-1+1])';
-    
+
     flt_prof(inprof).data_mode=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DATA_MODE'),[inprof-1],[inprof-1+1])';
     if format_version<3
         flt_prof(inprof).platform_type=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'INST_REFERENCE')); %Format 1.2
@@ -126,7 +126,7 @@ for inp=1:n_prof
     flt_prof(inprof).profile_pres_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PROFILE_PRES_QC'),[inprof-1],[inprof-1+1]);
     flt_prof(inprof).profile_temp_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PROFILE_TEMP_QC'),[inprof-1],[inprof-1+1]);
     flt_prof(inprof).profile_psal_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PROFILE_PSAL_QC'),[inprof-1],[inprof-1+1]);
-    
+
     flt_prof(inprof).vertical_sampling_scheme='';
     if format_version>=3
         flt_prof(inprof).vertical_sampling_scheme=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'VERTICAL_SAMPLING_SCHEME'),[0 inprof-1],[255 inprof-1+1]);
@@ -148,7 +148,7 @@ for inp=1:n_prof
     flt_prof(inprof).temp_adjusted(flt_prof(inprof).pres_adjusted==netcdf.getAtt(ncid,netcdf.inqVarID(ncid,'TEMP'),'_FillValue'))=NaN;
     flt_prof(inprof).temp_adjusted_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'TEMP_ADJUSTED_QC'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
     flt_prof(inprof).temp_adjusted_error=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'TEMP_ADJUSTED_ERROR'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
-    
+
     flt_prof(inprof).psal=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PSAL'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
     flt_prof(inprof).psal(flt_prof(inprof).pres==netcdf.getAtt(ncid,netcdf.inqVarID(ncid,'PSAL'),'_FillValue'))=NaN;
     flt_prof(inprof).psal_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PSAL_QC'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
@@ -156,7 +156,7 @@ for inp=1:n_prof
     flt_prof(inprof).psal_adjusted(flt_prof(inprof).pres_adjusted==netcdf.getAtt(ncid,netcdf.inqVarID(ncid,'PSAL'),'_FillValue'))=NaN;
     flt_prof(inprof).psal_adjusted_qc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PSAL_ADJUSTED_QC'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
     flt_prof(inprof).psal_adjusted_error=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PSAL_ADJUSTED_ERROR'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
-    
+
     if isdoxy == 1
         flt_prof(inprof).doxy=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'DOXY'),[0 inprof-1],[flt_prof(inprof).n_levels-1 inprof-1+1])';
         flt_prof(inprof).doxy(flt_prof(inprof).doxy==netcdf.getAtt(ncid,netcdf.inqVarID(ncid,'DOXY'),'_FillValue'))=NaN;
@@ -172,27 +172,27 @@ for inp=1:n_prof
         flt_prof(inprof).doxy_adjusted_qc=[];
         flt_prof(inprof).doxy_adjusted_error=[];
     end
-    
+
     %Using QC flags
     %Using QC flags
     flt_prof(inprof).latitude(flt_prof(inprof).position_qc=='4' |  flt_prof(inprof).position_qc=='9')=NaN;
     flt_prof(inprof).longitude(flt_prof(inprof).position_qc=='4' |  flt_prof(inprof).position_qc=='9')=NaN;
-    
+
     flt_prof(inprof).pres(flt_prof(inprof).pres_qc=='4' |  flt_prof(inprof).pres_qc=='9')=NaN;
     flt_prof(inprof).pres_adjusted(flt_prof(inprof).pres_adjusted_qc=='4' |  flt_prof(inprof).pres_adjusted_qc=='9')=NaN;
-    
+
     flt_prof(inprof).temp(flt_prof(inprof).temp_qc=='4' |  flt_prof(inprof).temp_qc=='9')=NaN;
     flt_prof(inprof).temp_adjusted(flt_prof(inprof).temp_adjusted_qc=='4' |  flt_prof(inprof).temp_adjusted_qc=='9')=NaN;
-    
+
     flt_prof(inprof).psal(flt_prof(inprof).psal_qc=='4' |  flt_prof(inprof).psal_qc=='9')=NaN;
     flt_prof(inprof).psal_adjusted(flt_prof(inprof).psal_adjusted_qc=='4' |  flt_prof(inprof).psal_adjusted_qc=='9')=NaN;
-    
+
     %% Calibration information for each profile
     % Calibrations are applied to parameters to create adjusted parameters. Different calibration methods will be used by groups processing Argo data. When a method is applied, its description is stored in the following fields.
     % This section contains calibration information for each parameter of each profile.
     % Each item of this section has a N_PROF (number of profiles), N_CALIB (number of calibrations), N_PARAM (number of parameters) dimension.
     % If no calibration is available, N_CALIB is set to 1, all values of calibration section are set to fill values.
-    
+
     %flt_prof(inprof).parameter=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PARAMETER'));
     %flt_prof(inprof).scientific_calib_equation=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'SCIENTIFIC_CALIB_EQUATION'));
     %flt_prof(inprof).scientific_calib_coefficient=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'SCIENTIFIC_CALIB_COEFFICIENT'));
@@ -245,15 +245,15 @@ for inp=1:n_prof
     %         flt_prof(inprof).scientific_calib_equation=reshape(VT,256,2,3);clear VT
     %         flt_prof(inprof).scientific_calib_equation=flt_prof(inprof).scientific_calib_equation(:,1,:);
     %     end
-    
-    
+
+
     %% History information for each profile
     % This section contains history information for each action performed on each profile by a data centre.
     % Each item of this section has a N_HISTORY (number of history records), N_PROF (number of profiles) dimension.
     % A history record is created whenever an action is performed on a profile.
     % The recorded actions are coded and described in the history code table from the reference table 7.
     % On the GDAC, multi-profile history section is empty to reduce the size of the file. History section is available on mono-profile files, or in multi-profile files distributed from the web data selection.
-    
+
     % flt_prof(inprof).history_institution=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'HISTORY_INSTITUTION'));
     % flt_prof(inprof).history_step=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'HISTORY_STEP'));
     % flt_prof(inprof).history_software=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'HISTORY_SOFTWARE'));

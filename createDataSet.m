@@ -16,12 +16,12 @@ configWebPage
 fprintf('>>>>> %s\n',mfilename)
 for NumDatSet = NumberOfDatSets
     DataSetName = DataSetNameM{NumDatSet};
-    
+
     %Reading floats in the DataSet
     fprintf('     > Reading %s\n',DataSetName)
     i1 = 0;
     boyasDataSet = [];
-    fprintf('     > Reading %s\n',strcat(DirFloatLists,'/floats',DataSetName,'.dat'))
+    fprintf('     > Reading %s ...',strcat(DirFloatLists,'/floats',DataSetName,'.dat'))
     fid = fopen(strcat(DirFloatLists,'/floats',DataSetName,'.dat'));
     while feof(fid) == 0
         linea=  fgetl(fid);
@@ -33,10 +33,13 @@ for NumDatSet = NumberOfDatSets
             boyasDataSet(i1) = boyasDSt;
         end
     end
+    fprintf('%d floats\n',length(boyasDataSet))
+
     %Read data
     Age=boyasDataSet.*0;
     ibData=0;
     for ibO=1:size(boyasDataSet,2)
+        fprintf('      >> Verifying %07d  \n',boyasDataSet(ibO));
         fileT = sprintf('%s/%07d/%07d_Rtraj.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
         fileM = sprintf('%s/%07d/%07d_meta.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
         fileTe = sprintf('%s/%07d/%07d_tech.nc',DataDirFloats,boyasDataSet(ibO),boyasDataSet(ibO));
@@ -44,15 +47,14 @@ for NumDatSet = NumberOfDatSets
         %Verifica si hay un .mat reciente con los datos
         ReadNCData = 1;
         if  exist(sprintf('%s/%07d.mat',DataDirFloats,boyasDataSet(ibO)),'file')==2 && ForceDataUpdate==0
+            fprintf('        load mat file\n');
             FloatData = load(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'FechaUltimoPerfilf');
             FechaUltimoPerfilMat=FloatData.FechaUltimoPerfilf;
             if (now-FloatData.FechaUltimoPerfilf)>4*InterDiasEmision
                 ReadNCData=0;
             end
         end
-        
-        keyboard
-	%Lee data nuevamente si existen los ficheros de datos y no existe
+        %Lee data nuevamente si existen los ficheros de datos y no existe
         %un mat con datos recientes
         if  exist(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'file') && ForceDataUpdate==0 && ReadNCData==0
             fprintf('     > %07d mat file %s, ',boyasDataSet(ibO),DataSetName);
@@ -73,7 +75,7 @@ for NumDatSet = NumberOfDatSets
         elseif exist(fileM,'file')>0 && exist(fileTe,'file')>0 && exist(fileHi,'file')>0
             try
                 Profs=readArgoFloatProfilesDM(fileHi,Verbose);
-                fprintf('     >> Updating %07d  with nc file %s, ',boyasDataSet(ibO),DataSetName);
+                fprintf('       > Updating %07d  with nc file %s, ',boyasDataSet(ibO),DataSetName);
                 ibData=ibData+1;
                 WMO(ibData) = boyasDataSet(ibO);
                 activa(ibData) = 2; %No esta activa pero tiene datos
@@ -104,12 +106,13 @@ for NumDatSet = NumberOfDatSets
                 pres=double(Profs(1).pres');
                 sals=double(Profs(1).psal');
                 tems=double(Profs(1).temp');
+                
                 for i2=2:1:size(Profs,2)
-                    pres=merge(pres,double(Profs(i2).pres'));
-                    tems=merge(tems,double(Profs(i2).temp'));
-                    sals=merge(sals,double(Profs(i2).psal'));
+                    pres=uneVectores(pres,double(Profs(i2).pres'));
+                    tems=uneVectores(tems,double(Profs(i2).temp'));
+                    sals=uneVectores(sals,double(Profs(i2).psal'));
                 end
-		keyboard
+                
                 if isfield(Profs,'doxy') == 1
                     oxys=double(Profs(1).doxy');
                     for i2=2:1:size(Profs,2)
@@ -121,7 +124,7 @@ for NumDatSet = NumberOfDatSets
                 HID{ibData}.tems=tems;
                 HID{ibData}.sals=sals;
                 HID{ibData}.nprof=size(Profs);
-                
+
                 FechaUltimoPerfil(ibData)=HID{ibData}.julds(end);
                 FechaPrimerPerfil(ibData)=HID{ibData}.julds(1);
                 Age(ibData)=(FechaUltimoPerfil(ibData)-FechaPrimerPerfil(ibData))/365;
@@ -130,14 +133,14 @@ for NumDatSet = NumberOfDatSets
                     activa(ibData)=1;
                 end
                 fprintf('last profile %s\n',datestr(HID{ibData}.julds(end)))
-                
+
                 %VoltageFinal
                 if isfield(TED{ibData},'VOLTAGE_BatteryParkEnd_VOLTS')==1
                     UltimoVoltaje(ibData)=TED{ibData}.VOLTAGE_BatteryParkEnd_VOLTS(end);
                 else
                     UltimoVoltaje(ibData)=NaN;
                 end
-                
+
                 %SurfaceOffsetFinal
                 if isfield(TED{ibData},'PRES_SurfaceOffsetTruncatedplus5dBar_dBAR')==1
                     UltimoSurfaceOffset(ibData)=TED{ibData}.PRES_SurfaceOffsetTruncatedplus5dBar_dBAR(end)-5;
@@ -146,11 +149,11 @@ for NumDatSet = NumberOfDatSets
                 else
                     UltimoSurfaceOffset(ibData)=NaN;
                 end
-                
+
                 %Calculo variables derivadas
                 HID{ibData}.ptems=sw_ptmp(HID{ibData}.sals,HID{ibData}.tems,HID{ibData}.pres,0);
                 HID{ibData}.pdens=sw_pden(HID{ibData}.sals,HID{ibData}.tems,HID{ibData}.pres,0);
-                
+
                 %Grabo los datos de cada boya por separado
                 WMOf=WMO(ibData);
                 HIDf=HID{ibData};
@@ -169,10 +172,10 @@ for NumDatSet = NumberOfDatSets
                 fprintf('>>>>>> Problem with profile files for %07d  with nc file %s.\n ', ...
                     boyasDataSet(ibO),DataSetName);
             end
-            
+
         end
     end
-    
+
     % Ordeno por ultimo perfil
     [FechaUltimoPerfil,IndiceOrdena] = sort(FechaUltimoPerfil,'descend');
     WMO = WMO(IndiceOrdena);
@@ -186,7 +189,7 @@ for NumDatSet = NumberOfDatSets
     iinactiva =length(find(activa == 2));
     inodesplegada =length(find(activa == 0));
     fprintf('     > Writing %s\n',DataSetName)
-    
+
     %Saving the data
     save(strcat(PaginaWebDir,'/data/data',DataSetName),'WMO','activa','FechaUltimoPerfil', ...
         'FechaPrimerPerfil','InterDiasEmision','UltimoVoltaje','UltimoSurfaceOffset','iactiva', ...
