@@ -33,7 +33,6 @@ for NumDatSet = NumberOfDatSets
             boyasDataSet(i1) = boyasDSt;
         end
     end
-    
     %Read data
     Age=boyasDataSet.*0;
     ibData=0;
@@ -52,7 +51,8 @@ for NumDatSet = NumberOfDatSets
             end
         end
         
-        %Lee data nuevamente si existen los ficheros de datos y no existe
+        keyboard
+	%Lee data nuevamente si existen los ficheros de datos y no existe
         %un mat con datos recientes
         if  exist(sprintf('%s/%07d',DataDirFloats,boyasDataSet(ibO)),'file') && ForceDataUpdate==0 && ReadNCData==0
             fprintf('     > %07d mat file %s, ',boyasDataSet(ibO),DataSetName);
@@ -109,6 +109,7 @@ for NumDatSet = NumberOfDatSets
                     tems=merge(tems,double(Profs(i2).temp'));
                     sals=merge(sals,double(Profs(i2).psal'));
                 end
+		keyboard
                 if isfield(Profs,'doxy') == 1
                     oxys=double(Profs(1).doxy');
                     for i2=2:1:size(Profs,2)
