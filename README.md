@@ -1,20 +1,15 @@
-# ArgoSpain web page
 
-## Getting Started
-[WIP]
-Here you can find all the matlab scripts used to update the Argo Spain web page [www.argoespana.es](http://www.argoespana.es)
+<h2>ArgoSpain web page</h2>
+<a href="https://www.argoespana.es"><img src="https://www.argoespana.es/imagenes/logoargoes.png" alt="SST" width="300""></a>
 
-### Prerequisites
+[![DOI](https://zenodo.org/badge/244975526.svg)](https://doi.org/10.5281/zenodo.13898771)
 
-matlabR2016b/Octave
+Here you can find all the matlab scripts used to update the Argo Spain web page [www.argoespana.es](https://www.argoespana.es)
 
-```
-Give examples
-```
+[Argo España status](https://www.argoespana.es/argoesstatus.html)
+
+[Argo España region status](https://www.argoespana.es/argoregionstatus.html)
+
+[Argo España report](https://www.argoespana.es/report.txt)
 
 
-## Authors
-
-* **Pedro Velez** - *Initial work* - [PJVelez](https://github.com/PedroVelez) [www.oceanografia.es](https://www.oceanografia.es)
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
