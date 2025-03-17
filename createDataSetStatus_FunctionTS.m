@@ -40,6 +40,7 @@ hCL=clabel(c,'color',[.5 .5 .5],'fontsize',6,'backgroundcolor','w');
 for ii=1:2:length(hCL)
     hCL(ii).Marker='none';
 end
+
 axis([Limits.minS Limits.maxS Limits.minT Limits.maxT]);
 
 %Add Profiles

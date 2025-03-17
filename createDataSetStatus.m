@@ -33,12 +33,13 @@ GlobalDS.Region=[1,2,3];
 GlobalDS.Regionnombre{1}='GLOB';
 GlobalDS.RegionnombreLargo{1}='Global';
 GlobalDS.RegionmaxAT(1)=28;
-GlobalDS.RegionminAT(1)=2;
+GlobalDS.RegionminAT(1)=-20;
 GlobalDS.RegionmaxAS(1)=38.8;
 GlobalDS.RegionminAS(1)=34;
 GlobalDS.RegionmaxAO(1)=400;
 GlobalDS.RegionminAO(1)=50;
 GlobalDS.RegionmaxAP(1)=2000;
+
 GlobalDS.Regionnombre{2}='ATNO';
 GlobalDS.RegionnombreLargo{2}='Atlantico nor-oriental';
 GlobalDS.RegionLonLimits{2}=[-45 -5.30 -5.30 0 10 -45 -45];
@@ -50,6 +51,7 @@ GlobalDS.RegionminAS(2)=34;
 GlobalDS.RegionmaxAO(2)=400;
 GlobalDS.RegionminAO(2)=50;
 GlobalDS.RegionmaxAP(2)=2000;
+
 GlobalDS.Regionnombre{3}='MEDO';
 GlobalDS.RegionnombreLargo{3}='Mediterranero Occidental';
 GlobalDS.RegionLonLimits{3}=[-5.30 10 10 0 -5.30];
