@@ -6,6 +6,7 @@
 *.gpg
 **/data/data*
 **/data/report*.mat
+html/argoesstatus.txt
 **/html/*txt
 **/html/floats/*
 **/html/*html
