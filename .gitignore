@@ -6,12 +6,12 @@
 *.gpg
 **/data/data*
 **/data/report*.mat
-html/argoesstatus.txt
-**/html/*txt
-**/html/floats/*
-**/html/*html
-**/html/*geojson
-**/log/*.log
+/html/argoesstatus.txt
+/html/*txt
+/html/floats/*
+/html/*html
+/html/*geojson
+/log/*.log
 nohup.out
 Prueba*
 
