@@ -26,8 +26,8 @@ GlobalDS.POSBorder=POSBorder;
 
 GlobalDS.Wfilecoast='./data/WorldOceanCoast.mat';% Fichero con la costa de la zona
 GlobalDS.Wfilebat='./data/WorldOceanBat.mat';TMP=load(GlobalDS.Wfilebat);
-GlobalDS.Wbatylon=TMP.batylon;
-GlobalDS.Wbatylat=TMP.batylat;
+GlobalDS.Wbatylon=TMP.bathyLon;
+GlobalDS.Wbatylat=TMP.bathyLat;
 GlobalDS.Welevations=TMP.elevations;clear TMP
 
 %Climatology
