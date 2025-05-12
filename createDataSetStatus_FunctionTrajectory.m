@@ -15,9 +15,14 @@ if Limits.lat_max<55 && Limits.lon_max<15 && Limits.lat_min>15 && Limits.lon_min
     m_contour(GlobalDS.batylon,GlobalDS.batylat,GlobalDS.elevations,[-4000 -4000],'color',[0.8 0.8 0.8]);
     m_usercoast(GlobalDS.filecoast,'patch',[.7 .6 .4],'edgecolor',[.7 .6 .4]);
 else
-    m_elev('contour',[-1000 -1000],'color',[0.6 0.6 0.6]);hold on;grid on;
-    m_elev('contour',[-2000 -2000],'color',[0.7 0.7 0.7]);
-    m_coast('patch',[.7 .6 .4],'edgecolor',[.7 .6 .4]);
+    %m_elev('contour',[-1000 -1000],'color',[0.6 0.6 0.6]);hold on;grid on;
+    %m_elev('contour',[-2000 -2000],'color',[0.7 0.7 0.7]);
+    %m_coast('patch',[.7 .6 .4],'edgecolor',[.7 .6 .4]);
+    m_contour(GlobalDS.Wbatylon,GlobalDS.Wbatylat,GlobalDS.Welevations,[-1000 -1000],'color',[0.6 0.6 0.6]);hold on;grid on;
+    m_contour(GlobalDS.Wbatylon,GlobalDS.Wbatylat,GlobalDS.Welevations,[-2000 -2000],'color',[0.7 0.7 0.7]);
+    m_contour(GlobalDS.Wbatylon,GlobalDS.Wbatylat,GlobalDS.Welevations,[-4000 -4000],'color',[0.8 0.8 0.8]);
+    m_usercoast(GlobalDS.Wfilecoast,'patch',[.7 .6 .4],'edgecolor',[.7 .6 .4]);
+
 end
 m_grid('xtick',3,'ytick',3,'fontsize',7,'color',[0.5 0.5 0.5])
 color=linspace(1,length(cl),length(OneFloatData.lons));
