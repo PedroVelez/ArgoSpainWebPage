@@ -32,6 +32,9 @@ function D=ReadArgoTechFile(file)
     t(end+1).s='PRES_SurfaceOffsetCorrectedNotResetNegative_1cBarResolution_dbar';k(end+1)=0;% Deep Arvor
     t(end+1).s='PRES_LastAscentPumpedRawSample_dbar';k(end+1)=0;% Deep Arvor
 
+    t(end+1).s='FLAG_RemoteControlMessageOK_COUNT';k(end+1)=0;% Deep Arvor
+    
+
     
     for it=1:size(t,2)
         lv=length(t(it).s);
