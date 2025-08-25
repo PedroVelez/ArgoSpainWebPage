@@ -30,7 +30,12 @@ fprintf(fid,'<body>\n');
 fprintf(fid,'<table width="900"  border="0" align="center" cellpadding="1" cellspacing="1" bordercolor="#999999">\n');
 fprintf(fid,'<tr bordercolor="#999999">\n');
 fprintf(fid,'<th width="403"><div align="left"><a href="https://www.argoespana.es/"><img src="https://www.argoespana.es/imagenes/logoargoes.png" border="0"></div></th>\n');
-fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
+
+if strfind(MD.FloatOwner,'ICATMAR')==1
+    fprintf(fid,'<th width="425"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a>&nbsp; &nbsp; <a href="http://www.icatmar.cat/es"><img src="https://www.argoespana.es/imagenes/logoicatmar.png" border="0"></a></div></th>\n');
+else
+    fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
+end    
 fprintf(fid,'</tr>\n');
 fprintf(fid,'</table>\n');
 
