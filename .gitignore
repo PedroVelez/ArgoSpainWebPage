@@ -4,13 +4,13 @@
 *._*
 *.log
 *.gpg
+*.swp
 data/data*
 data/report*.mat
 html/argoesstatus.txt
-html/*.txt
+html/
+html/*
 html/floats/*
-html/*html
-html/*geojson
 log/*.log
 nohup.out
 Prueba*
