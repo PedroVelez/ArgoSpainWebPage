@@ -1,5 +1,6 @@
 clear all;close all
-%Este script crea una serie de datos y graficos para topdas las boyas del
+
+%Este script crea una serie de datos y graficos para todas las boyas del
 %programa Argo Espana y Argo Interest
 
 %% Read configuration
@@ -39,9 +40,9 @@ GlobalDS.Region=[1,2,3];
 GlobalDS.Regionnombre{1}='GLOB';
 GlobalDS.RegionnombreLargo{1}='Global';
 GlobalDS.RegionmaxAT(1)=28;
-GlobalDS.RegionminAT(1)=-20;
+GlobalDS.RegionminAT(1)=-2;
 GlobalDS.RegionmaxAS(1)=38.8;
-GlobalDS.RegionminAS(1)=34;
+GlobalDS.RegionminAS(1)=33.75;
 GlobalDS.RegionmaxAO(1)=400;
 GlobalDS.RegionminAO(1)=50;
 GlobalDS.RegionmaxAP(1)=2000;
@@ -69,6 +70,18 @@ GlobalDS.RegionminAS(3)=36;
 GlobalDS.RegionmaxAO(3)=400;
 GlobalDS.RegionminAO(3)=50;
 GlobalDS.RegionmaxAP(3)=700;
+
+GlobalDS.Regionnombre{4}='ANT-A';
+GlobalDS.RegionnombreLargo{4}='Antartida Atlantica';
+GlobalDS.RegionLonLimits{4}=[-60 -60 10 10 -60];
+GlobalDS.RegionLatLimits{4}=[-50.00 -80.00 -80 -50 -80];
+GlobalDS.RegionmaxAT(4)=12;
+GlobalDS.RegionminAT(4)=-2;
+GlobalDS.RegionmaxAS(4)=36;
+GlobalDS.RegionminAS(4)=33.25;
+GlobalDS.RegionmaxAO(4)=400;
+GlobalDS.RegionminAO(4)=50;
+GlobalDS.RegionmaxAP(4)=2000;
 
 %% Inicio
 fprintf('>>>>> %s\n',mfilename)

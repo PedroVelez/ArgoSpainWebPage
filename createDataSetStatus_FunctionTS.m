@@ -1,4 +1,5 @@
 function createDataSetStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hPosition);
+
 %Colors
 cl=parula;
 color=linspace(1,length(cl),size(OneFloatData.sals,2));
@@ -46,18 +47,26 @@ axis([Limits.minS Limits.maxS Limits.minT Limits.maxT]);
 %Add Profiles
 %CTD profile in the case is was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
-    plot(OneFloatData.CTD0.salt,OneFloatData.CTD0.ptmp,':','color',cl(1,:),'linewidth',3);hold on
+    hCTD0=plot(OneFloatData.CTD0.salt,OneFloatData.CTD0.ptmp,':','color',cl(1,:),'linewidth',3);hold on
 end
+
 %Fist profile
 plot(OneFloatData.sals(:,1),OneFloatData.ptms(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
+
 %Following profiles
 for j=2:size(OneFloatData.sals,2)
     plot(OneFloatData.sals(:,j),OneFloatData.ptms(:,j),'color',cl(ceil(color(j)),:),'linewidth',1.25);
 end
+
 %Last profiles
 plot(OneFloatData.sals(:,end),OneFloatData.ptms(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);
 hlp=plot(OneFloatData.sals(:,end),OneFloatData.ptms(:,end),'color','k','linewidth',1);
-hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','northwest');
+
+if isfield(OneFloatData,'CTD0')==1
+    hl=legend([hCTD0,hlp],sprintf('Perfil CTD'),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','northwest');
+else
+    hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','northwest');
+end
 hl.Box='off';
 
 colormap(cl)

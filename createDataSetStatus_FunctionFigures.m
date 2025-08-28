@@ -44,6 +44,7 @@ end
 %Geographical limits
 Limits.lat_min=nanmin(OneFloatData.lats);  Limits.lat_max=nanmax(OneFloatData.lats);
 Limits.lon_min=nanmin(OneFloatData.lons);  Limits.lon_max=nanmax(OneFloatData.lons);
+
 %Region
 iRegion=1;
 for ii=size(GlobalDS.Regionnombre,2)
@@ -51,6 +52,8 @@ for ii=size(GlobalDS.Regionnombre,2)
         iRegion=ii;
     end
 end
+fprintf('region (%s), ',GlobalDS.RegionnombreLargo{iRegion})
+
 Limits.lat_min=nanmin(OneFloatData.lats)-GlobalDS.POSBorder;  Limits.lat_max=nanmax(OneFloatData.lats)+GlobalDS.POSBorder;
 Limits.lon_min=nanmin(OneFloatData.lons)-GlobalDS.POSBorder;  Limits.lon_max=nanmax(OneFloatData.lons)+GlobalDS.POSBorder;
 

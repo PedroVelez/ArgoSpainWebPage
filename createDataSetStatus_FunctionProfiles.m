@@ -29,7 +29,6 @@ end
 
 %CTD profile in the case is was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
-keyboard
 hCTD0=plot(OneFloatData.CTD0.ptmp,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
 end
 %Fist profile
@@ -75,7 +74,7 @@ end
 
 %CTD profile in the case is was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
-    plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
+    hCTD0=plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
 end
 %Fist profile
 plot(OneFloatData.sals(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
@@ -86,7 +85,12 @@ end
 %Last profile
 plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);grid on
 hlp=plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color','k','linewidth',1);grid on
+
+if isfield(OneFloatData,'CTD0')==1
+hl=legend([hCTD0,hlp],sprintf('Perfil CTD'),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+else
 hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+end
 hl.Box='off';
 
 colormap(parula)
