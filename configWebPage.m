@@ -56,14 +56,14 @@ lat_min=-65;    lat_max=65;
 lon_min=-80;    lon_max=40;
 
 %Map createArgoRegionMap
-GMCentroArgoIb=[39,-16];
-GMZoomArgoIb=4;
-GMTamanoArgoIb=[700,650]; %Ancho,Alto
+MCentroArgoIb=[39,-16];
+MZoomArgoIb=4;
+MTamanoArgoIb=[800,650]; %Ancho,Alto
 
-%Google Map createArgoSpainGMap
-GMCentroArgoEs=[20,0];
-GMZoomArgoEs=2;
-GMTamanoArgoEs=[800,500];
+%Map createArgoSpainGMap
+MCentroArgoEs=[20,0];
+MZoomArgoEs=2;
+MTamanoArgoEs=[800,500];
 
 %% Ftp
 ftp_dir='/html/float';

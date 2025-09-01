@@ -16,10 +16,10 @@ configWebPage
 % lat_min=-65;    lat_max=65;
 % lon_min=-80;    lon_max=40;
 %
-% %Google Map
-% GMCentroArgoIb=[39,-16];
-% GMZoomArgoIb=4;
-% GMTamanoArgoIb=[700,650];
+% %Map
+% MCentroArgoIb=[39,-16];
+% MZoomArgoIb=4;
+% MTamanoArgoIb=[700,650];
 %
 % FileHtmlRegionStatus =strcat(PaginaWebDir,'/html/','argoibstatus.html');
 % DataDirGeo='... /Argo/geo/atlantic_ocean');
@@ -56,11 +56,11 @@ fprintf(fid,'    <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-f
 fprintf(fid,'</head> \n');
 fprintf(fid,'<body> \n');
 fprintf(fid,'<div align="center">\n');
-fprintf(fid,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',GMTamanoArgoIb(1),GMTamanoArgoIb(2));
+fprintf(fid,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
 fprintf(fid,'</div> \n');
 fprintf(fid,'<script> \n');
 fprintf(fid,'// Initialize the map and set up control \n');
-fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n',GMCentroArgoIb(1),GMCentroArgoIb(2),GMZoomArgoIb);
+fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n',MCentroArgoIb(1),MCentroArgoIb(2),MZoomArgoIb);
 fprintf(fid,'     mymap.addControl(new L.Control.Fullscreen());\n');
 fprintf(fid,'//Tiles \n');
 fprintf(fid,'   L.tileLayer(''https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'', { \n');
