@@ -71,7 +71,7 @@ ftp_dir_html='/html';
 
 %% StatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=500.1; %Days to look for to update the figures
+DiasAnalisis=1.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=1;
