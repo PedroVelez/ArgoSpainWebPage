@@ -28,7 +28,7 @@ m_grid('xtick',3,'ytick',3,'fontsize',7,'color',[0.5 0.5 0.5])
 color=linspace(1,length(cl),length(OneFloatData.lons));
 
 if isfield(OneFloatData,'CTD0')==1
-    m_plot(OneFloatData.CTD0.long,OneFloatData.CTD0.lati,'MarkerFaceColor',cl(1,:),'marker','s','MarkerEdgeColor','k','markersize',6);
+    hCTD0=m_plot(OneFloatData.CTD0.long,OneFloatData.CTD0.lati,'MarkerFaceColor',cl(1,:),'marker','s','MarkerEdgeColor','k','markersize',6);
 end
 if length(OneFloatData.lons)>=2
     for j=2:length(OneFloatData.lons)
@@ -41,7 +41,14 @@ for j=1:length(OneFloatData.lons)
 end
 hfp=m_plot(OneFloatData.lons(1),OneFloatData.lats(1),'MarkerFaceColor',cl(ceil(color(1)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
 hlp=m_plot(OneFloatData.lons(end),OneFloatData.lats(end),'MarkerFaceColor',cl(ceil(color(end)),:),'marker','o','MarkerEdgeColor','k','markersize',6);
-hl=legend([hfp,hlp],sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)));
+
+if isfield(OneFloatData,'CTD0')==1
+    hl=legend([hCTD0,hfp,hlp],sprintf('Perfil CTD inicial'),sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+else
+    hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','northwest');
+end
+
+
 
 hl.Box='off';
 
