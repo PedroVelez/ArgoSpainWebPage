@@ -29,22 +29,25 @@ end
 
 %CTD profile in the case is was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
-hCTD0=plot(OneFloatData.CTD0.ptmp,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
+    hCTD0=plot(OneFloatData.CTD0.ptmp,-OneFloatData.CTD0.pres,'-','color',[0.75 0.75 0.75],'linewidth',3);hold on
 end
+
 %Fist profile
-plot(OneFloatData.ptms(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
+hfp=plot(OneFloatData.ptms(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
+
 %Following profiles
 for j=1:size(OneFloatData.tems,2)
     plot(OneFloatData.ptms(:,j),-OneFloatData.pres(:,j),'color',cl(ceil(color(j)),:),'linewidth',1.25);
 end
+
 %Last profile
 plot(OneFloatData.ptms(:,end),-OneFloatData.pres(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);grid on
 hlp=plot(OneFloatData.ptms(:,end),-OneFloatData.pres(:,end),'color','k','linewidth',1);grid on
 
 if isfield(OneFloatData,'CTD0')==1
-hl=legend([hCTD0,hlp],sprintf('Perfil CTD'),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+    hl=legend([hCTD0,hfp,hlp],sprintf('Perfil CTD inicial'),sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
 else
-hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+    hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
 end
 hl.Box='off';
 
@@ -74,22 +77,24 @@ end
 
 %CTD profile in the case is was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
-    hCTD0=plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
+    hCTD0=plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,'-','color',[0.75 0.75 0.75],'linewidth',3);hold on
 end
 %Fist profile
-plot(OneFloatData.sals(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
+hfp=plot(OneFloatData.sals(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
+
 %Following profiles
 for j=1:size(OneFloatData.tems,2)
     plot(OneFloatData.sals(:,j),-OneFloatData.pres(:,j),'color',cl(ceil(color(j)),:),'linewidth',1.25);
 end
+
 %Last profile
 plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color',cl(ceil(color(end)),:),'linewidth',3);grid on
 hlp=plot(OneFloatData.sals(:,end),-OneFloatData.pres(:,end),'color','k','linewidth',1);grid on
 
 if isfield(OneFloatData,'CTD0')==1
-hl=legend([hCTD0,hlp],sprintf('Perfil CTD'),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+    hl=legend([hCTD0,hfp,hlp],sprintf('Perfil CTD inicial'),sprintf('Primer perfil: %s',datestr(OneFloatData.julds(1),1)),sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
 else
-hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
+    hl=legend(hlp,sprintf('Último perfil: %s',datestr(OneFloatData.julds(end),1)),'Location','southeast');
 end
 hl.Box='off';
 
