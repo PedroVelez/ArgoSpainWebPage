@@ -126,12 +126,4 @@ then
   fi
 fi
 
-#------------------------------------
-# TelegramBot
-#------------------------------------
-#source $HOME/.telegram
-#URL="https://api.telegram.org/bot$ArgoEsBotTOKEN/sendMessage"
-#MENSAJE=`cat $HOME/Analisis/ArgoSpainWebpage/data/report.txt`
-#curl -s -X POST $URL -d chat_id=$ArgoEsChannel -d text="$MENSAJE" -d parse_mode=html
-
 printf "<<<<< Updated ArgoSpainWebArgo \n"
