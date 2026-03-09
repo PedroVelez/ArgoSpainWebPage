@@ -1,16 +1,24 @@
-# Argo Spain Web Processing Pipeline
+# Argo Spain Web Page 
 
-<a href="https://www.argoespana.es"><img src="https://www.argoespana.es/imagenes/logoargoes.png" alt="SST" width="300""></a>
+<p align="left">
+<a href="https://www.argoespana.es">
+<img src="https://www.argoespana.es/imagenes/logoargoes.png" width="500">
+</a>
+</p>
 
-[![DOI](https://zenodo.org/badge/244975526.svg)](https://doi.org/10.5281/zenodo.13898771)
-
-![MATLAB](https://img.shields.io/badge/MATLAB-data_processing-orange) ![Bash](https://img.shields.io/badge/Bash-pipeline-blue) ![Leaflet](https://img.shields.io/badge/Leaflet-interactive_maps-green) ![Status](https://img.shields.io/badge/status-operational-brightgreen) ![License](https://img.shields.io/badge/license-institutional-lightgrey)
+[![DOI](https://zenodo.org/badge/244975526.svg)](https://doi.org/10.5281/zenodo.13898771)![MATLAB](https://img.shields.io/badge/MATLAB-data_processing-orange) ![Bash](https://img.shields.io/badge/Bash-pipeline-blue) ![Leaflet](https://img.shields.io/badge/Leaflet-interactive_maps-green) ![Status](https://img.shields.io/badge/status-operational-brightgreen) ![License](https://img.shields.io/badge/license-institutional-lightgrey)
 
 This repository contains the scripts used to generate and update the Argo Spain web page [www.argoespana.es](https://www.argoespana.es). The system automates the transformation of raw Argo data into web-ready products through MATLAB-based scrips organized by a Bash script.
 
-[Argo España status](https://www.argoespana.es/argoesstatus.html)
 [Argo España region status](https://www.argoespana.es/argoregionstatus.html)
+[Argo España status](https://www.argoespana.es/argoesstatus.html)
+[Argo España table](https://www.argoespana.es/argoesstatustable.html)
 [Argo España report](https://www.argoespana.es/report.txt)
+
+
+
+
+
 
 ## System Overview
 Main components:
