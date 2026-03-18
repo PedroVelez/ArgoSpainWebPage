@@ -59,12 +59,34 @@ fprintf(fid,'<div align="center">\n');
 fprintf(fid,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
 fprintf(fid,'</div> \n');
 fprintf(fid,'<script> \n');
+
+%% Initialize the map and set up control
 fprintf(fid,'// Initialize the map and set up control \n');
-fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n',MCentroArgoIb(1),MCentroArgoIb(2),MZoomArgoIb);
+fprintf(fid,'   const mymap = L.map(''mapid'', \n');
+fprintf(fid,'   {scrollWheelZoom: false}).setView([%4.2f, %4.2f],  %d); \n',MCentroArgoIb(1),MCentroArgoIb(2),MZoomArgoIb);
+
+fprintf(fid,'//Propagación activa haciendo click \n');
+fprintf(fid,'  mymap.on(''click'', function() {\n');
+fprintf(fid,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fid,'  });\n');
+fprintf(fid,'//Propagar mapa cuando se cliquea un polígono\n');
+fprintf(fid,'  mymap.on(''focus'', function() { \n');
+fprintf(fid,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fid,'  });\n');
+fprintf(fid,'//Desactyiva propagacgión mapa cuando el puntero sale del área de acción\n');
+fprintf(fid,'  mymap.on(''mouseout'', function() {\n');
+fprintf(fid,'      mymap.scrollWheelZoom.disable();\n');
+fprintf(fid,'  });\n');
+
+
 fprintf(fid,'     mymap.addControl(new L.Control.Fullscreen());\n');
+
+% Tiles
 fprintf(fid,'//Tiles \n');
 fprintf(fid,'   L.tileLayer(''https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'', { \n');
 fprintf(fid,'       attribution: ''Tiles &copy ESRI''}).addTo(mymap); \n');
+
+%Iconos
 fprintf(fid,'//Defino iconos \n');
 fprintf(fid,'   var buoyIcon = L.Icon.extend({ \n');
 fprintf(fid,'       options: { \n');
@@ -76,6 +98,7 @@ fprintf(fid,'   }); \n');
 fprintf(fid,'   var buoyred = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyaroja.png''}), \n');
 fprintf(fid,'       buoyyellow = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyablancaroja.png''}), \n');
 fprintf(fid,'       buoywhite = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyablanca.png''}); \n');
+
 %% Trajectoria de las Argo Espana
 fprintf(fid,'  // Trayectorias de las boyas ArgoEspana\n');
 for ifloat=1:size(DataArgoEs.WMO,2)
@@ -84,7 +107,6 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         lon=FloatData.HIDf.lons;
         lat=FloatData.HIDf.lats;
         julds=FloatData.HIDf.julds;
-
         ind=find(isnan(lon)==0 & isnan(lat)==0);
         lon=lon(ind);
         lat=lat(ind);
@@ -127,6 +149,7 @@ for ifloat=1:size(DataArgoIn.WMO,2)
         end
     end
 end
+
 %% Lee todos los perfiles en los ultimos 30 dias.
 fprintf(fid,' //Datos de ultima posicion de las las boyas\n');
 fprintf(fid,'   var perfiladores = [\n');

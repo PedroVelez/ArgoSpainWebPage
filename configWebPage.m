@@ -58,12 +58,12 @@ lon_min=-80;    lon_max=40;
 %Map createArgoRegionMap
 MCentroArgoIb=[39,-16];
 MZoomArgoIb=4;
-MTamanoArgoIb=[800,650]; %Ancho,Alto
+MTamanoArgoIb=[1000,650]; %Ancho,Alto
 
 %Map createArgoSpainGMap
 MCentroArgoEs=[20,0];
 MZoomArgoEs=2;
-MTamanoArgoEs=[800,500];
+MTamanoArgoEs=[1000,500];
 
 %% Ftp
 ftp_dir='/html/float';

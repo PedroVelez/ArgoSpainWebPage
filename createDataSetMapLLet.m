@@ -65,22 +65,38 @@ fprintf(fHTML,'<div align="center">\n');
 
 %Add current status of tthe Argo Spain Contribution
 fprintf(fHTML,'<br><span class="style2"><div align="center">\n');
-fprintf(fHTML,'Cobertura del programa <b>Argo Espa&ntilde;a</b> el %s a las %s <br />\n',datestr(now,1),datestr(now,13));
-fprintf(fHTML,'</span></div>\n');
-fprintf(fHTML,'<br><span class="style2"><div align="center">\n');
+fprintf(fHTML,'Cobertura del programa <b>Argo Espa&ntilde;a</b> el %s a las %s <br/>\n',datestr(now,1),datestr(now,13));
+%fprintf(fHTML,'</span></div>\n');
+%fprintf(fHTML,'<br><span class="style2"><div align="center">\n');
 fprintf(fHTML,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Último dato recibido el %s <br />\n',DataArgoEs.iactiva,DataArgoEs.inodesplegada,DataArgoEs.iinactiva,datestr(max(DataArgoEs.FechaUltimoPerfil)) );
-fprintf(fHTML,'</span></div>\n');
-fprintf(fHTML,'<br><span class="style2"><div align="center">\n');
+%fprintf(fHTML,'</span></div>\n');
+%fprintf(fHTML,'<br><span class="style2"><div align="center">\n');
 fprintf(fHTML,'Hasta la fecha %d perfiles han sido realizados por las boyas del programa <b>Argo Espa&ntilde;a</b>\n',sum(NTotalPerfiles));
 fprintf(fHTML,'</span></div><br>\n');
 
-%Add map
+%% Add map
 fprintf(fHTML,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',MTamanoArgoEs(1),MTamanoArgoEs(2));
 fprintf(fHTML,'</div> \n');
 fprintf(fHTML,'<script> \n');
 fprintf(fHTML,'// Initialize the map and set up control \n');
-fprintf(fHTML,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n', MCentroArgoEs(1),MCentroArgoEs(2),MZoomArgoEs);
+fprintf(fHTML,'   const mymap = L.map(''mapid'',{scrollWheelZoom: false}).setView([%4.2f, %4.2f],  %d); \n', MCentroArgoEs(1),MCentroArgoEs(2),MZoomArgoEs);
+
+fprintf(fHTML,'//Propagación activa haciendo click \n');
+fprintf(fHTML,'   mymap.on(''click'', function() {\n');
+fprintf(fHTML,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fHTML,'  });\n');
+fprintf(fHTML,'//Propagar mapa cuando se cliquea un polígono\n');
+fprintf(fHTML,'  mymap.on(''focus'', function() { \n');
+fprintf(fHTML,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fHTML,'  });\n');
+fprintf(fHTML,'//Desactiva propagación mapa cuando el puntero sale del área de acción\n');
+fprintf(fHTML,'  mymap.on(''mouseout'', function() {\n');
+fprintf(fHTML,'      mymap.scrollWheelZoom.disable();\n');
+fprintf(fHTML,'  });\n');
+
 fprintf(fHTML,'     mymap.addControl(new L.Control.Fullscreen());\n');
+
+% Tiles
 fprintf(fHTML,'//Tiles \n');
 fprintf(fHTML,'   L.tileLayer(''https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'', { \n');
 fprintf(fHTML,'       attribution: ''Tiles &copy ESRI''}).addTo(mymap); \n');

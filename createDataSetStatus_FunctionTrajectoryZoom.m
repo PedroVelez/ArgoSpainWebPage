@@ -11,6 +11,19 @@ else
 end
 fprintf('trajectoryZ, ')
 
+if isnan(lat_minZ)
+	lat_minZ=-80
+end
+if isnan(lat_maxZ)
+	lat_minZ=80
+end
+if isnan(lon_minZ)
+	lon_minZ=-170
+end
+if isnan(lon_maxZ)
+	lon_minZ=170
+end
+
 m_proj('mercator','long',[lon_minZ lon_maxZ],'lat',[lat_minZ lat_maxZ]);hold on;grid on;
 if Limits.lat_max<55 && Limits.lon_max<15 && Limits.lat_min>15 && Limits.lon_min>-45 && isfield(GlobalDS,'batylon')==1
     m_contour(GlobalDS.batylon,GlobalDS.batylat,GlobalDS.elevations,[-1000 -1000],'color',[0.6 0.6 0.6]);hold on;grid on;
