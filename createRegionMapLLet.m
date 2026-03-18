@@ -47,9 +47,11 @@ fprintf(fid,'<head> \n');
 fprintf(fid,'	<title>Argo Espa&ntilde;a</title> \n');
 fprintf(fid,'	<meta charset="utf-8" /> \n');
 fprintf(fid,'	<meta name="viewport" content="width=device-width, initial-scale=1.0"> \n');
+
 %Leaflet libraries
 fprintf(fid,'    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css" integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/> \n');
 fprintf(fid,'    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew==" crossorigin=""></script> \n');
+
 %Full screen control
 fprintf(fid,'    <script src=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js''></script>\n');
 fprintf(fid,'    <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'' rel=''stylesheet'' />\n');
@@ -59,8 +61,24 @@ fprintf(fid,'<div align="center">\n');
 fprintf(fid,'<div id="mapid" style="width: %dpx; height: %dpx;"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
 fprintf(fid,'</div> \n');
 fprintf(fid,'<script> \n');
+
+%% Initialize the map and set up control
 fprintf(fid,'// Initialize the map and set up control \n');
 fprintf(fid,'   var mymap = L.map(''mapid'',{scrollwheelzoom: false}).setView([%4.2f, %4.2f],  %d); \n',MCentroArgoIb(1),MCentroArgoIb(2),MZoomArgoIb);
+
+fprintf(fid,'//Propagación activa haciendo click \n');
+fprintf(fid,'  mymap.on(''click'', function() {\n');
+fprintf(fid,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fid,'  });\n');
+fprintf(fid,'//Propagar mapa cuando se cliquea un polígono\n');
+fprintf(fid,'  mymap.on(''focus'', function() { \n');
+fprintf(fid,'      mymap.scrollWheelZoom.enable();\n');
+fprintf(fid,'  });\n');
+fprintf(fid,'//Desactyiva propagacgión mapa cuando el puntero sale del área de acción\n');
+fprintf(fid,'  mymap.on(''mouseout'', function() {\n');
+fprintf(fid,'      mymap.scrollWheelZoom.disable();\n');
+fprintf(fid,'  });\n');
+
 fprintf(fid,'     mymap.addControl(new L.Control.Fullscreen());\n');
 fprintf(fid,'//Tiles \n');
 fprintf(fid,'   L.tileLayer(''https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}'', { \n');
@@ -76,6 +94,7 @@ fprintf(fid,'   }); \n');
 fprintf(fid,'   var buoyred = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyaroja.png''}), \n');
 fprintf(fid,'       buoyyellow = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyablancaroja.png''}), \n');
 fprintf(fid,'       buoywhite = new buoyIcon({iconUrl: ''https://www.argoespana.es/imagenes/boyablanca.png''}); \n');
+
 %% Trajectoria de las Argo Espana
 fprintf(fid,'  // Trayectorias de las boyas ArgoEspana\n');
 for ifloat=1:size(DataArgoEs.WMO,2)
@@ -102,6 +121,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         end
     end
 end
+
 %% Trajectoria de las Argo Interes
 fprintf(fid,'  // Trayectorias de las boyas Argo Interes\n');
 for ifloat=1:size(DataArgoIn.WMO,2)
@@ -127,6 +147,7 @@ for ifloat=1:size(DataArgoIn.WMO,2)
         end
     end
 end
+
 %% Lee todos los perfiles en los ultimos 30 dias.
 fprintf(fid,' //Datos de ultima posicion de las las boyas\n');
 fprintf(fid,'   var perfiladores = [\n');
