@@ -21,7 +21,7 @@ then
   DirArgoDataCopy=/data/pvb/Argo
 fi
 
-PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
+PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
 DirLog=$PaginaWebDir/log
 
 #------------------------------------

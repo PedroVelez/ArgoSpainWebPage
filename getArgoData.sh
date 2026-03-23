@@ -19,7 +19,7 @@ then
   DirArgoData=/data/pvb/Argo
 fi
 
-PaginaWebDir=$DirRaiz/Analisis/ArgoSpainWebpage
+PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
 
 /bin/rm -f $PaginaWebDir/log/*.log
 

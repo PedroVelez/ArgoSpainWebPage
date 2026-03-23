@@ -53,8 +53,8 @@ fprintf(fid,'    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js" i
 fprintf(fid,'    <script src=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js''></script>\n');
 fprintf(fid,'    <link href=''https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css'' rel=''stylesheet''/>\n');
 fprintf(fid,'    <style>\n');
-fprintf(fid,'	      html, body {height: 80%%;0;padding: 0;}\n');
-fprintf(fid,'	      #map {width: 80%%;height: 80vh;}\n');
+fprintf(fid,'	      html, body {height: 100%%;}\n');
+fprintf(fid,'	      #map {width: 100%%;height: 100vh;}\n');
 fprintf(fid,'	      .info { padding: 6px; font: 14px/16px Arial, Helvetica, sans-serif; box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }\n');
 fprintf(fid,'	      .legend { text-align: left; line-height: 18px; color: #555; }\n');
 fprintf(fid,'	      .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 1; }\n');
@@ -62,9 +62,10 @@ fprintf(fid,'	      .leaflet-control-layers label { text-align: left; }\n');
 fprintf(fid,'	 </style>\n');
 fprintf(fid,'</head> \n');
 fprintf(fid,'<body> \n');
-fprintf(fid,'<div align="center">\n');
-fprintf(fid,'<div id="map" style="width: %d px; height: %d px;"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
-fprintf(fid,'</div> \n');
+%fprintf(fid,'<div align="center">\n');
+%fprintf(fid,'<div id="map" style="width: %d px; height: %d px;"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
+fprintf(fid,'<div id="map"></div> \n',MTamanoArgoIb(1),MTamanoArgoIb(2));
+%fprintf(fid,'</div> \n');
 fprintf(fid,'<script type="text/javascript">\n');
 
 
@@ -299,7 +300,7 @@ fprintf(fid,'	}// Marcador de posicion de las boyas\n');
 %fprintf(fid,'	};\n');
 %fprintf(fid,'	legend.addTo(map);\n');
 
-%%// Leyenda
+%% Leyenda
 fprintf(fid,'//Leyenda \n');
 fprintf(fid,'    var legend = L.control({position: ''bottomright''});\n');
 fprintf(fid,'    legend.onAdd = function (map) {\n');
@@ -328,7 +329,10 @@ fprintf(fid,'    }\n');
 fprintf(fid,'    div.innerHTML = labels.join("");\n');
 fprintf(fid,'    return div;\n');
 fprintf(fid,'};\n');
+
+fprintf(fid,'  if (window.innerWidth >= 767) {\n');
 fprintf(fid,'	legend.addTo(map);\n');
+fprintf(fid,'  }\n');
 
 
 fprintf(fid,' //Funcion para crear el titulo\n');
@@ -347,7 +351,11 @@ fprintf(fid,'		    div.style.paddingBottom = ''4px'';\n');
 fprintf(fid,'           div.style.opacity = "1"; // valor entre 0 y 1\n');
 fprintf(fid,'	    return div;\n');
 fprintf(fid,'	};\n');
-fprintf(fid,'	titulo.addTo(map);\n');
+
+fprintf(fid,'  if (window.innerWidth >= 767) {\n');
+fprintf(fid,'	 titulo.addTo(map);\n');
+fprintf(fid,'  }\n');
+
 fprintf(fid,'</script> \n');
 fprintf(fid,'</body> \n');
 fprintf(fid,'</html>\n');

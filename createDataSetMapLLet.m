@@ -61,7 +61,7 @@ fprintf(fid,'<body> \n');
 fprintf(fid,'<div align="center">\n');
 fprintf(fid,'    <style>\n');
 fprintf(fid,'	      html, body {height: 80%%;0;padding: 0;}\n');
-fprintf(fid,'	      #map {width: 80%%;height: 100vh;}\n');
+fprintf(fid,'	      #map {width: 100%%;height: 100vh;}\n');
 fprintf(fid,'	      .info { padding: 6px; font: 14px/16px Arial, Helvetica, sans-serif; box-shadow: 0 0 15px rgba(0,0,0,0.2); border-radius: 5px; }\n');
 fprintf(fid,'	      .legend { text-align: left; line-height: 18px; color: #555; }\n');
 fprintf(fid,'	      .legend i { width: 18px; height: 18px; float: left; margin-right: 8px; opacity: 1; }\n');
@@ -302,7 +302,7 @@ fprintf(fid,'<td width="100"><div align="center" class="style1" ><div align="cen
 %fprintf(fid,'<td width="50"> <div align="center" class="style1" ><div align="center"><strong>Surface offset</strong></div></div></td>\n');
 fprintf(fid,'</TR>\n');
 fprintf(fTxt,'# Boyas del Argo España ordenadas por ultimo perfil emitido \n');
-fprintf(fTxt,'Estado; WMO; Proyecto; Primer perfil; ultimo perfil; Edad; Tipo de boya \n');
+fprintf(fTxt,'Estado; WMO; Proyecto; Primer perfil; ultimo perfil; Edad; Tipo de boya; FloatOwner; Lon; Lat \n');
 
 %Lee los datos de las boyas para poder crear la tabla de datos
 %iactiva=0;iinactiva=0;inodesplegada=0;
@@ -312,8 +312,8 @@ for ifloat=1:size(DataArgoEs.WMO,2)
 
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         if DataArgoEs.activa(ifloat)==1
-            fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
-            fprintf(fTxt,'Activa; %7d; %12s; %s; %s; %s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel);
+            fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s;%s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner)
+            fprintf(fTxt,'Activa; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,FloatData.HIDf.lons(end),FloatData.HIDf.lats(end) );
             if mod(ifloat,2);
                 fprintf(fid,'<tr height: 55px; bgcolor="#e5e5e5">\n');
             else
@@ -329,7 +329,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fid,'</tr>');
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
-            fprintf(fTxt,'Inactiva; %7d; %12s; %s; %s; %s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel);
+            fprintf(fTxt,'Inactiva; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,FloatData.HIDf.lons(end),FloatData.HIDf.lats(end));
             if mod(ifloat,2);
                 fprintf(fid,'<TR height: 55px; bgcolor="#e5e5e5">\n');
             else
