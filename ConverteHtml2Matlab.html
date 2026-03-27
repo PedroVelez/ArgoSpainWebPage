@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HTML → MATLAB fprintf</title>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e12; --panel: #16161d; --border: #2a2a38;
+    --accent: #e8ff47; --accent2: #47c8ff;
+    --text: #e8e8f0; --muted: #5a5a72; --code-bg: #111118; --success: #47ffb4;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; min-height: 100vh; display: flex; flex-direction: column; }
+  header { padding: 18px 28px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 14px; background: var(--panel); }
+  .logo-badge { background: var(--accent); color: #0e0e12; font-weight: 800; font-size: 11px; letter-spacing: 2px; padding: 4px 10px; text-transform: uppercase; }
+  header h1 { font-size: 19px; font-weight: 700; }
+  header h1 span { color: var(--accent); }
+  .subtitle { margin-left: auto; font-size: 12px; color: var(--muted); font-family: 'JetBrains Mono', monospace; }
+  .workspace { display: grid; grid-template-columns: 1fr 1fr; flex: 1; }
+  .pane { display: flex; flex-direction: column; border-right: 1px solid var(--border); }
+  .pane:last-child { border-right: none; }
+  .pane-header { padding: 10px 18px; background: var(--panel); border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 10px; font-size: 11px; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); }
+  .dot { width: 8px; height: 8px; border-radius: 50%; }
+  .dot-html { background: var(--accent2); } .dot-matlab { background: var(--accent); }
+  .lang-tag { margin-left: auto; font-size: 10px; padding: 2px 8px; border: 1px solid var(--border); font-family: 'JetBrains Mono', monospace; font-weight: 400; }
+  textarea { flex: 1; background: var(--code-bg); color: var(--text); border: none; outline: none; resize: none; padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.65; min-height: 420px; }
+  textarea::placeholder { color: var(--muted); }
+  .output-area { flex: 1; background: var(--code-bg); padding: 16px; font-family: 'JetBrains Mono', monospace; font-size: 12.5px; line-height: 1.65; overflow-y: auto; white-space: pre; min-height: 420px; }
+  .controls { padding: 12px 18px; background: var(--panel); border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .btn { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 8px 16px; border: none; cursor: pointer; transition: all 0.15s; }
+  .btn-primary { background: var(--accent); color: #0e0e12; } .btn-primary:hover { background: #d4eb30; }
+  .btn-secondary { background: transparent; color: var(--text); border: 1px solid var(--border); } .btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-copy { background: transparent; color: var(--accent2); border: 1px solid var(--accent2); } .btn-copy:hover { background: var(--accent2); color: #0e0e12; }
+  .opt { display: flex; align-items: center; gap: 6px; font-size: 11px; color: var(--muted); cursor: pointer; text-transform: uppercase; letter-spacing: 0.5px; }
+  input[type="checkbox"] { accent-color: var(--accent); width: 13px; height: 13px; cursor: pointer; }
+  .opt-right { margin-left: auto; display: flex; align-items: center; gap: 8px; font-size:11px; color:var(--muted); text-transform:uppercase; letter-spacing:.5px; }
+  select { background: var(--bg); color: var(--text); border: 1px solid var(--border); padding: 5px 8px; font-family: 'JetBrains Mono', monospace; font-size: 11px; outline: none; cursor: pointer; }
+  select:hover { border-color: var(--accent); }
+  .status-bar { padding: 5px 18px; background: var(--bg); border-top: 1px solid var(--border); font-size: 11px; font-family: 'JetBrains Mono', monospace; color: var(--muted); display: flex; gap: 20px; }
+  .ok { color: var(--success); }
+  .toast { position: fixed; bottom: 20px; right: 20px; background: var(--success); color: #0e0e12; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; padding: 10px 18px; transform: translateY(60px); opacity: 0; transition: all 0.3s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none; z-index:999; }
+  .toast.show { transform: translateY(0); opacity: 1; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo-badge">Tool</div>
+  <h1>HTML <span>→</span> MATLAB fprintf</h1>
+  <div class="subtitle">Convierte HTML a sentencias fprintf de MATLAB</div>
+</header>
+
+<div class="workspace">
+  <div class="pane">
+    <div class="pane-header">
+      <span class="dot dot-html"></span>Código HTML<span class="lang-tag">input</span>
+    </div>
+    <textarea id="htmlInput" spellcheck="false" placeholder="Pega aquí tu HTML..."></textarea>
+    <div class="controls">
+      <button class="btn btn-primary" onclick="convert()">▶ Convertir</button>
+      <button class="btn btn-secondary" onclick="clearAll()">Limpiar</button>
+      <button class="btn btn-secondary" onclick="loadExample()">Ejemplo</button>
+    </div>
+  </div>
+
+  <div class="pane">
+    <div class="pane-header">
+      <span class="dot dot-matlab"></span>Código MATLAB<span class="lang-tag">output</span>
+    </div>
+    <div class="output-area" id="matlabOutput" style="color:var(--muted)">% El código MATLAB aparecerá aquí...
+% Pulsa "Convertir" para generar las sentencias fprintf</div>
+    <div class="controls">
+      <button class="btn btn-copy" onclick="copyOutput()">⎘ Copiar</button>
+      <label class="opt"><input type="checkbox" id="optFid" checked> usar fid</label>
+      <label class="opt"><input type="checkbox" id="optSkipEmpty"> omitir vacías</label>
+      <div class="opt-right">
+        Función:
+        <select id="funcName">
+          <option value="fprintf">fprintf</option>
+          <option value="printf">printf</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <span id="statLines">Líneas: 0</span>
+  <span id="statChars">Caracteres: 0</span>
+  <span id="statOut"></span>
+</div>
+
+<div class="toast" id="toast">¡Copiado!</div>
+
+<script>
+let plainOutput = '';
+
+/**
+ * Escapa una línea de HTML para que sea un string válido en MATLAB:
+ *  - Comilla simple '  →  ''      (escape de MATLAB para strings)
+ *  - Barra invertida \ →  \\     (para que \n no se interprete)
+ *  - Porcentaje %  →  %%         (para que fprintf no lo trate como formato)
+ */
+function escapeForMatlab(line) {
+  return line
+    .replace(/\\/g, '\\\\')
+    .replace(/'/g, "''")
+    .replace(/%/g, '%%');
+}
+
+/** Escapa < > & para mostrar en innerHTML sin que el navegador interprete el HTML */
+function escHtml(s) {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function buildStatement(escaped, funcName, useFid) {
+  if (funcName === 'fprintf') {
+    return useFid
+      ? "fprintf(fid, '" + escaped + "\\n');"
+      : "fprintf('" + escaped + "\\n');";
+  }
+  return "printf('" + escaped + "\\n');";
+}
+
+function convert() {
+  const raw       = document.getElementById('htmlInput').value;
+  const funcName  = document.getElementById('funcName').value;
+  const useFid    = document.getElementById('optFid').checked;
+  const skipEmpty = document.getElementById('optSkipEmpty').checked;
+
+  if (!raw.trim()) {
+    document.getElementById('matlabOutput').style.color = 'var(--muted)';
+    document.getElementById('matlabOutput').textContent = '% ⚠ Pega HTML en el panel izquierdo';
+    return;
+  }
+
+  const htmlLines  = [];   // para innerHTML (con colores)
+  const plainLines = [];   // para copiar al portapapeles
+
+  // --- Cabecera ---
+  const hdr = '% Generado automáticamente — HTML → MATLAB ' + funcName;
+  htmlLines.push('<span style="color:var(--muted);font-style:italic">' + escHtml(hdr) + '</span>');
+  plainLines.push(hdr);
+  htmlLines.push('');
+  plainLines.push('');
+
+  if (useFid) {
+    const open = "fid = fopen('salida.html', 'w');";
+    htmlLines.push('<span style="color:var(--accent2)">' + escHtml(open) + '</span>');
+    plainLines.push(open);
+    htmlLines.push('');
+    plainLines.push('');
+  }
+
+  // --- Líneas del HTML ---
+  const lines = raw.split('\n');
+  let count = 0;
+
+  for (const line of lines) {
+    if (skipEmpty && line.trim() === '') continue;
+
+    const escaped = escapeForMatlab(line);
+    const stmt    = buildStatement(escaped, funcName, useFid);
+
+    // Para mostrar en pantalla, escapamos los < > & del propio stmt
+    // y coloreamos el string entre comillas
+    const displayStmt = escHtml(stmt).replace(
+      /&#x27;(.*?)&#x27;/g,
+      (m, inner) => "'<span style=\"color:#a8e6cf\">" + inner + "</span>'"
+    ).replace(
+      /^(fprintf|printf)/,
+      '<span style="color:var(--accent)">$1</span>'
+    ).replace(
+      /(fid)/,
+      '<span style="color:var(--accent2)">$1</span>'
+    );
+
+    // Nota: escHtml convierte ' en &#x27; así que el regex de arriba lo captura bien
+    htmlLines.push(displayStmt);
+    plainLines.push(stmt);
+    count++;
+  }
+
+  if (useFid) {
+    htmlLines.push('');
+    plainLines.push('');
+    const close = 'fclose(fid);';
+    htmlLines.push('<span style="color:var(--accent2)">' + close + '</span>');
+    plainLines.push(close);
+  }
+
+  // --- Render ---
+  plainOutput = plainLines.join('\n');
+  const outEl = document.getElementById('matlabOutput');
+  outEl.style.color = '#b8ffa0';
+  outEl.innerHTML = htmlLines.join('\n');
+
+  document.getElementById('statLines').textContent = 'Líneas HTML: ' + lines.length;
+  document.getElementById('statChars').textContent = 'Caracteres: ' + raw.length;
+  const s = document.getElementById('statOut');
+  s.textContent = '✓ ' + count + ' sentencias generadas';
+  s.className = 'ok';
+}
+
+function clearAll() {
+  document.getElementById('htmlInput').value = '';
+  document.getElementById('matlabOutput').style.color = 'var(--muted)';
+  document.getElementById('matlabOutput').textContent = '% El código MATLAB aparecerá aquí...\n% Pulsa "Convertir" para generar las sentencias fprintf';
+  document.getElementById('statLines').textContent = 'Líneas: 0';
+  document.getElementById('statChars').textContent = 'Caracteres: 0';
+  document.getElementById('statOut').textContent = '';
+  plainOutput = '';
+}
+
+function copyOutput() {
+  if (!plainOutput) return;
+  navigator.clipboard.writeText(plainOutput).then(() => {
+    const t = document.getElementById('toast');
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 1800);
+  });
+}
+
+function loadExample() {
+  document.getElementById('htmlInput').value =
+`<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Informe</title>
+  <style>
+    body { font-family: Arial, sans-serif; }
+    h1 { color: #333; }
+    table { border-collapse: collapse; width: 100%; }
+    td, th { border: 1px solid #ccc; padding: 8px; }
+  </style>
+</head>
+<body>
+  <h1>Resultados del análisis</h1>
+  <p>Generado el 24/03/2026</p>
+  <table>
+    <tr><th>Variable</th><th>Valor</th></tr>
+    <tr><td>Media</td><td>%f</td></tr>
+    <tr><td>Std</td><td>%f</td></tr>
+  </table>
+</body>
+</html>`;
+  convert();
+}
+
+// Auto-convertir con debounce
+let timer;
+document.getElementById('htmlInput').addEventListener('input', () => {
+  clearTimeout(timer);
+  timer = setTimeout(convert, 400);
+});
+</script>
+</body>
+</html>
+
+
