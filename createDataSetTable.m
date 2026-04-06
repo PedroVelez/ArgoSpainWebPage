@@ -125,12 +125,12 @@ fprintf(fid, '        <div class="stat-label">PERFILES OCEANOGRÁFICOS</div>\n')
 fprintf(fid, '    </div>\n');
 fprintf(fid, '    <div class="separator">|</div>\n');
 fprintf(fid, '    <div class="stat-item">\n');
-fprintf(fid, '        <div class="stat-number">%3.1%%</div>\n',BoyasActivaArgoEs/CoberturaArgoGlobal*100);
+fprintf(fid, '        <div class="stat-number">%3.1f%%</div>\n',BoyasActivaArgoEs/CoberturaArgoGlobal*100);
 fprintf(fid, '        <div class="stat-label">COBERTURA GLOBAL</div>\n');
 fprintf(fid, '    </div>\n');
 fprintf(fid, '    <div class="separator">|</div>\n');
 fprintf(fid, '    <div class="stat-item">\n');
-fprintf(fid, '        <div class="stat-number">3.1f%%</div>\n',BoyasActivaArgoEsMed/CoberturaArgoMed*100);
+fprintf(fid, '        <div class="stat-number">%3.1f%%</div>\n',BoyasActivaArgoEsMed/CoberturaArgoMed*100);
 fprintf(fid, '        <div class="stat-label">COBERTURA MEDITERRÁNEA</div>\n');
 fprintf(fid, '    </div>\n');
 fprintf(fid, '</div>\n');
