@@ -57,7 +57,6 @@ fprintf(fid, '    justify-content: center;\n');
 fprintf(fid, '    width: 100%%;\n');
 fprintf(fid, '    padding: 10px 0;\n');
 fprintf(fid, '}\n');
-fprintf(fid, '\n');
 fprintf(fid, '.stat-item {\n');
 fprintf(fid, '    display: flex;\n');
 fprintf(fid, '    flex-direction: column;\n');
