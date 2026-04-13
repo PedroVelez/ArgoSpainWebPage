@@ -530,8 +530,8 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fidT,'<td width="106"><div align="center" class="style3">%s</span></div></td>',datestr(FloatData.HIDf.julds(end),22));
             fprintf(fidT,'<td width="45"> <div align="center" class="style3">%s</span></div></td>',MD.Age);
             fprintf(fidT,'<td width="100"><div align="center" class="style3">%12s</span></div></td>',MD.PlatformModel);
-            fprintf(fidT, '<td width="30" style="vertical-align:middle;text-align:center;"><span class="btn-expandir" onclick="toggleDetalle(''det_%d'', this)">+</span></td></tr>\n',MD.WMOFloat);
-            fprintf(fidT, '<tr class="detalle-movil" id="det_%d"><td colspan="8"></td>\n',MD.WMOFloat);
+            fprintf(fidT,'<td width="30" style="vertical-align:middle;text-align:center;"><span class="btn-expandir" onclick="toggleDetalle(''det_%d'', this)">+</span></td></tr>\n',MD.WMOFloat);
+            fprintf(fidT,'<tr class="detalle-movil" id="det_%d"><td colspan="8"></td>\n',MD.WMOFloat);
             fprintf(fidT,'</tr>');
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
@@ -548,7 +548,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fidT,'<td width="106"><div align="center" class="style3">%s</span></div></td>',datestr(FloatData.HIDf.julds(end),22));
             fprintf(fidT,'<td width=" 45"><div align="center" class="style3">%s</span></div></td>',MD.Age);
             fprintf(fidT,'<td width="100"><div align="center" class="style3">%12s</span></div></td>',MD.PlatformModel);
-            fprintf(fidT, '<td width="30" style="vertical-align:middle;text-align:center;"><span class="btn-expandir" onclick="toggleDetalle(''det_%d'', this)">+</span></td></tr>\n',MD.WMOFloat);
+            fprintf(fidT,'<td width="30" style="vertical-align:middle;text-align:center;"><span class="btn-expandir" onclick="toggleDetalle(''det_%d'', this)">+</span></td></tr>\n',MD.WMOFloat);
             fprintf(fidT, '<tr class="detalle-movil" id="det_%d"><td colspan="8"></td>\n',MD.WMOFloat);
             fprintf(fidT,'</tr>');
         end
@@ -568,6 +568,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
 end
 fprintf(fidT,'</Table>\n');
 fprintf(fidT,'</div>\n');
+fclose(fTxt);
 
 %Scripts para plegar la tabla
 fprintf(fidT, '<script>\n');
@@ -586,7 +587,7 @@ fprintf(fidT, '    var abierto = filaDet.classList.toggle(''abierto'');\n');
 fprintf(fidT, '    btn.classList.toggle(''abierto'', abierto);\n');
 fprintf(fidT, '    btn.textContent = abierto ? ''−'' : ''+'';\n');
 fprintf(fidT, '\n');
-fprintf(fidT, '    // Si se abre y la celda está vacía, leer los datos de la fila padre\n');
+fprintf(fidT, '    // Si se abre y la celda ests vacia, leer los datos de la fila padre\n');
 fprintf(fidT, '    if (abierto) {\n');
 fprintf(fidT, '      var celda = filaDet.querySelector(''td'');\n');
 fprintf(fidT, '      if (!celda.hasChildNodes()) {\n');
@@ -621,8 +622,9 @@ fprintf(fidT, '  }\n');
 fprintf(fidT, '</script>\n');
 fprintf(fidT,'</body>\n');
 fprintf(fidT,'</html>\n');
+
 fclose(fidT);
-fclose(fTxt);
+
 
 %% Ftp the files
 ftpobj=FtpArgoespana;
