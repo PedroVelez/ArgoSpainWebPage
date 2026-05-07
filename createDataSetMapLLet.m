@@ -142,14 +142,18 @@ fprintf(fidM,'<script type="text/javascript">\n');
 fprintf(fidM,'const esMovil = window.innerWidth <= 767;\n');
 fprintf(fidM,'\n');
 fprintf(fidM,'const map = L.map(''map'', {\n');
-fprintf(fidM,'  center: [39, -16],\n');
-fprintf(fidM,'  zoom: esMovil ? 3 : 4,\n');
+fprintf(fidM,'  center: [0, -16],\n');
+fprintf(fidM,'  zoom: esMovil ? 2 : 2,\n');
 fprintf(fidM,'  scrollWheelZoom: false,\n');
 fprintf(fidM,'  dragging: false,\n');
 fprintf(fidM,'  touchZoom: false,\n');
 fprintf(fidM,'  doubleClickZoom: false\n');
 fprintf(fidM,'});\n');
 fprintf(fidM,'\n');
+
+fprintf(fidM,'setTimeout(function() {\n');
+fprintf(fidM,'  map.invalidateSize();\n');
+fprintf(fidM,'}, 250);\n');
 
 fprintf(fidM,'//Activar interacción\n');
 fprintf(fidM,'function activarInteraccion() {\n');
@@ -407,11 +411,38 @@ fprintf(fidM,'};\n');
 fprintf(fidM,'titulo.addTo(map);\n');
 fprintf(fidM,'legend.addTo(map);\n');
 fprintf(fidM,'</script> \n');
+
+%Envia la altura al html que lo embebe
+fprintf(fidM, '<script>\n');
+fprintf(fidM, '  function enviarAltura() {\n');
+fprintf(fidM, '    var altura = document.documentElement.scrollHeight;\n');
+fprintf(fidM, '    window.parent.postMessage({ iframeAltura: altura, iframeId: ''mapa'' }, ''*'');\n');
+fprintf(fidM, '  }\n');
+fprintf(fidM, '  \n');
+fprintf(fidM, '  window.addEventListener(''load'', function() {\n');
+fprintf(fidM, '    setTimeout(enviarAltura, 300);\n');
+fprintf(fidM, '  });\n');
+fprintf(fidM, '  window.addEventListener(''resize'', enviarAltura);\n');
+
+fprintf(fidM, '/************************\n');
+fprintf(fidM, ' INCLUIR EN WIDGATE HTML DE ELEMENTOR:\n');
+fprintf(fidM, '  <iframe id="iframe-mapa"\n');
+fprintf(fidM, '    src="/argoesstatus_mapa.html"\n');
+fprintf(fidM, '    style="width:100%%; height:600px; border:none; display:block;"\n');
+fprintf(fidM, '    scrolling="no">\n');
+fprintf(fidM, '  </iframe>\n');
+fprintf(fidM, '  <script>\n');
+fprintf(fidM, '    window.addEventListener(''message'', function(e) {\n');
+fprintf(fidM, '      if (e.data && e.data.iframeId === ''mapa'') {\n');
+fprintf(fidM, '        document.getElementById(''iframe-mapa'').style.height = e.data.iframeAltura + ''px'';\n');
+fprintf(fidM, '      }\n');
+fprintf(fidM, '  });\n');
+fprintf(fidM, '  <//script>  Ojo: quitar doble de barra de script\n');
+fprintf(fidM, '**************************/\n');
+
 fprintf(fidM,'</body>\n');
 fprintf(fidM,'</html>\n');
 fclose(fidM);
-
-
 
 %% Tabla con los datos
 fprintf(fidT,'<!DOCTYPE html> \n');
@@ -574,6 +605,24 @@ fprintf(fidT, '  }\n');
 fprintf(fidT, '  window.addEventListener(''load'', enviarAltura);\n');
 fprintf(fidT, '  window.addEventListener(''resize'', enviarAltura);\n');
 fprintf(fidT, '\n');
+
+%% Incluir en elementor
+fprintf(fidT, '  /***********************\n');
+fprintf(fidT, '  <iframe id="iframe-tabla"\n');
+fprintf(fidT, '    src="/argoesstatus_tabla.html"\n');
+fprintf(fidT, '    style="width:100%%; border:none; display:block;"\n');
+fprintf(fidT, '    scrolling="no">\n');
+fprintf(fidT, '  </iframe>\n');
+fprintf(fidT, '\n');
+fprintf(fidT, '  <script>\n');
+fprintf(fidT, '    window.addEventListener(''message'', function(e) {\n');
+fprintf(fidT, '      if (e.data && e.data.iframeId === ''tabla'') {\n');
+fprintf(fidT, '        document.getElementById(''iframe-tabla'').style.height = e.data.iframeAltura + ''px'';\n');
+fprintf(fidT, '      }\n');
+fprintf(fidT, '    });\n');
+fprintf(fidT, '  <//script>\n');
+fprintf(fidT, '  ***********************/\n');
+
 fprintf(fidT, '  function toggleDetalle(id, btn) {\n');
 fprintf(fidT, '    var filaDet = document.getElementById(id);\n');
 fprintf(fidT, '    if (!filaDet) return;\n');
