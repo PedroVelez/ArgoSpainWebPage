@@ -1,16 +1,11 @@
 clear all;close all
-% Crea la pagina argoesstatus.html con el mapa creado con Leaflet de las posiciones de
-% las boyas Argo-Es y las Argo-In
+% Crea la pagina argoesstatus_mapa.html con el mapa creado con Leaflet de las posiciones de
+% las boyas Argo-Es y las Argo-In y argoesstatus_table.html con las boyas de Argo Es
 
 %% Read configuration
 configWebPage
 
 % TrajectorySpanArgo=now-datenum(2005,1,1);
-%% Map
-% MCentroArgoEs=[30,-16];
-% MZoomArgoEs=1;
-% MTamanoArgoEs=[675,390];
-%% Output file
 % FileHtmlArgoEsStatus;
 
 %% Inicio
