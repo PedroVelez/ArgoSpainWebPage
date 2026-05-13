@@ -68,13 +68,22 @@ then
     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit' > $DirLog/createDataSet.log
   fi
 #Updating leaflet map for Argo in the region
+#   printf "  Updating leaflet map for Argo in the region\n"
+#   if [ $Verbose -eq 1 ]
+#   then
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit'
+#   else
+#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit' > $DirLog/createRegionMapLLet.log
+#   fi
+
+#Updating gson files for Argo in the region
    printf "  Updating leaflet map for Argo in the region\n"
-   if [ $Verbose -eq 1 ]
-   then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit'
-   else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit' > $DirLog/createRegionMapLLet.log
-   fi
+  if [ $Verbose -eq 1 ]
+  then
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit'
+  else
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit' > $DirLog/createRegionGeoJSON.log
+  fi
 
 #Updating leaflet map for Argo Spain
     printf "  Updating leaflet map for Argo Spain\n"

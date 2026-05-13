@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Argo España</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css"
+    rel="stylesheet" />
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 90vh;
+      touch-action: none;
+    }
+
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .legend {
+      text-align: left;
+      line-height: 18px;
+      color: #555;
+    }
+
+    .legend .row {
+      display: flex;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .legend .dot {
+      width: 12px;
+      height: 12px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.15);
+      color: #fff;
+      font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    // ─────────────────────────────────────────────────────────────────────
+    // Inicialización del mapa
+    // ─────────────────────────────────────────────────────────────────────
+    const isMobile = window.innerWidth <= 767;
+
+    const map = L.map('map', {
+      center: [39, -16],
+      zoom: isMobile ? 3 : 4,
+      scrollWheelZoom: false,
+      dragging: false,
+      touchZoom: false,
+      doubleClickZoom: false
+    });
+
+    map.addControl(new L.Control.Fullscreen());
+
+    L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Tiles © ESRI', zIndex: 1 }
+    ).addTo(map);
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Interacción: el mapa empieza bloqueado.
+    // Escritorio: click activa, mouseout desactiva.
+    // ─────────────────────────────────────────────────────────────────────
+    function enableInteraction() {
+      map.dragging.enable();
+      map.touchZoom.enable();
+      map.scrollWheelZoom.enable();
+      map.doubleClickZoom.enable();
+    }
+    function disableInteraction() {
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.doubleClickZoom.disable();
+    }
+
+    map.on('click', enableInteraction);
+    map.on('mouseout', disableInteraction);
+
+    const container = map.getContainer();
+    const overlay = document.createElement('div');
+    overlay.className = 'map-overlay';
+    overlay.textContent = 'Haz click para activar el mapa';
+    container.appendChild(overlay);
+    map.on('click', () => { overlay.style.display = 'none'; });
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Carga de los 3 GeoJSON
+    // Los ficheros con sufijo "2" los produce createRegionGeoJSON2.toImplement.m
+    // ─────────────────────────────────────────────────────────────────────
+    Promise.all([
+      fetch('data/TrajectoryAS.geojson').then(r => r.json()),
+      fetch('data/TrajectoryAI.geojson').then(r => r.json()),
+      fetch('data/PosicionBoyas.geojson').then(r => r.json()),
+      fetch("data/Summary.txt").then(r => r.text())
+    ]).then(function (datosGJSON) {
+      // datos es un array con los 3 GeoJSON, en el mismo orden que el Promise.all:
+      //   datosGJSON[0] -> TrajectoryAS2.geojson
+      //   datosGJSON[1] -> TrajectoryAI2.geojson
+      //   datosGJSON[2] -> PosicionBoyas2.geojson
+      //   datosGJSON[3] -> Summary.txt
+      var trajAS = datosGJSON[0];
+      var trajAI = datosGJSON[1];
+      var boyas = datosGJSON[2];
+      const summary = datosGJSON[3];
+
+      // ──── DIBUJAR TRAYECTORIAS ARGO ESPAÑA ─────────────────────────────
+      //
+      // trajAS.features es un array. Recorremos uno a uno con un for.
+      // Cada feature lleva en geometry.coordinates un array de pares
+      // [lon, lat] (orden GeoJSON). Leaflet espera [lat, lon] para sus
+      // polylines, así que convertimos par a par dentro de un segundo for.
+      //
+      for (let i = 0; i < trajAS.features.length; i++) {
+        const feature = trajAS.features[i];
+        const color = feature.properties.stroke;   // '#FF0000'
+        const coords = feature.geometry.coordinates; // [[lon,lat], [lon,lat], ...]
+
+        // Convertir [lon,lat] -> [lat,lon] para Leaflet
+        const puntos = [];
+        for (let j = 0; j < coords.length; j++) {
+          puntos.push([coords[j][1], coords[j][0]]);
+        }
+
+        L.polyline(puntos, {
+          color: color,
+          opacity: 0.6,
+          weight: 2
+        }).addTo(map);
+      }
+
+      // ──── DIBUJAR TRAYECTORIAS ARGO INTERÉS ────────────────────────────
+      //
+      // Mismo bucle que el de Argo España; lo único que cambia es de qué
+      // FeatureCollection se lee (trajAI).
+      //
+      for (let i = 0; i < trajAI.features.length; i++) {
+        const feature = trajAI.features[i];
+        const color = feature.properties.stroke;   // '#ffee00'
+        const coords = feature.geometry.coordinates;
+
+        const puntos = [];
+        for (let j = 0; j < coords.length; j++) {
+          puntos.push([coords[j][1], coords[j][0]]);
+        }
+
+        L.polyline(puntos, {
+          color: color,
+          opacity: 0.6,
+          weight: 2
+        }).addTo(map);
+      }
+
+      // ──── DIBUJAR BOYAS ────────────────────────────────────────────────
+      //
+      // boyas.features es un array de features Point. Recorremos uno a uno.
+      // Por cada feature:
+      //   - leemos sus properties (WMO, Description, Icon, ...)
+      //   - leemos sus coordenadas [lon, lat]
+      //   - decidimos el color y la URL en función de Icon
+      //   - construimos el HTML del popup
+      //   - creamos el circleMarker y lo añadimos al mapa
+      //
+      // Mismo patrón que el HTML antiguo (`for (var i=0; i<perfiladores.length; i++)`)
+      // pero ahora leyendo desde un GeoJSON estructurado.
+      //
+      for (let i = 0; i < boyas.features.length; i++) {
+        const feature = boyas.features[i];
+        const p = feature.properties;
+        const lon = feature.geometry.coordinates[0];
+        const lat = feature.geometry.coordinates[1];
+
+        // 1) Color y URL según el tipo de boya (Icon: 0/1/2)
+        let color, href;
+        if (p.Icon === 1) {
+          // Argo España
+          color = '#ff0000';
+          href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
+        } else if (p.Icon === 2) {
+          // Argo Interés
+          color = '#ffffff';
+          href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
+        } else {
+          // Argo Internacional
+          color = '#ffffff';
+          href = 'https://fleetmonitoring.euro-argo.eu/float/' + p.WMO;
+        }
+
+        // 2) HTML del popup (idéntico al del HTML antiguo)
+        const popup =
+          '<center><p>Boya <b><a href="' + href + '" target="_blank">' + p.WMO + '</a></b>' +
+          '<br><b>' + p.Description + '</b><br><br>' +
+          '<b>Último dato&nbsp;</b>' + p.Date +
+          '<br><b>Dato superficial&nbsp;</b>' + p.SurfaceValue +
+          '<br><b>Dato profundo&nbsp;</b>' + p.BottomValue +
+          '</p></center>';
+
+        // 3) Crear el marcador y añadirlo al mapa
+        L.circleMarker([lat, lon], {
+          radius: 3,
+          color: color,
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 0.85,
+          opacity: 1
+        }).addTo(map).bindPopup(popup);
+      }
+
+      // ──── PANEL DE TÍTULO (cuenta boyas y trayectorias) ─────────────────
+      // Cargamos el summary
+      document.getElementById('summary').innerHTML = summary
+    });
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Leyenda
+    // ─────────────────────────────────────────────────────────────────────
+    const legend = L.control({ position: 'bottomright' });
+    legend.onAdd = () => {
+      const div = L.DomUtil.create('div', 'info legend');
+      div.innerHTML =
+        '<strong>Boyas Argo</strong>' +
+        '<div class="row"><span class="dot" style="background:#ffffff"></span>Argo Internacional</div>' +
+        '<div class="row"><span class="dot" style="background:#ff0000"></span>Argo España</div>';
+      return div;
+    };
+    legend.addTo(map);
+
+    // ─────────────────────────────────────────────────────────────────────
+    // Título (panel arriba a la derecha)
+    // ─────────────────────────────────────────────────────────────────────
+    const titleControl = L.control({ position: 'topright' });
+    titleControl.onAdd = () => {
+      const div = L.DomUtil.create('div', 'info');
+      div.id = 'summary';
+      div.innerHTML = '<b>Cargando datos…</b>';
+      return div;
+    };
+    titleControl.addTo(map);
+  </script>
+</body>
+
+</html>

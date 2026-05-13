@@ -7,7 +7,7 @@ configWebPage
 [DayNumber,DayName] = weekday(now);
 
 % Read partial reports
-R1=load(strcat(PaginaWebDir,'/data/reportcreateRegionMapLLet.mat'));
+R1=load(strcat(PaginaWebDir,'/data/reportcreateRegionGeoJSON.mat'));
 R2=load(strcat(PaginaWebDir,'/data/reportcreateDataSetMapLLet.mat'));
 R3=load(strcat(PaginaWebDir,'/data/reportArgoSpainStatus'));
 R4=load(strcat(PaginaWebDir,'/data/reportArgoInterestStatus'));
@@ -22,6 +22,7 @@ catch ME
     EnviaCorreoArgo('pedro.velez@ieo.csic.es',MensajeError)
 end
 end
+keyboard
 
 %Write to a txt file
 fid=fopen('./data/report.txt','w');
