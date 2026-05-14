@@ -10,8 +10,8 @@
 
 This repository contains the scripts used to generate and update the Argo Spain web page [www.argoespana.es](https://www.argoespana.es). The system automates the transformation of raw Argo data into web-ready products through MATLAB-based scrips organized by a Bash script.
 
-[Argo region map]     (https://www.argoespana.es/argoregionstatus.html)
-[Argo España map]     (https://www.argoespana.es/argoesstatus_mapa.html
+[Argo region map]     (https://www.argoespana.es/argoregionstatus.html).  [create the gjsonfiles]
+[Argo España map]     (https://www.argoespana.es/argoesstatus_mapa.html.  [create the gjsonfiles]
 [Argo España Table].  (https://www.argoespana.es/argoesstatus_tabla.html)
 [Argo España Table].  (https://www.argoespana.es/argoesstatus_tabla.txt)
 [Argo España Summary] (https://www.argoespana.es/argoessummary.html)
