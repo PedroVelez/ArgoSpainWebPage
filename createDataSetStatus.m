@@ -1,6 +1,6 @@
 clear all;close all
 
-%Este script crea una serie de datos y graficos para todas las boyas del
+%Este script crea una serie de datos y gráficos para todas las boyas del
 %programa Argo Espana y Argo Interest
 
 %% Read configuration

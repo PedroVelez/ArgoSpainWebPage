@@ -12,6 +12,16 @@ R2=load(strcat(PaginaWebDir,'/data/reportcreateDataSetMapLLet.mat'));
 R3=load(strcat(PaginaWebDir,'/data/reportArgoSpainStatus'));
 R4=load(strcat(PaginaWebDir,'/data/reportArgoInterestStatus'));
 
+%Write to a txt file
+fid=fopen('./data/argoesreport.txt','w');
+fprintf(fid,'<b>Argo Report</b>\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s \n',datestr(now),R1.Informe,R2.Informe,R3.Informe,R4.Informe,domainName);
+fclose(fid);
+
+fprintf('     > Uploading  report  \n')
+ftpobj=FtpArgoespana;
+var=cd(ftpobj,ftp_dir_html);
+outftp=mput(ftpobj,'./data/argoesreport.txt');
+
 % Send by email
 if sendEmail==1
 try
@@ -24,13 +34,5 @@ end
 end
 keyboard
 
-%Write to a txt file
-fid=fopen('./data/report.txt','w');
-fprintf(fid,'<b>Argo Report</b>\n%s\n\n%s\n\n%s\n\n%s\n\n%s\n\n%s \n',datestr(now),R1.Informe,R2.Informe,R3.Informe,R4.Informe,domainName);
-fclose(fid);
 
-fprintf('     > Uploading  report  \n')
-ftpobj=FtpArgoespana;
-var=cd(ftpobj,ftp_dir_html);
-outftp=mput(ftpobj,'./data/report.txt');
 

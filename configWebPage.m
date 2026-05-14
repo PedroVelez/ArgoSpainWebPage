@@ -35,7 +35,8 @@ DirOutGraph=strcat(PaginaWebDir,'/html/floats');
 % Names of the outputs files
 FileHtmlRegionStatus = strcat(PaginaWebDir,'/html/','argoregionstatus.html');
 FileHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatus.html');
-FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
+%FileTableArgoEsStatus  = strcat(PaginaWebDir,'/html/','argoesstatustable.html');
+FileTableArgoEsSummary  = strcat(PaginaWebDir,'/html/','argoessummary.html');
 
 %% createDataSet
 InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar

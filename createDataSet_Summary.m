@@ -39,7 +39,7 @@ end
 %% Begin
 fprintf('>>>>> %s\n',mfilename)
 
-fid = fopen(FileTableArgoEsStatus,'w');
+fid = fopen(FileTableArgoEsSummary,'w');
 
 fprintf(fid, '<!DOCTYPE html>\n');
 fprintf(fid, '<html>\n');
@@ -138,10 +138,10 @@ fprintf(fid, '</html>\n');
 fclose(fid);
 
 %% Ftp the file
-fprintf('     > Uploading  %s \n',FileTableArgoEsStatus);
+fprintf('     > Uploading  %s \n',FileTableArgoEsSummary);
 ftpobj=FtpArgoespana;
 var=cd(ftpobj,ftp_dir_html);
-outftp=mput(ftpobj,FileTableArgoEsStatus);
+outftp=mput(ftpobj,FileTableArgoEsSummary);
 
 
 fprintf('%s <<<<< \n',mfilename)

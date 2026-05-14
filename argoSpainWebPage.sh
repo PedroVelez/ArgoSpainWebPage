@@ -8,17 +8,17 @@ JustUpload=0 #Si es 1 solo sube los datos. Si es 0 actualiza y sube los datos
 strval=$(uname -a)
 if [[ $strval == *Okapi* ]];
 then
-  MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
-  DirRaiz=$HOME/Dropbox/Oceanografia
-  DirArgoData=$DirRaiz/Oceanografia/Data/Argo
-  DirArgoDataCopy=/data/pvb/Argo
+    MatVersion=/Applications/MATLAB_R2019b.app/bin/matlab
+    DirRaiz=$HOME/Dropbox/Oceanografia
+    DirArgoData=$DirRaiz/Oceanografia/Data/Argo
+    DirArgoDataCopy=/data/pvb/Argo
 fi
 if [[ $strval == *rossby* ]];
 then
-  MatVersion=/usr/bin/matlab
-  DirRaiz=$HOME
-  DirArgoData=/data/pvb/Data/Argo
-  DirArgoDataCopy=/data/pvb/Data/Argo
+    MatVersion=/usr/bin/matlab
+    DirRaiz=$HOME
+    DirArgoData=/data/pvb/Data/Argo
+    DirArgoDataCopy=/data/pvb/Data/Argo
 fi
 
 PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
@@ -42,12 +42,12 @@ printf "  DirArgoData  $DirArgoData \n"
 #------------------------------------
 #Convierte la ArgoGreyList a mat
 #------------------------------------
- printf "  Updating argo grey list\n"
+printf "  Updating argo grey list\n"
 if [ $Verbose -eq 1 ]
 then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'getArgoGreyList2mat;exit'
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'getArgoGreyList2mat;exit'
 else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'getArgoGreyList2mat;exit' > $DirLog/getArgoGreyList2mat.log
+    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'getArgoGreyList2mat;exit' > $DirLog/getArgoGreyList2mat.log
 fi
 
 #------------------------------------
@@ -55,69 +55,70 @@ fi
 #------------------------------------
 if [ $JustUpload == 0 ]
 then
-   /bin/rm -f $PaginaWebDir/log/ErrorArgoEsLeeDatos.mat
-   /bin/rm -f $PaginaWebDir/data/dataArgoSpain.mat
-   /bin/rm -f $PaginaWebDir/data/dataArgoInterest.mat
+    /bin/rm -f $PaginaWebDir/log/ErrorArgoEsLeeDatos.mat
+    /bin/rm -f $PaginaWebDir/data/dataArgoSpain.mat
+    /bin/rm -f $PaginaWebDir/data/dataArgoInterest.mat
+    
+    # Updating data sets
+    printf "  Updating data sets, ArgoSpain and ArgoInterest\n"
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit' > $DirLog/createDataSet.log
+    fi
 
-# Updating data sets
-  printf "  Updating data sets, ArgoSpain and ArgoInterest\n"
-  if [ $Verbose -eq 1 ]
-  then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit'
-  else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet;exit' > $DirLog/createDataSet.log
-  fi
-#Updating leaflet map for Argo in the region
-#   printf "  Updating leaflet map for Argo in the region\n"
-#   if [ $Verbose -eq 1 ]
-#   then
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit'
-#   else
-#     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionMapLLet;exit' > $DirLog/createRegionMapLLet.log
-#   fi
-
-#Updating gson files for Argo in the region
-   printf "  Updating leaflet map for Argo in the region\n"
-  if [ $Verbose -eq 1 ]
-  then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit'
-  else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit' > $DirLog/createRegionGeoJSON.log
-  fi
-
-#Updating leaflet map for Argo Spain
+    # Updating gJson files for Argo in the region
+    printf "  Updating leaflet map for Argo in the region\n"
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createRegionGeoJSON;exit' > $DirLog/createRegionGeoJSON.log
+    fi
+    
+    # Updating gJson for Argo Spain map
     printf "  Updating leaflet map for Argo Spain\n"
     if [ $Verbose -eq 1 ]
     then
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetMapLLet;exit'
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_GeoJSON;exit'
     else
-     cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetMapLLet;exit' > $DirLog/createDataSetMapLLet.log
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_GeoJSON;exit' > $DirLog/createDataSet_GeoJSON.log
     fi
-
-#Updating table with the statistics of Argo Spain
-  printf "  Updating table with the statistics of Argo Spain\n"
-  if [ $Verbose -eq 1 ]
-  then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetTable;exit'
-  else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetTable;exit' > $DirLog/createDataSetTable.log
-  fi
-
-#Update ArgoEs figures
-  printf "  Updating and upload webpages for the ArgoSpain and ArgoInterest figures\n"
-  if [ $Verbose -eq 1 ]
-  then
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit'
-  else
-   cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit' > $DirLog/createDataSetStatus.log
-  fi
+   
+    # Updating gJson for Argo Spain table
+    printf "  Updating leaflet map for Argo Spain\n"
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_Table;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_Table;exit' > $DirLog/createDataSet_Table.log
+    fi
+    
+    #Updating table with the summary statistics of Argo Spain
+    printf "  Updating table with the statistics of Argo Spain\n"
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_Summary;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSet_Summary;exit' > $DirLog/createDataSetSummary.log
+    fi
+    
+    #Update ArgoEs figures
+    printf "  Updating and upload webpages for the ArgoSpain and ArgoInterest figures\n"
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createDataSetStatus;exit' > $DirLog/createDataSetStatus.log
+    fi
 fi
 
 #Borra ficheros DataSetGraficos
 if [ $JustUpload == 0 ]
 then
-   printf "  Deleting local copy of ArgoEs figures\n"
-   /bin/rm -f $PaginaWebDir/html/floats/* > $DirLog/deleteFiles.log
+    printf "  Deleting local copy of ArgoEs figures\n"
+    /bin/rm -f $PaginaWebDir/html/floats/* > $DirLog/deleteFiles.log
 fi
 
 #------------------------------------
@@ -126,13 +127,13 @@ fi
 printf "  Send reports by email \n"
 if [ $JustUpload == 0 ]
 then
-  cd $PaginaWebDir
-  if [ $Verbose -eq 1 ]
-  then
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit'
-  else
-    cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit' > $DirLog/sendDataSetReport.log
-  fi
+    cd $PaginaWebDir
+    if [ $Verbose -eq 1 ]
+    then
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit'
+    else
+        cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'sendDataSetReport;exit' > $DirLog/sendDataSetReport.log
+    fi
 fi
 
 printf "<<<<< Updated ArgoSpainWebArgo \n"
