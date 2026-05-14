@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Argo España — mapa</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+    integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+    crossorigin="" />
+  <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+    integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+    crossorigin=""></script>
+  <script src="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js"></script>
+  <link href="https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css"
+    rel="stylesheet" />
+
+  <style>
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+    }
+
+    #map {
+      width: 100%;
+      height: 90vh;
+      touch-action: none;
+    }
+
+    .info {
+      padding: 6px 8px;
+      font: 14px/16px Arial, Helvetica, sans-serif;
+      background: rgba(255, 255, 255, 0.95);
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+      border-radius: 5px;
+    }
+
+    .legend {
+      text-align: left;
+      line-height: 18px;
+      color: #555;
+    }
+
+    .legend .row {
+      display: flex;
+      align-items: center;
+      margin-top: 4px;
+    }
+
+    .legend .dot {
+      width: 12px;
+      height: 12px;
+      border: 2px solid #000;
+      border-radius: 50%;
+      display: inline-block;
+      margin-right: 6px;
+    }
+
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.15);
+      color: #fff;
+      font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
+
+    /* Versión móvil/tablet: leyenda y título se vuelven colapsables */
+    @media (max-width: 767px) {
+      .info.legend {
+        padding: 0 !important;
+        font-size: 11px !important;
+        width: 160px !important;
+        overflow: hidden;
+        border-radius: 8px;
+        background: transparent;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      }
+      .legend-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        border: none;
+        padding: 7px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+        box-sizing: border-box;
+        border-radius: 8px;
+      }
+      .legend-toggle-btn.open { border-radius: 8px 8px 0 0; }
+      .legend-arrow {
+        font-size: 10px;
+        display: inline-block;
+        transition: transform 0.25s ease;
+        transform: rotate(0deg);
+      }
+      .legend-toggle-btn.open .legend-arrow { transform: rotate(180deg); }
+      .legend-collapsible {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.25s ease;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 0 8px;
+        border-radius: 0 0 8px 8px;
+      }
+      .legend-collapsible.open {
+        max-height: 300px;
+        opacity: 1;
+        padding: 6px 8px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+
+  <script>
+    // Inicialización del mapa
+    var isMobile = window.innerWidth <= 767;
+
+    var map = L.map('map', {
+      center: [0, -16],
+      zoom: 2,
+      scrollWheelZoom: false,
+      dragging: false,
+      touchZoom: false,
+      doubleClickZoom: false
+    });
+
+    map.addControl(new L.Control.Fullscreen());
+
+    L.tileLayer(
+      'https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+      { attribution: 'Tiles © ESRI', zIndex: 1 }
+    ).addTo(map);
+
+    // Interacción del mapa.
+    //   Escritorio: click activa, mouseout desactiva.
+    //   Móvil: dos dedos activan; al soltar se desactiva tras 800 ms.
+    function enableInteraction() {
+      map.dragging.enable();
+      map.touchZoom.enable();
+      map.scrollWheelZoom.enable();
+      map.doubleClickZoom.enable();
+    }
+    function disableInteraction() {
+      map.dragging.disable();
+      map.touchZoom.disable();
+      map.scrollWheelZoom.disable();
+      map.doubleClickZoom.disable();
+    }
+
+    map.on('click', enableInteraction);
+    map.on('mouseout', disableInteraction);
+
+    var container = map.getContainer();
+    var touchTimeout;
+    container.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) enableInteraction();
+    });
+    container.addEventListener('touchend', function () {
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(disableInteraction, 800);
+    });
+
+    // Overlay con la instrucción de uso (cambia el texto si es móvil).
+    var overlay = document.createElement('div');
+    overlay.className = 'map-overlay';
+    overlay.textContent = isMobile
+      ? 'Usa dos dedos para mover el mapa'
+      : 'Haz click para activar el mapa';
+    container.appendChild(overlay);
+
+    function ocultarOverlay() { overlay.style.display = 'none'; }
+    function mostrarOverlay() { overlay.style.display = 'flex'; }
+
+    map.on('click', ocultarOverlay);
+    container.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) ocultarOverlay();
+    });
+    container.addEventListener('touchend', function () {
+      setTimeout(mostrarOverlay, 800);
+    });
+
+
+    // Carga de los 3 ficheros en paralelo. Cada uno alimenta una variable:
+    //   traj    : FeatureCollection de LineString. properties.stroke trae el
+    //             color y geometry.coordinates es un array de pares [lon,lat]
+    //             (orden GeoJSON; Leaflet quiere [lat,lon], se voltea abajo).
+    //   boyas   : FeatureCollection de Point. properties = { WMO, Description,
+    //             Date, Icon }. Icon === 1 -> activa, Icon === 2 -> inactiva.
+    //   summary : Texto HTML pre-formateado para el panel de título.
+    Promise.all([
+      fetch('data/TrajectoryDataSet.geojson').then(r => r.json()),
+      fetch('data/PosicionBoyasDataSet.geojson').then(r => r.json()),
+      fetch('data/SummaryDataSet.txt').then(r => r.text())
+    ]).then(function (datosGJSON) {
+      var traj = datosGJSON[0];
+      var boyas = datosGJSON[1];
+      var summary = datosGJSON[2];
+
+      // Trayectorias
+      for (let i = 0; i < traj.features.length; i++) {
+        const feature = traj.features[i];
+        const color = '#ff0000';
+        const coords = feature.geometry.coordinates;
+
+        // [lon,lat] -> [lat,lon] para Leaflet
+        const puntos = [];
+        for (let j = 0; j < coords.length; j++) {
+          puntos.push([coords[j][1], coords[j][0]]);
+        }
+
+        L.polyline(puntos, {
+          color: color,
+          opacity: 0.6,
+          weight: 2
+        }).addTo(map);
+      }
+
+      // Boyas: rojo si activa, blanco si inactiva. El enlace siempre apunta
+      // a la ficha de argoespana.es porque en este mapa solo hay Argo España.
+      for (let i = 0; i < boyas.features.length; i++) {
+        const feature = boyas.features[i];
+        const p = feature.properties;
+        const lon = feature.geometry.coordinates[0];
+        const lat = feature.geometry.coordinates[1];
+
+        let color;
+        if (p.Icon === 1) {
+          color = '#ff0000';
+        } else {
+          color = '#ffffff';
+        }
+        var href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
+
+        var popup =
+          '<center><p>Boya <b><a href="' + href + '" target="_blank">' + p.WMO + '</a></b>' +
+          '<br><b>' + p.Description + '</b><br><br>' +
+          '<b>Fecha ultimo dato&nbsp;</b>' + p.Date + '</p></center>';
+
+        L.circleMarker([lat, lon], {
+          radius: 3,
+          color: color,
+          weight: 1,
+          fillColor: color,
+          fillOpacity: 0.85,
+          opacity: 1
+        }).addTo(map).bindPopup(popup);
+      }
+
+      // El txt ya viene con etiquetas HTML (<b>, <br/>), se inserta tal cual
+      // en el div del panel de título.
+      document.getElementById('summary').innerHTML = summary;
+    });
+
+
+    // Alterna la clase 'open' en el botón y su contenedor. La usan los
+    // paneles colapsables que se generan solo en versión móvil.
+    function toggleLeyenda(btnId, contenidoId) {
+      document.getElementById(btnId).classList.toggle('open');
+      document.getElementById(contenidoId).classList.toggle('open');
+    }
+
+
+    // Leyenda (esquina inferior derecha). En móvil se envuelve en un botón
+    // colapsable con flecha; en escritorio se muestra directamente.
+    var legend = L.control({ position: 'bottomright' });
+    legend.onAdd = function () {
+      var div = L.DomUtil.create('div', 'info legend');
+      var cuerpo =
+        '<strong>Boyas Argo España</strong>' +
+        '<div class="row"><span class="dot" style="background:#ff0000"></span>Activa</div>' +
+        '<div class="row"><span class="dot" style="background:#ffffff"></span>Inactiva</div>';
+
+      if (window.innerWidth <= 767) {
+        div.innerHTML =
+          '<button class="legend-toggle-btn" id="btnLeyenda" ' +
+          'onclick="toggleLeyenda(\'btnLeyenda\',\'contentLeyenda\')">' +
+          'Boyas Argo <span class="legend-arrow">▼</span></button>' +
+          '<div id="contentLeyenda" class="legend-collapsible">' + cuerpo + '</div>';
+      } else {
+        div.innerHTML = cuerpo;
+      }
+      return div;
+    };
+    legend.addTo(map);
+
+
+    // Título (esquina superior derecha). El <span id="summary"> es donde
+    // el .then de arriba mete el contenido de SummaryDataSet.txt; el resto
+    // (botón + colapsable) solo se construye en móvil.
+    var titleControl = L.control({ position: 'topright' });
+    titleControl.onAdd = function () {
+      var div = L.DomUtil.create('div', 'info');
+      if (window.innerWidth <= 767) {
+        div.classList.add('legend');
+        div.innerHTML =
+          '<button class="legend-toggle-btn" id="btnTitulo" ' +
+          'onclick="toggleLeyenda(\'btnTitulo\',\'contentTitulo\')">' +
+          'Resumen <span class="legend-arrow">▼</span></button>' +
+          '<div id="contentTitulo" class="legend-collapsible">' +
+          '<span id="summary">Cargando datos…</span>' +
+          '</div>';
+      } else {
+        div.innerHTML = '<span id="summary"><b>Cargando datos…</b></span>';
+      }
+      return div;
+    };
+    titleControl.addTo(map);
+  </script>
+
+  <script>
+    // ─────────────────────────────────────────────────────────────────────
+    // Integración con Elementor (WordPress)
+    //
+    // Este HTML se embebe en argoespana.es dentro de un iframe colocado en
+    // un widget HTML de Elementor. Como un iframe tiene altura fija por
+    // defecto (con scroll interno), aquí mandamos al padre la altura real
+    // del contenido para que la página de WordPress ajuste el iframe y
+    // desaparezca el scroll interno.
+    //
+    // Funcionamiento:
+    //   - enviarAltura() lee la altura total del documento y se la manda
+    //     a la ventana padre con postMessage. El mensaje lleva un id propio
+    //     ('mapa') por si en la misma página hay más de un iframe.
+    //   - Se dispara al cargar (con un retardo de 300 ms para dar tiempo a
+    //     Leaflet a renderizar) y cada vez que cambia el tamaño de ventana.
+    //   - El snippet HTML del widget de Elementor está al final, comentado,
+    //     para copiarlo y pegarlo donde haga falta.
+    // ─────────────────────────────────────────────────────────────────────
+    function enviarAltura() {
+      var altura = document.documentElement.scrollHeight;
+      window.parent.postMessage({ iframeAltura: altura, iframeId: 'mapa' }, '*');
+    }
+
+    window.addEventListener('load', function () {
+      setTimeout(enviarAltura, 300);
+    });
+    window.addEventListener('resize', enviarAltura);
+
+    /************************************************************************
+     * Snippet a pegar en el widget HTML de Elementor (la página padre).
+     * Recibe el postMessage de arriba y ajusta la altura del iframe.
+     *
+     * <iframe id="iframe-mapa"
+     *         src="/argoesstatus_mapa.html"
+     *         style="width:100%; height:600px; border:none; display:block;"
+     *         scrolling="no">
+     * </iframe>
+     * <script>
+     *   window.addEventListener('message', function (e) {
+     *     if (e.data && e.data.iframeId === 'mapa') {
+     *       document.getElementById('iframe-mapa').style.height =
+     *         e.data.iframeAltura + 'px';
+     *     }
+     *   });
+     * <//script>
+     *
+     * Nota: al pegarlo en Elementor hay que quitar la doble barra "//" del
+     * cierre del script (está aquí para que este comentario no rompa el
+     * parseo de este propio fichero).
+     ***********************************************************************/
+  </script>
+</body>
+
+</html>
