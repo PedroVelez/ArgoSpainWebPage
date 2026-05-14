@@ -1,7 +1,6 @@
 #! /bin/bash
 
 FtpArgoData=ftp://ftp.ifremer.fr/ifremer/argo
-#FtpArgoData=ftp://usgodae1.fnmoc.navy.mil/pub/outgoing/argo
 
 # Depending on the computer setup the folders
 # And the path of the matlab application
@@ -16,7 +15,7 @@ if [[ $strval == *rossby* ]];
 then
   MatVersion=/usr/bin/matlab
   DirRaiz=$HOME
-  DirArgoData=/data/pvb/Argo
+  DirArgoData=/data/pvb/Data/Argo
 fi
 
 PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
