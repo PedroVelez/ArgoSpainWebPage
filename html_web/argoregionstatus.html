@@ -58,19 +58,83 @@
       margin-right: 6px;
     }
 
-    .map-overlay {
-      position: absolute;
-      inset: 0;
-      z-index: 400;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(0, 0, 0, 0.15);
-      color: #fff;
-      font: bold 14px/1.4 Arial, Helvetica, sans-serif;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-      pointer-events: none;
-    }
+    /*---Leyendas colapsable movil/tablet*/
+    @media (max-width: 767px) {
+
+      /*---Contenedor de la leyenda*/
+      .info.legend {
+        padding: 0 !important;
+        font-size: 11px !important;
+        width: 160px !important;
+        overflow: hidden;
+        border-radius: 8px;
+        background: transparent;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+      }
+
+      /*---Boton siempre visible*/
+      .legend-toggle-btn {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100 background: rgba(255, 255, 255, 0.95);
+        border: none;
+        padding: 7px 10px;
+        font-size: 11px;
+        font-weight: bold;
+        cursor: pointer;
+        color: #333;
+        box-sizing: border-box;
+        border-radius: 8px;
+      }
+
+      /*Redondea boton cuando se abre*/
+      .legend-toggle-btn.open {
+        border-radius: 8px 8px 0 0;
+      }
+
+      /*Flecha desplegable con transición*/
+      .legend-arrow {
+        font-size: 10px;
+        display: inline-block;
+        transition: transform 0.25s ease;
+        transform: rotate(0deg);
+      }
+
+      .legend-toggle-btn.open .legend-arrow {
+        transform: rotate(180deg);
+      }
+
+      /*Contenido despegable*/
+      .legend-collapsible {
+        overflow: hidden;
+        max-height: 0;
+        opacity: 0;
+        transition: max-height 0.3s ease, opacity 0.25s ease;
+        background: rgba(255, 255, 255, 0.95);
+        padding: 0 8px;
+        border-radius: 0 0 8px 8px;
+      }
+
+      .legend-collapsible.open {
+        max-height: 300px;
+        opacity: 1;
+        padding: 6px 8px;
+      }
+
+      .map-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: 400;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: rgba(0, 0, 0, 0.15);
+        color: #fff;
+        font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+        pointer-events: none;
+      }
   </style>
 </head>
 
@@ -126,6 +190,35 @@
     container.appendChild(overlay);
     map.on('click', () => { overlay.style.display = 'none'; });
 
+    function toggleLeyenda(btnId, contenidoId) {
+      var btn = document.getElementById(btnId);
+      var contenido = document.getElementById(contenidoId);
+      var arrow = btn.querySelector('.legend-arrow');
+      var abierto = contenido.classList.contains('open')
+      if (abierto) {
+        contenido.classList.remove('open');
+        btn.classList.remove('open');
+      } else {
+        contenido.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+
+    function toggleTitulo(btnId, contenidoId) {
+      var btn = document.getElementById(btnId);
+      var contenido = document.getElementById(contenidoId);
+      var arrow = btn.querySelector('.legend-arrow');
+      var abierto = contenido.classList.contains('open')
+      if (abierto) {
+        contenido.classList.remove('open');
+        btn.classList.remove('open');
+      } else {
+        contenido.classList.add('open');
+        btn.classList.add('open');
+      }
+    }
+
+
     // ─────────────────────────────────────────────────────────────────────
     // Carga de los 3 GeoJSON
     // Los ficheros con sufijo "2" los produce createRegionGeoJSON2.toImplement.m
@@ -147,7 +240,6 @@
       const summary = datosGJSON[3];
 
       // ──── DIBUJAR TRAYECTORIAS ARGO ESPAÑA ─────────────────────────────
-      //
       // trajAS.features es un array. Recorremos uno a uno con un for.
       // Cada feature lleva en geometry.coordinates un array de pares
       // [lon, lat] (orden GeoJSON). Leaflet espera [lat, lon] para sus
@@ -172,7 +264,6 @@
       }
 
       // ──── DIBUJAR TRAYECTORIAS ARGO INTERÉS ────────────────────────────
-      //
       // Mismo bucle que el de Argo España; lo único que cambia es de qué
       // FeatureCollection se lee (trajAI).
       //
@@ -194,7 +285,6 @@
       }
 
       // ──── DIBUJAR BOYAS ────────────────────────────────────────────────
-      //
       // boyas.features es un array de features Point. Recorremos uno a uno.
       // Por cada feature:
       //   - leemos sus properties (WMO, Description, Icon, ...)
@@ -202,10 +292,7 @@
       //   - decidimos el color y la URL en función de Icon
       //   - construimos el HTML del popup
       //   - creamos el circleMarker y lo añadimos al mapa
-      //
-      // Mismo patrón que el HTML antiguo (`for (var i=0; i<perfiladores.length; i++)`)
-      // pero ahora leyendo desde un GeoJSON estructurado.
-      //
+
       for (let i = 0; i < boyas.features.length; i++) {
         const feature = boyas.features[i];
         const p = feature.properties;
@@ -248,28 +335,43 @@
         }).addTo(map).bindPopup(popup);
       }
 
-      // ──── PANEL DE TÍTULO (cuenta boyas y trayectorias) ─────────────────
-      // Cargamos el summary
-      document.getElementById('summary').innerHTML = summary
+      // Cargamos el summary para el Panel del Titulo
+      if (isMobile) {
+        document.getElementById('summary').innerHTML = 
+        '<button class="legend-toggle-btn" onclick="toggleTitulo(\'btn\',\'content\')" id="btn">Resumen contribución <span class="legend-arrow">▼</span></button>' + '<div id="content" class="legend-collapsible">' + summary + '</div>'
+      }
+      else {
+        document.getElementById('summary').innerHTML = summary
+      }
     });
 
     // ─────────────────────────────────────────────────────────────────────
     // Leyenda
     // ─────────────────────────────────────────────────────────────────────
+
     const legend = L.control({ position: 'bottomright' });
     legend.onAdd = () => {
-      const div = L.DomUtil.create('div', 'info legend');
-      div.innerHTML =
-        '<strong>Boyas Argo</strong>' +
-        '<div class="row"><span class="dot" style="background:#ffffff"></span>Argo Internacional</div>' +
-        '<div class="row"><span class="dot" style="background:#ff0000"></span>Argo España</div>';
+      var div = L.DomUtil.create('div', 'info legend');
+      if (isMobile) {
+        div.innerHTML =
+          '<strong>Boyas Argo</strong>' +
+          '<button class="legend-toggle-btn" onclick="toggleLeyenda(\'legendBtn\',\'legendContent\')" id="legendBtn">' +
+          'Leyenda <span class="legend-arrow">▼</span></button>' +
+          '<div id="legendContent" class="legend-collapsible">' +
+          '<div class="row"><span class="dot" style="background:#ffffff"></span>Argo Internacional</div>' +
+          '<div class="row"><span class="dot" style="background:#ff0000"></span>Argo España</div>' +
+          '</div>';
+      }
+      else {
+        div.innerHTML =
+          '<strong>Boyas Argo</strong>' +
+          '<div class="row"><span class="dot" style="background:#ffffff"></span>Argo Internacional</div>' +
+          '<div class="row"><span class="dot" style="background:#ff0000"></span>Argo España</div>';
+      }
       return div;
     };
-    legend.addTo(map);
 
-    // ─────────────────────────────────────────────────────────────────────
     // Título (panel arriba a la derecha)
-    // ─────────────────────────────────────────────────────────────────────
     const titleControl = L.control({ position: 'topright' });
     titleControl.onAdd = () => {
       const div = L.DomUtil.create('div', 'info');
@@ -277,6 +379,8 @@
       div.innerHTML = '<b>Cargando datos…</b>';
       return div;
     };
+
+    legend.addTo(map);
     titleControl.addTo(map);
   </script>
 </body>
