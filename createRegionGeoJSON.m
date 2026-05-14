@@ -99,14 +99,10 @@ for ifloat=1:size(DataArgoIn.WMO,2)
         if numel(lon)>=2
             iTrajectoryAI=iTrajectoryAI+1;
             TrajectoryAI.type='FeatureCollection';
-            TrajectoryAI.features{iTrajectoryAI}.type='Feature';
-            % Cambio: amarillo Argo Interes (antes '#555555').
-            TrajectoryAI.features{iTrajectoryAI}.properties.stroke='#ffee00';
+            TrajectoryAI.features{iTrajectoryAI}.type='Feature';            
+            TrajectoryAI.features{iTrajectoryAI}.properties.stroke='#ffee00'; 
             TrajectoryAI.features{iTrajectoryAI}.properties.strokewidth=2;
-            % Cambio: eliminada properties.icon (no aplica a LineString).
-            % Cambio: 'Point' -> 'LineString'.
             TrajectoryAI.features{iTrajectoryAI}.geometry.type='LineString';
-            % Cambio: idem que en AS, num2cell.
             TrajectoryAI.features{iTrajectoryAI}.geometry.coordinates = num2cell([lon(:), lat(:)], 2);
         end
     end
@@ -168,10 +164,16 @@ for ifecha=FechaF:-1:FechaI
                         if isempty(find(DataArgoEs.WMO==platformes(ntper), 1))==0
                             ntperes=ntperes+1;
                             PosicionBoyas.features{ntper}.properties.Icon=1;
+                            PosicionBoyas.features{ntper}.properties.href = strcat('https://www.argoespana.es/float/',deblank(platform(np,:)),'.html');
+                            PosicionBoyas.features{ntper}.properties.stroke='#ff0000'; % Argo España
                         elseif ~isempty(find(DataArgoIn.WMO==platformes(ntper), 1))
                             PosicionBoyas.features{ntper}.properties.Icon=2;
+                            PosicionBoyas.features{ntper}.properties.href = strcat('https://www.argoespana.es/float/',deblank(platform(np,:)),'.html');
+                            PosicionBoyas.features{ntper}.properties.stroke='#ffffff'; % Argo Interest
                         else
                             PosicionBoyas.features{ntper}.properties.Icon=0;
+                            PosicionBoyas.features{ntper}.properties.href = strcat('https://fleetmonitoring.euro-argo.eu/float/',deblank(platform(np,:)));
+                            PosicionBoyas.features{ntper}.properties.stroke='#ffffff'; % Argo Internacional
                         end
                     end
                 else
@@ -213,10 +215,16 @@ for ifecha=FechaF:-1:FechaI
                     if isempty(find(DataArgoEs.WMO==platformes(ntper), 1))==0
                         ntperes=ntperes+1;
                         PosicionBoyas.features{ntper}.properties.Icon=1;
+                        PosicionBoyas.features{ntper}.properties.href = strcat('https://www.argoespana.es/float/',deblank(platform(np,:)),'.html');
+                        PosicionBoyas.features{ntper}.properties.stroke='#ff0000'; % Argo España
                     elseif ~isempty(find(DataArgoIn.WMO==platformes(ntper), 1))
                         PosicionBoyas.features{ntper}.properties.Icon=2;
+                        PosicionBoyas.features{ntper}.properties.href = strcat('https://www.argoespana.es/float/',deblank(platform(np,:)),'.html');
+                        PosicionBoyas.features{ntper}.properties.stroke='#ffffff'; % Argo Interest
                     else
                         PosicionBoyas.features{ntper}.properties.Icon=0;
+                        PosicionBoyas.features{ntper}.properties.href = strcat('https://fleetmonitoring.euro-argo.eu/float/',deblank(platform(np,:)));
+                        PosicionBoyas.features{ntper}.properties.stroke='#ffffff'; % Argo Internacional
                     end
                 end
             end
