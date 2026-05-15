@@ -21,10 +21,8 @@ The system automatically transforms Argo float data into web-ready products incl
 
 ## Web Products
 
-- [Argo Spain Main Page](https://www.argoespana.es)
-- [Argo Spain Status Map](https://www.argoespana.es/argoesstatus.html)
-- [Argo Spain Interactive Map](https://www.argoespana.es/argoesstatus_mapa.html)
 - [Iberian Basin Regional Status](https://www.argoespana.es/argoregionstatus.html)
+- [Argo Spain Interactive Map](https://www.argoespana.es/argoesstatus_mapa.html)
 - [Argo Spain Float Table](https://www.argoespana.es/argoesstatus_tabla.html)
 - [Argo Spain Float Table (TXT)](https://www.argoespana.es/argoesstatus_tabla.txt)
 - [Argo Spain Summary](https://www.argoespana.es/argoessummary.html)
