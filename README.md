@@ -1,4 +1,4 @@
-# Argo Spain Web Page 
+# Argo Spain Web Page
 
 <p align="left">
 <a href="https://www.argoespana.es">
@@ -6,56 +6,68 @@
 </a>
 </p>
 
-[![DOI](https://zenodo.org/badge/244975526.svg)](https://doi.org/10.5281/zenodo.13898771)![MATLAB](https://img.shields.io/badge/MATLAB-data_processing-orange) ![Bash](https://img.shields.io/badge/Bash-pipeline-blue) ![Leaflet](https://img.shields.io/badge/Leaflet-interactive_maps-green) ![Status](https://img.shields.io/badge/status-operational-brightgreen) ![License](https://img.shields.io/badge/license-institutional-lightgrey)
+[![DOI](https://zenodo.org/badge/244975526.svg)](https://doi.org/10.5281/zenodo.13898771)
+![MATLAB](https://img.shields.io/badge/MATLAB-data_processing-orange)
+![Bash](https://img.shields.io/badge/Bash-pipeline-blue)
+![Leaflet](https://img.shields.io/badge/Leaflet-interactive_maps-green)
+![Status](https://img.shields.io/badge/status-operational-brightgreen)
+![License](https://img.shields.io/badge/license-institutional-lightgrey)
 
-This repository contains the scripts used to generate and update the Argo Spain web page [www.argoespana.es](https://www.argoespana.es). The system automates the transformation of raw Argo data into web-ready products through MATLAB-based scrips organized by a Bash script.
+This repository contains the operational scripts and processing pipeline used to generate and maintain the Argo Spain web platform:
 
-[Argo region map]     (https://www.argoespana.es/argoregionstatus.html).  [create the gjsonfiles]
-[Argo España map]     (https://www.argoespana.es/argoesstatus_mapa.html.  [create the gjsonfiles]
-[Argo España Table].  (https://www.argoespana.es/argoesstatus_tabla.html)
-[Argo España Table].  (https://www.argoespana.es/argoesstatus_tabla.txt)
-[Argo España Summary] (https://www.argoespana.es/argoessummary.html)
-[Argo España Report]  (https://www.argoespana.es/argoesreport.html)
+https://www.argoespana.es
 
+The system automatically transforms Argo float data into web-ready products including interactive maps, operational summaries, tables, float monitoring pages, technical diagnostics, and automatic reports. The workflow is mainly based on MATLAB processing modules coordinated through Bash scripts, while Leaflet is used for interactive web visualization.
 
+## Web Products
 
-
-
+- [Argo Spain Main Page](https://www.argoespana.es)
+- [Argo Spain Status Map](https://www.argoespana.es/argoesstatus.html)
+- [Argo Spain Interactive Map](https://www.argoespana.es/argoesstatus_mapa.html)
+- [Iberian Basin Regional Status](https://www.argoespana.es/argoregionstatus.html)
+- [Argo Spain Float Table](https://www.argoespana.es/argoesstatus_tabla.html)
+- [Argo Spain Float Table (TXT)](https://www.argoespana.es/argoesstatus_tabla.txt)
+- [Argo Spain Summary](https://www.argoespana.es/argoessummary.html)
+- [Argo Spain Technical Report](https://www.argoespana.es/argoesreport.txt)
 
 ## System Overview
+
 Main components:
 
-- **Bash** – pipeline organization
-- **MATLAB** – data processing and product generation  
-- **Leaflet** – interactive web maps  
-- **HTML outputs** – web pages and figures  
+- **Bash** – workflow and pipeline orchestration
+- **MATLAB** – data ingestion, processing, diagnostics, and figure generation
+- **Leaflet** – interactive web maps
+- **HTML outputs** – operational web products and reports
 
 ## Repository Structure
 
-```
+```text
 .
 ├── argoSpainWebPage.sh
 ├── configWebPage.m
 ├── createDataSet.m
-├── createDataSetMap.m
-├── createDataSetMapLLet.m
+├── createDataSet_GeoJSON.m
+├── createDataSet_Table.m
+├── createDataSet_Summary.m
 ├── createDataSetStatus/
 │   ├── createDataSetStatus_FunctionMetadata.m
 │   ├── createDataSetStatus_FunctionProfiles.m
 │   ├── createDataSetStatus_FunctionTechnicalData.m
 │   ├── createDataSetStatus_FunctionSections.m
 │   ├── createDataSetStatus_FunctionFigures.m
-│   └── createDataSetStatus_FunctionReport.m
+│   ├── createDataSetStatus_FunctionReport.m
+│   └── createDataSetStatus_FunctionTrajectory.m
 ├── data/
 ├── html/
 └── log/
 ```
 
 ## Processing Workflow
-The scrips transforms Argo float data → web visualization products:
 
-```
-Argo Data
+The processing chain transforms operational Argo data into monitoring and visualization products for the Argo Spain website.
+
+```text
+Argo GDAC Data
          │
          ▼
 Dataset Generation (createDataSet)
@@ -67,114 +79,185 @@ Map Generation (createDataSetMap / createDataSetMapLLet)
 Tables and Statistics (createDataSetTable)
          │
          ▼
+Operational Summary (createDataSetSummary)
+         │
+         ▼
 Float Status Pages (createDataSetStatus)
          │                 │
          │                 ├── Metadata
          │                 ├── Profiles
-         │                 ├── Technical data
-         │                 ├── Sections
-         │                 └── Figures
+         │                 ├── Technical diagnostics
+         │                 ├── Trajectories
+         │                 ├── Vertical sections
+         │                 └── Figures and reports
          │
          ▼
-Web Content Generation (argoesstatus.html , argoregionstatus.html)
+Web Content Generation
          │
          ▼
-Automatic Reporting by email (sendDataSetReport)
+Automatic Reporting by Email
 ```
 
 ## Main Script
-The entire workflow is executed by the Bash script:
-```
+
+The complete operational workflow is executed through:
+
+```bash
 argoSpainWebPage.sh
 ```
+
 This script:
-- Organize the full processing pipeline
-- Runs MATLAB scripts sequentially
-- Manages logs
-- Cleans outdated files
-- Sends automatic reports (email)
+
+- Organizes the complete processing pipeline
+- Executes MATLAB modules sequentially
+- Updates web products
+- Handles execution logs
+- Cleans obsolete files
+- Generates automatic reports
+- Sends notification emails
 
 ## MATLAB Modules
 
 ### Configuration
-```
+
+```matlab
 configWebPage.m
 ```
+
 Defines:
+
 - Directory paths
-- Data locations
-- Website output directories
-- General configuration parameters
+- Data source locations
+- Output directories
+- Website configuration
+- Processing parameters
 
 ### Dataset Generation
-```
+
+```matlab
 createDataSet.m
 ```
-Creates the main datasets used by the system.Actually there are only two data sets, but it may be configurated to have more data sets:
-```
+
+Generates the datasets used by the operational system.  
+Currently the workflow uses two principal datasets:
+
+```matlab
 dataArgoSpain.mat
 dataArgoInterest.mat
 ```
 
-These datasets include information about:
+These datasets include:
+
 - Argo Spain floats
-- regional floats of interest
-- profile data and metadata
+- Regional floats of interest
+- Float metadata
+- Profile information
+- Position data
+- Temporal information
+- Technical parameters
 
 ### Map Generation
-#### Static maps
-Generates static visualizations of float positions.
-```
+
+#### Static Maps
+
+Generates gJson files that are read by the hmtl files static visualizations of float trajectories and positions.
+
+```matlab
 createDataSetMap.m
 ```
 
-#### Interactive maps
-Creates Leaflet-based interactive maps used on the web interface.
-```
-createDataSetMapLLet.m
-```
-[argoesstatus.html    : ArgoEspaña status](https://www.argoespana.es/argoesstatus.html)
-[argoregionstatus.html: Iberian Basin region status](https://www.argoespana.es/argoregionstatus.html)
+#### Interactive Maps
 
-#### Float Status Pages
-The float monitoring pages are generated using several modular scripts.
-Main processing:
+Creates Leaflet-based interactive maps integrated into the web interface.
+
+```matlab
+createRegionGeoJSON.m
+createDataSet_GeoJSON.m
 ```
+
+Associated web pages:
+
+- [argoregionstatus.html : Iberian Basin regional status](https://www.argoespana.es/argoregionstatus.html)
+- [argoesstatus.html : Argo Spain status](https://www.argoespana.es/argoesstatus.html)
+
+### Tables and Summaries
+
+#### Float Tables
+
+Creates operational tables summarizing float activity and metadata.
+
+```matlab
+createDataSet_Table.m
+```
+
+#### Operational Summary
+
+Generates summary statistics and regional monitoring products.
+
+```matlab
+createDataSet_Summary.m
+```
+
+### Float Status Pages
+
+The float monitoring pages are generated through a modular processing structure.
+
+Main processing:
+
+```matlab
 createDataSetStatus
 ```
 
 Supporting modules:
 
-```
+```matlab
 createDataSetStatus_FunctionMetadata.m
 createDataSetStatus_FunctionProfiles.m
 createDataSetStatus_FunctionTechnicalData.m
 createDataSetStatus_FunctionSections.m
 createDataSetStatus_FunctionFigures.m
 createDataSetStatus_FunctionReport.m
+createDataSetStatus_FunctionTrajectory.m
 ```
 
 These modules generate:
-- Float metadata
-- Profile information
-- Technical diagnostics
-- Vertical sections
-- Figures and visualizations
-- Summary reports
 
-#### Logs
+- Float metadata pages
+- Profile summaries
+- Technical diagnostics
+- Float trajectories
+- Vertical oceanographic sections
+- Figures and scientific visualizations
+- Automatic monitoring reports
+
+### Logs
+
 Execution logs are stored in:
-```
+
+```text
 /log/
 ```
+## Data Sources
 
-Example log files:
+The system processes Argo float observations distributed through the international Argo GDAC infrastructure.
 
-```
-createDataSet.log
-createDataSetMapLLet.log
-createDataSetStatus.log
-```
+Primary sources include:
+
+- Coriolis GDAC
+- Global Argo Program
+- Regional Argo deployments
+- Argo Spain operational datasets
+
+## Operational Purpose
+
+This repository supports the operational monitoring and visualization activities of Argo Spain by providing:
+
+- Near real-time float monitoring
+- Regional ocean observing products
+- Interactive float visualization
+- Technical diagnostics
+- Automatic operational reporting
+- Scientific and outreach web products
 
 ## Authors
 

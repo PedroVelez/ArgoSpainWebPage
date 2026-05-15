@@ -8,7 +8,6 @@
 data/data*
 data/report*.mat
 html/argoesstatus.txt
-html/
 html/*
 html/floats/*
 log/*.log
