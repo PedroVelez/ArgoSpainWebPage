@@ -77,7 +77,8 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: 100 background: rgba(255, 255, 255, 0.95);
+        width: 100;
+        background: rgba(255, 255, 255, 0.95);
         border: none;
         padding: 7px 10px;
         font-size: 11px;
@@ -121,20 +122,21 @@
         opacity: 1;
         padding: 6px 8px;
       }
+    }
 
-      .map-overlay {
-        position: absolute;
-        inset: 0;
-        z-index: 400;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        background: rgba(0, 0, 0, 0.15);
-        color: #fff;
-        font: bold 14px/1.4 Arial, Helvetica, sans-serif;
-        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
-        pointer-events: none;
-      }
+    .map-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 400;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(0, 0, 0, 0.15);
+      color: #fff;
+      font: bold 14px/1.4 Arial, Helvetica, sans-serif;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+    }
   </style>
 </head>
 
@@ -142,9 +144,7 @@
   <div id="map"></div>
 
   <script>
-    // ─────────────────────────────────────────────────────────────────────
     // Inicialización del mapa
-    // ─────────────────────────────────────────────────────────────────────
     const isMobile = window.innerWidth <= 767;
 
     const map = L.map('map', {
@@ -163,10 +163,9 @@
       { attribution: 'Tiles © ESRI', zIndex: 1 }
     ).addTo(map);
 
-    // ─────────────────────────────────────────────────────────────────────
-    // Interacción: el mapa empieza bloqueado.
-    // Escritorio: click activa, mouseout desactiva.
-    // ─────────────────────────────────────────────────────────────────────
+    // Interacción del mapa.
+    //   Escritorio: click activa, mouseout desactiva.
+    //   Móvil: dos dedos activan; al soltar se desactiva tras 800 ms.
     function enableInteraction() {
       map.dragging.enable();
       map.touchZoom.enable();
@@ -184,11 +183,33 @@
     map.on('mouseout', disableInteraction);
 
     const container = map.getContainer();
+    var touchTimeout;
+    container.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) enableInteraction();
+    });
+    container.addEventListener('touchend', function () {
+      clearTimeout(touchTimeout);
+      touchTimeout = setTimeout(disableInteraction, 800);
+    });
+
+    // Overlay con la instrucción de uso (cambia el texto si es móvil).
     const overlay = document.createElement('div');
     overlay.className = 'map-overlay';
-    overlay.textContent = 'Haz click para activar el mapa';
+    overlay.textContent = isMobile
+      ? 'Usa dos dedos para mover el mapa'
+      : 'Haz click para activar el mapa';
     container.appendChild(overlay);
-    map.on('click', () => { overlay.style.display = 'none'; });
+
+    function ocultarOverlay() { overlay.style.display = 'none'; }
+    function mostrarOverlay() { overlay.style.display = 'flex'; }
+
+    map.on('click', ocultarOverlay);
+    container.addEventListener('touchstart', function (e) {
+      if (e.touches.length === 2) ocultarOverlay();
+    });
+    container.addEventListener('touchend', function () {
+      setTimeout(mostrarOverlay, 800);
+    });
 
     function toggleLeyenda(btnId, contenidoId) {
       var btn = document.getElementById(btnId);
@@ -218,7 +239,6 @@
       }
     }
 
-
     // ─────────────────────────────────────────────────────────────────────
     // Carga de los 3 GeoJSON
     // Los ficheros con sufijo "2" los produce createRegionGeoJSON2.toImplement.m
@@ -247,8 +267,8 @@
       //
       for (let i = 0; i < trajAS.features.length; i++) {
         const feature = trajAS.features[i];
-        const color = feature.properties.stroke;   // '#FF0000'
-        const coords = feature.geometry.coordinates; // [[lon,lat], [lon,lat], ...]
+        const color = feature.properties.stroke;
+        const coords = feature.geometry.coordinates;
 
         // Convertir [lon,lat] -> [lat,lon] para Leaflet
         const puntos = [];
@@ -298,22 +318,26 @@
         const p = feature.properties;
         const lon = feature.geometry.coordinates[0];
         const lat = feature.geometry.coordinates[1];
+        const color = feature.properties.stroke;
+        const href = feature.properties.href;
+
+        // DEBUG: descomenta para inspeccionar cada boya en la consola del navegador.
+        // Pasamos `p` como argumento separado (no concatenado) para que la
+        // consola lo muestre como objeto desplegable, no como "[object Object]".
+        // console.log('boya creada', p.WMO, 'propiedades:', p);
 
         // 1) Color y URL según el tipo de boya (Icon: 0/1/2)
-        let color, href;
-        if (p.Icon === 1) {
-          // Argo España
-          color = '#ff0000';
-          href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
-        } else if (p.Icon === 2) {
-          // Argo Interés
-          color = '#ffffff';
-          href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
-        } else {
-          // Argo Internacional
-          color = '#ffffff';
-          href = 'https://fleetmonitoring.euro-argo.eu/float/' + p.WMO;
-        }
+        //let color, href;
+        //if (p.Icon === 1) {
+        // Argo España
+        //href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
+        //} else if (p.Icon === 2) {
+        // Argo Interés
+        //href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
+        //} else {
+        // Argo Internacional
+        //href = 'https://fleetmonitoring.euro-argo.eu/float/' + p.WMO;
+        //}
 
         // 2) HTML del popup (idéntico al del HTML antiguo)
         const popup =
@@ -333,12 +357,14 @@
           fillOpacity: 0.85,
           opacity: 1
         }).addTo(map).bindPopup(popup);
+
+        //console.log('boya creada:' + p.WMO + ' ,propiedades: ', p);
       }
 
       // Cargamos el summary para el Panel del Titulo
       if (isMobile) {
-        document.getElementById('summary').innerHTML = 
-        '<button class="legend-toggle-btn" onclick="toggleTitulo(\'btn\',\'content\')" id="btn">Resumen contribución <span class="legend-arrow">▼</span></button>' + '<div id="content" class="legend-collapsible">' + summary + '</div>'
+        document.getElementById('summary').innerHTML =
+          '<button class="legend-toggle-btn" onclick="toggleTitulo(\'btn\',\'content\')" id="btn">Resumen contribución <span class="legend-arrow">▼</span></button>' + '<div id="content" class="legend-collapsible">' + summary + '</div>'
       }
       else {
         document.getElementById('summary').innerHTML = summary

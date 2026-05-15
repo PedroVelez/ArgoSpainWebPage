@@ -2,7 +2,7 @@
 <html>
 
 <head>
-  <title>Argo España — mapa</title>
+  <title>Argo España</title>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -132,8 +132,8 @@
     var isMobile = window.innerWidth <= 767;
 
     var map = L.map('map', {
-      center: [0, -16],
-      zoom: 2,
+      center: [24, -16],
+      zoom: 3,
       scrollWheelZoom: false,
       dragging: false,
       touchZoom: false,
@@ -195,7 +195,6 @@
       setTimeout(mostrarOverlay, 800);
     });
 
-
     // Carga de los 3 ficheros en paralelo. Cada uno alimenta una variable:
     //   traj    : FeatureCollection de LineString. properties.stroke trae el
     //             color y geometry.coordinates es un array de pares [lon,lat]
@@ -215,7 +214,8 @@
       // Trayectorias
       for (let i = 0; i < traj.features.length; i++) {
         const feature = traj.features[i];
-        const color = '#ff0000';
+        //const color = '#ff0000';
+        const color = feature.properties.stroke;
         const coords = feature.geometry.coordinates;
 
         // [lon,lat] -> [lat,lon] para Leaflet
@@ -238,13 +238,13 @@
         const p = feature.properties;
         const lon = feature.geometry.coordinates[0];
         const lat = feature.geometry.coordinates[1];
-
-        let color;
-        if (p.Icon === 1) {
-          color = '#ff0000';
-        } else {
-          color = '#ffffff';
-        }
+        var color = feature.properties.stroke;
+                
+        //if (p.Icon === 1) {
+        //  color = '#ff0000';
+        //} else {
+        //  color = '#ffffff';
+        //}
         var href = 'https://www.argoespana.es/float/' + p.WMO + '.html';
 
         var popup =
