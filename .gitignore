@@ -5,6 +5,7 @@
 *.log
 *.gpg
 *.swp
+floatsArgo.dat
 data/data*
 data/report*.mat
 html/argoesstatus.txt
