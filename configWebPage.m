@@ -39,12 +39,12 @@ FileHtmlArgoEsStatus = strcat(PaginaWebDir,'/html/','argoesstatus.html');
 FileTableArgoEsSummary  = strcat(PaginaWebDir,'/html/','argoessummary.html');
 
 %% createDataSet
-InterDiasEmision=30; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
+InterDiasEmision=60; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
 ForceDataUpdate=1;   %1 to force to re-read the netcdf files
 
 %% createRegionLLet
 %Time interval
-FechaI=now-30;
+FechaI=now-60;
 FechaF=now;
 TrajectorySpanArgo=90; %en dias
 
@@ -72,7 +72,7 @@ ftp_dir_html='/html';
 
 %% StatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
-DiasAnalisis=1.1; %Days to look for to update the figures
+DiasAnalisis=30.1; %Days to look for to update the figures
 
 %% About sending reports
 sendEmail=1;
