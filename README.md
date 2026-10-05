@@ -86,7 +86,7 @@ Float Status Pages (createDataSetStatus)
          │                 ├── Metadata
          │                 ├── Profiles
          │                 ├── Technical diagnostics
-         │                 ├── Trajectories
+         │                 ├── Trajectories (interactive Leaflet map)
          │                 ├── Vertical sections
          │                 └── Figures and reports
          │
@@ -208,19 +208,18 @@ createDataSetStatus_FunctionTechnicalData.m
 createDataSetStatus_FunctionSections.m
 createDataSetStatus_FunctionFigures.m
 createDataSetStatus_FunctionReport.m
-createDataSetStatus_FunctionTrajectory.m
 createDataSetStatus_FunctionTS.m
 createDataSetStatus_FunctionWebPage.m
 ```
 
-For each float a web page `NNNNNNN.html` is generated (`createDataSetStatus_FunctionWebPage`), with an interactive Leaflet map of the float trajectory (positions embedded in the page, coloured by date) and the figures, each with a title and a caption, that can be enlarged by clicking on them.
+For each float a web page `NNNNNNN.html` is generated (`createDataSetStatus_FunctionWebPage`), with an interactive Leaflet map of the float trajectory (positions embedded in the page, coloured by date) and the figures (θ-S diagram and vertical profiles, vertical sections and technical data), each with a title and a caption, that can be enlarged by clicking on them.
 
 These modules generate:
 
 - Float metadata pages
 - Profile summaries
 - Technical diagnostics
-- Float trajectories
+- Interactive float trajectory maps
 - Vertical oceanographic sections
 - Figures and scientific visualizations
 - Automatic monitoring reports
