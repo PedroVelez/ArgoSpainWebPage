@@ -122,15 +122,13 @@ if isfield(FloatData.HIDf,'oxys') == 1
     end
 end
 
-%% FigureA - Map of trajectories, TS Diagram, T, S and O perfiles
-hTraPosition=[0.05 0.54 0.38 0.38];
-hTSPosition=[0.50 0.54 0.42 0.42];
+%% FigureA - TS Diagram (centred, the trajectory is in the interactive map of the web page), T, S and O perfiles
+hTSPosition=[0.29 0.54 0.42 0.42];
 
 figureA=figure('visible','off','clipping','on');
 if GlobalDS.Visible==1
     set(gcf,'visible','on')
 end
-createDataSetStatus_FunctionTrajectory(OneFloatData,GlobalDS,Limits,hTraPosition);
 createDataSetStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hTSPosition);
 createDataSetStatus_FunctionProfiles(OneFloatData,Limits);
 FileOutA=sprintf('%s/%sA.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));

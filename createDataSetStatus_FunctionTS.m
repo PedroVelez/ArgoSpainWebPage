@@ -82,4 +82,20 @@ hAxes.ClippingStyle='rectangle';
 hAxes.FontSize=7;
 hAxes.XColor=[0.5 0.5 0.5];
 hAxes.YColor=[0.5 0.5 0.5];
+
+%Colorbar with the date of the profiles (keeps the size of the TS axes)
+PosAxes=hAxes.Position;
+hC=colorbar;
+hAxes.Position=PosAxes;
+hC.Position=[PosAxes(1)+PosAxes(3)+0.015 PosAxes(2) 0.02 PosAxes(4)];
+if length(OneFloatData.julds)==1
+    hC.Ticks=[1 2];
+    hC.TickLabels=[datestr(OneFloatData.julds-1,12);datestr(OneFloatData.julds+1,12)];
+else
+    hC.Ticks=unique(round(hC.Ticks));
+    hC.TickLabels=datestr(OneFloatData.julds(hC.Ticks),12);
+end
+hC.FontSize=6;
+hC.Color=[0.5 0.5 0.5];
+hC.LineWidth=0.1;
 end
