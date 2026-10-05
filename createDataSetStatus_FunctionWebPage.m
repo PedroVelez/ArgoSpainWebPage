@@ -1,4 +1,7 @@
 function  FileOutFHtml=createDataSetStatus_FunctionWebPage(WMO,GlobalDS)
+% Float web page (NNNNNNN.html). 
+% Each figure has a title and a caption, and clicking a figure &
+% opens it enlarged (lightbox).
 
 if nargin==1
     GlobalDS.DirOutGraph='./html/floats';
@@ -12,195 +15,174 @@ fprintf('web page, ')
 %% Read Metada data
 MD=createDataSetStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData);
 
+% Initial CTD available? (same test as createDataSetStatus_FunctionFigures)
+fileCTD0=fullfile(GlobalDS.DirArgoData,'Floats','CTD',strcat(num2str(WMO),'CTD0.mat'));
+TextCTD0='';
+if exist(fileCTD0,'file')==2
+    TextCTD0=' El cuadrado (mapa) y la línea gris gruesa (diagrama y perfiles) corresponden al perfil CTD realizado durante el despliegue.';
+end
+
+%% Figures: file, link (image shown when clicked), title and caption
+Fig(1).file=sprintf('%07dA.png',MD.WMOFloat);
+Fig(1).link=sprintf('%07dA_Zoom.png',MD.WMOFloat);
+Fig(1).title='Trayectoria, diagrama θ-S y perfiles verticales';
+Fig(1).caption=['Arriba a la izquierda, trayectoria del perfilador: el color de cada posición indica la fecha del perfil (barra de color) ', ...
+    'y las líneas grises son las isóbatas de 1000, 2000 y 4000 m. ', ...
+    'Arriba a la derecha, diagrama temperatura potencial - salinidad de todos los perfiles, con las isopicnas (σ<sub>0</sub>) en gris. Los puntos grises son los valores históricos. ', ...
+    'Abajo, perfiles verticales de temperatura potencial, salinidad y, si el perfilador dispone de sensor, oxígeno disuelto. ', ...
+    'En todos los paneles el color indica la fecha del perfil y el último perfil se resalta en negro.',TextCTD0, ...
+    ' Pinche en la figura para ver el detalle de la trayectoria reciente.'];
+
+Fig(2).file=sprintf('%07dB.png',MD.WMOFloat);
+Fig(2).link=Fig(2).file;
+Fig(2).title='Evolución temporal de la temperatura y la salinidad';
+Fig(2).caption=['Temperatura (arriba) y salinidad (abajo) medidas por el perfilador en función de la fecha (eje horizontal) y de la presión (eje vertical). ', ...
+    'Para cada variable, el panel superior muestra la capa superficial con la escala vertical ampliada y el inferior el resto de la columna de agua. ', ...
+    'Las líneas grises son isolíneas y entre corchetes se indican los valores mínimo y máximo medidos.'];
+
+Fig(3).file=sprintf('%07dC.png',MD.WMOFloat);
+Fig(3).link=Fig(3).file;
+Fig(3).title='Datos técnicos';
+Fig(3).caption=['Evolución, en función del número de ciclo, de algunos parámetros técnicos transmitidos por el perfilador: ', ...
+    'voltaje de la batería (arriba), offset de presión en superficie (centro) y vacío interno (abajo). ', ...
+    'Solo se representan las variables que transmite cada modelo de perfilador.'];
+
+%% Rows of the metadata table {label, value, label, value}
+Tabla={ ...
+    'Transmission system',         MD.TransmisionSystem, 'Transmission ID',         MD.TransmissionID; ...
+    'Platform model',              MD.PlatformModel,     'Platform ID',             MD.PlatformID; ...
+    'Sensors',                     MD.Sensors,           'Sensores s/n',            MD.SensorsID; ...
+    'Data Centre (Format version)',MD.DataCentre,        'Project name',            MD.ProjectName; ...
+    'Float Owner',                 MD.FloatOwner,        'PI Name',                 MD.PIName; ...
+    'Parking depth (dbar)',        MD.ParkingDepth,      'Profile depth (dbar)',    MD.ProfileDepth; ...
+    'Number of profiles',          MD.NumberOfProfiles,  'Status',                  MD.StatusT; ...
+    'Deployment date',             MD.LaunchDate,        'Deployed position',       MD.LaunchPosition; ...
+    'Last surfacing date',         MD.LastSurfacingDate, 'Last surfacing position', MD.LastSurfacingPosition; ...
+    'Age (Yr)',                    MD.Age,               MD.VoltageT,               MD.Voltage};
+if isempty(MD.SurfacePressure) == 0 & isempty(MD.InternalVacum)
+    Tabla(end+1,:)={MD.SurfacePressureT, MD.SurfacePressure, MD.InternalVacumT, MD.InternalVacum};
+end
+
+%% Institutional logos
+Logos='';
+if strfind(lower(MD.ProjectName),'spain')>=1 | strfind(lower(MD.FloatOwner),'ieo')>=1 | strfind(lower(MD.FloatOwner),'socib')>=1 | strfind(lower(MD.FloatOwner),'csic')>=1 | strfind(lower(MD.FloatOwner),'icm')>=1  | strfind(lower(MD.FloatOwner),'icatmar')>=1
+    Logos=['<a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" alt="IEO"></a>', ...
+        '<a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" alt="SOCIB"></a>'];
+    if strfind(MD.FloatOwner,'ICATMAR')>=1
+        Logos=[Logos '<a href="http://www.icatmar.cat/es"><img src="https://www.argoespana.es/imagenes/logoicatmar.png" alt="ICATMAR"></a>'];
+    end
+end
+
 %% Escribe pagina web
 FileOutFHtml=sprintf('%s/%07d.html',GlobalDS.DirOutGraph,WMO);
-fid = fopen(FileOutFHtml,'w');
-fprintf(fid,'<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">\n');
-fprintf(fid,'<html>\n');
-fprintf(fid,'<head>\n');
-fprintf(fid,'<title>Argo Espa&ntilde;a %07d</title> \n',MD.WMOFloat);
-fprintf(fid,'<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">\n');
-fprintf(fid,'<style type="text/css">\n');
-fprintf(fid,'<!--.style1 {font-size: 30px; font-weight: bold;font-family: verdana; color: #0c2046;}-->\n');
-fprintf(fid,'<!--.style2 {font-size: 20px; font-weight: bold;font-family: verdana; }-->\n');
-fprintf(fid,'<!--.style3 {font-size: 20px; font-weight: bold;font-family: verdana; }-->\n');
-fprintf(fid,'<!--.style8 {font-size: 12px; font-weight: normal;font-family: verdana; }-->\n');
-fprintf(fid,'<!--.style9 {font-size: 12px; font-weight: bold; font-family: verdana; color: #0c2046}-->\n');
-fprintf(fid,'<!--.style10 {font-size: 10px; font-weight: normal; font-family: verdana; color: #0c2046}-->\n');
-fprintf(fid,'</style>\n');
-fprintf(fid,'</head>\n');
-fprintf(fid,'<body><br>\n');
+fid = fopen(FileOutFHtml,'w','n','UTF-8');
+fprintf(fid,'%s\n', ...
+    '<!DOCTYPE html>', ...
+    '<html lang="es">', ...
+    '<head>', ...
+    sprintf('<title>Argo España %07d</title>',MD.WMOFloat), ...
+    '<meta charset="utf-8">', ...
+    '<meta name="viewport" content="width=device-width, initial-scale=1">', ...
+    '<style type="text/css">', ...
+    'body {margin: 0; background: #ffffff; font-family: verdana, sans-serif; color: #0c2046;}', ...
+    'a {color: #0c2046;}', ...
+    '.container {max-width: 1000px; margin: 0 auto; padding: 1.5em 16px;}', ...
+    '.cabecera {display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1em;}', ...
+    '.cabecera a {max-width: 100%;}', ...
+    '.cabecera img {border: 0; max-width: 100%; height: auto;}', ...
+    '.logos a {margin-left: 1.2em;}', ...
+    '.logos-pie {text-align: center; margin: 2em 0 1em;}', ...
+    '.logos-pie a {margin: 0 0.6em;}', ...
+    '.logos-pie img, .logos img {border: 0;}', ...
+    'h1 {font-size: 30px; font-weight: bold; text-align: center; margin: 1.5em 0 0.6em;}', ...
+    '.enlaces {text-align: center; font-size: 20px; font-weight: bold; line-height: 2em; margin-bottom: 1.5em;}', ...
+    '.tabla {overflow-x: auto; margin-bottom: 2em;}', ...
+    '.tabla table {width: 100%; border-collapse: separate; border-spacing: 2px;}', ...
+    '.tabla td {height: 25px; padding: 0 0.6em; font-size: 12px; text-align: left;}', ...
+    '.tabla td.etiqueta {background: #e5e5e5; font-weight: bold; color: #0c2046; width: 25%;}', ...
+    '.tabla td.valor {font-weight: normal; color: #000000; width: 25%;}', ...
+    '.figura {margin: 0 0 2.5em;}', ...
+    '.figura img {display: block; width: 100%; height: auto; border: 0; cursor: zoom-in;}', ...
+    '.pie {border: 1px solid #bebebe; padding: 0.8em 1em;}', ...
+    '.pie h3 {font-size: 12px; font-weight: bold; color: #0c2046; margin: 0 0 0.4em;}', ...
+    '.pie p {font-size: 12px; font-weight: normal; color: #333333; line-height: 1.5em; text-align: justify; margin: 0;}', ...
+    '.actualizacion {text-align: right; font-size: 10px; color: #0c2046;}', ...
+    '#lightbox {display: none; position: fixed; inset: 0; z-index: 1000; background: rgba(0,0,0,0.85); align-items: center; justify-content: center;}', ...
+    '#lightbox.active {display: flex;}', ...
+    '#lightbox img {max-width: 95vw; max-height: 95vh; background: #ffffff;}', ...
+    '#lightbox button {position: absolute; top: 0.3em; right: 0.6em; font-size: 2.5em; color: #ffffff; background: none; border: 0; cursor: pointer;}', ...
+    '</style>', ...
+    '</head>', ...
+    '<body>', ...
+    '<div class="container">');
 
-fprintf(fid,'<table width="1000"  border="0" align="center" cellpadding="1" cellspacing="1" bordercolor="#999999">\n');
-fprintf(fid,'<tr bordercolor="#999999">\n');
-fprintf(fid,'<th width="403"><div align="left"><a href="https://www.argoespana.es/"><img src="https://www.argoespana.es/imagenes/logoargoes.png" border="0"></div></th>\n');
+% Cabecera
+fprintf(fid,'%s\n', ...
+    '<div class="cabecera">', ...
+    '<a href="https://www.argoespana.es/"><img src="https://www.argoespana.es/imagenes/logoargoes.png" alt="Argo España"></a>', ...
+    ['<div class="logos">' Logos '</div>'], ...
+    '</div>');
 
-
-%%Logos institucionales
-if strfind(lower(MD.ProjectName),'spain')>=1 | strfind(lower(MD.FloatOwner),'ieo')>=1 | strfind(lower(MD.FloatOwner),'socib')>=1 | strfind(lower(MD.FloatOwner),'csic')>=1 | strfind(lower(MD.FloatOwner),'icm')>=1  | strfind(lower(MD.FloatOwner),'icatmar')>=1 
-  if strfind(MD.FloatOwner,'ICATMAR')>=1
-      fprintf(fid,'<th width="425"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a>&nbsp; &nbsp; <a href="http://www.icatmar.cat/es"><img src="https://www.argoespana.es/imagenes/logoicatmar.png" border="0"></a></div></th>\n');
-  else 
-      fprintf(fid,'<th width="325"><div align="right"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
-  end    
-end
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table><br><br>\n');
-
-
-%Titulo
-fprintf(fid,'<span class="style1"><div align="center">&nbsp;&nbsp;Perfilador Argo %7d</span></div><br>\n',MD.WMOFloat);
-
-%EuroArgo at sea monitoring
-fprintf(fid,'<span class="style3"><div align="center"><a href=" https://fleetmonitoring.euro-argo.eu/float/%7d">Acceso a los datos</a></div></span><br>\n',MD.WMOFloat);
-
-%Informe de lanzamiento
+% Titulo y enlaces
+fprintf(fid,'<h1>Perfilador Argo %7d</h1>\n',MD.WMOFloat);
+fprintf(fid,'<div class="enlaces">\n');
+fprintf(fid,'<a href="https://fleetmonitoring.euro-argo.eu/float/%7d">Acceso a los datos</a><br>\n',MD.WMOFloat);
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeLanzamiento.pdf'));
 if exist(fileReport,'file')==2
-    fprintf(fid,'<span class="style3"><div align="center"><a href="%s/Informes/%7dInformeLanzamiento.pdf">Informe de despliegue</a></div></span><br>\n',domainName,MD.WMOFloat);
+    fprintf(fid,'<a href="%s/Informes/%7dInformeLanzamiento.pdf">Informe de despliegue</a><br>\n',domainName,MD.WMOFloat);
 end
-
-%Informe de DMQC
 fileReport=fullfile(GlobalDS.DirArgoData,'Floats','Informes',strcat(num2str(WMO),'InformeDMQC.pdf'));
 if exist(fileReport,'file')==2
-    fprintf(fid,'<span class="style3"><div align="center"><a href="%s/Informes/%7dInformeDMQC.pdf">Informe de Delayed Mode Quality Control</a></div></span><br>\n',domainName,MD.WMOFloat);
+    fprintf(fid,'<a href="%s/Informes/%7dInformeDMQC.pdf">Informe de Delayed Mode Quality Control</a><br>\n',domainName,MD.WMOFloat);
+end
+fprintf(fid,'</div>\n');
+
+% Tabla con informacion
+fprintf(fid,'<div class="tabla"><table>\n');
+for ii=1:size(Tabla,1)
+    fprintf(fid,'<tr><td class="etiqueta">%s</td><td class="valor">%s</td><td class="etiqueta">%s</td><td class="valor">%s</td></tr>\n',Tabla{ii,:});
+end
+fprintf(fid,'</table></div>\n');
+
+% Figuras con pie
+for ii=1:length(Fig)
+    fprintf(fid,'%s\n', ...
+        '<div class="figura">', ...
+        sprintf('<a href="./%s"><img src="./%s" alt="%s"></a>',Fig(ii).link,Fig(ii).file,Fig(ii).title), ...
+        '<div class="pie">', ...
+        sprintf('<h3>%s</h3>',Fig(ii).title), ...
+        sprintf('<p>%s</p>',Fig(ii).caption), ...
+        '</div>', ...
+        '</div>');
 end
 
-fprintf(fid,'<br>\n');
-%Tabla con informacion
-fprintf(fid,'<table width="1000"  border="0" align="center" cellpadding="1" cellspacing="2">\n');
-fprintf(fid,'<tr bordercolor="#333333" bgcolor="#FFFFFF">\n');
-fprintf(fid,'<th width="25%%">&nbsp;</th>\n');
-fprintf(fid,'<th width="25%%">&nbsp;</th>\n');
-fprintf(fid,'<th width="25%%">&nbsp;</th>\n');
-fprintf(fid,'<th width="25%%">&nbsp;</th>\n');
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Transmission system</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.TransmisionSystem);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Transmission ID</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.TransmissionID);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Platform model</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.PlatformModel);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Platform ID</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.PlatformID);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Sensors</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.Sensors);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Sensores s/n</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.SensorsID);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Data Centre (Format version)</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.DataCentre);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Project name</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.ProjectName);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Float Owner</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.FloatOwner);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;PI Name</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.PIName);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Parking depth (dbar)</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.ParkingDepth);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Profile depth (dbar)</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.ProfileDepth);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Number of profiles</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.NumberOfProfiles);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Status</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.StatusT);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Deployment date</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.LaunchDate);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Deployed position</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.LaunchPosition);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Last surfacing date</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.LastSurfacingDate);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Last surfacing position</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.LastSurfacingPosition);
-fprintf(fid,'</tr>\n');
-
-fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;Age (Yr)</span></div></th>\n');
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.Age);
-fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;%s</span></div></th>\n',MD.VoltageT);
-fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.Voltage);
-fprintf(fid,'</tr>\n');
-
-if isempty(MD.SurfacePressure) == 0 & isempty(MD.InternalVacum)
-    fprintf(fid,'<tr style="bordercolor=#333333; height: 25px">\n');
-    fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;%s</span></div></th>\n',MD.SurfacePressureT);
-    fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.SurfacePressure);
-    fprintf(fid,'<th bgcolor="#e5e5e5"><div align="left"><span class="style9">&nbsp;&nbsp;%s</span></div></th>\n',MD.InternalVacumT);
-    fprintf(fid,'<th><div align="left"><span class="style8">&nbsp;&nbsp;%s</span></div></th>\n',MD.InternalVacum);
-    fprintf(fid,'</tr>\n');
+% Logos y actualizacion
+if ~isempty(Logos)
+    fprintf(fid,'<div class="logos-pie">%s</div>\n',Logos);
 end
+fprintf(fid,'<div class="actualizacion">%s</div>\n', datestr(now));
+fprintf(fid,'</div>\n');
 
-fprintf(fid,'<tr bordercolor="#333333" bgcolor="#FFFFFF">\n');
-fprintf(fid,'<th>&nbsp;</th>\n');
-fprintf(fid,'<th>&nbsp;</th>\n');
-fprintf(fid,'<th>&nbsp;</th>\n');
-fprintf(fid,'<th>&nbsp;</th>\n');
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table>\n');
-
-fprintf(fid,'<table width="1000"  border="0" align="center">\n');
-fprintf(fid,'<tr>\n');
-fprintf(fid,'<td><div align="left"><a href="./%07dA_Zoom.png"><img src="./%07dA.png" width="934"></a></div></td>\n',MD.WMOFloat,MD.WMOFloat);
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table>\n');
-
-fprintf(fid,'<table width="1000"  border="0" align="center">\n');
-fprintf(fid,'<tr>\n');
-fprintf(fid,'<td><div align="left"><img src="./%07dB.png" width="944"></div></td>\n',MD.WMOFloat);
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table>\n');
-
-fprintf(fid,'<table width="1000"  border="0" align="center">\n');
-fprintf(fid,'<tr>\n');
-fprintf(fid,'<td><div align="left"><img src="./%07dC.png" width="979"></div></td>\n',MD.WMOFloat);
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table><br>\n');
-
-
-% Logos
-fprintf(fid,'<table width="1000"  border="0" align="center" cellpadding="1" cellspacing="1" bordercolor="#999999">\n');
-fprintf(fid,'<tr bordercolor="#999999">\n');
-
-if strfind(lower(MD.ProjectName),'spain')>=1 | strfind(lower(MD.FloatOwner),'ieo')>=1 | strfind(lower(MD.FloatOwner),'socib')>=1 | strfind(lower(MD.FloatOwner),'csic')>=1 | strfind(lower(MD.FloatOwner),'icm')>=1  | strfind(lower(MD.FloatOwner),'icatmar')>=1 
-  if strfind(MD.FloatOwner,'ICATMAR')>=1
-      fprintf(fid,'<th width="425"><div align="center"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a>&nbsp; &nbsp; <a href="http://www.icatmar.cat/es"><img src="https://www.argoespana.es/imagenes/logoicatmar.png" border="0"></a></div></th>\n');
-  else 
-      fprintf(fid,'<th width="325"><div align="center"><a href="http://www.ieo.es"><img src="https://www.argoespana.es/imagenes/logoieo.png" border="0"></a> &nbsp; &nbsp; <a href="http://www.socib.es"><img src="https://www.argoespana.es/imagenes/logosocib.png" border="0"></a></div></th>\n');
-  end    
-end
-fprintf(fid,'</tr>\n');
-fprintf(fid,'</table><br>\n');
-
-% Actualizacion
-fprintf(fid,'<span class="style3"><div align="right"><h6>%s</h6></div></span><br>\n', datestr(now));
-
-
-fprintf(fid,'</body>\n');
-fprintf(fid,'</html>\n');
+% Lightbox: al pinchar en una figura se muestra ampliada
+fprintf(fid,'%s\n', ...
+    '<div id="lightbox"><button id="lightbox-close" aria-label="Cerrar">&times;</button><img id="lightbox-img" src="" alt=""></div>', ...
+    '<script>', ...
+    'document.addEventListener("DOMContentLoaded", function(){', ...
+    '  var lb = document.getElementById("lightbox");', ...
+    '  var lbImg = document.getElementById("lightbox-img");', ...
+    '  document.querySelectorAll(".figura a").forEach(function(link){', ...
+    '    link.addEventListener("click", function(e){', ...
+    '      e.preventDefault();', ...
+    '      lbImg.src = link.getAttribute("href");', ...
+    '      lbImg.alt = link.querySelector("img").alt;', ...
+    '      lb.classList.add("active");', ...
+    '    });', ...
+    '  });', ...
+    '  function cierra(){ lb.classList.remove("active"); lbImg.src = ""; }', ...
+    '  lb.addEventListener("click", function(e){ if(e.target !== lbImg){ cierra(); } });', ...
+    '  document.addEventListener("keydown", function(e){ if(e.key === "Escape"){ cierra(); } });', ...
+    '});', ...
+    '</script>', ...
+    '</body>', ...
+    '</html>');
 fclose(fid);

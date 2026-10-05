@@ -41,22 +41,23 @@ Main components:
 
 ```text
 .
-├── argoSpainWebPage.sh
-├── configWebPage.m
+├── argoSpainWebPage.sh                 # main pipeline
+├── getArgoData.sh / getArgoDataAll.sh  # download Argo data from the GDAC
+├── configWebPage.m                     # configuration
+├── createLists.m                       # float lists (floatsArgoSpain.dat, floatsArgoInterest.dat)
 ├── createDataSet.m
 ├── createDataSet_GeoJSON.m
+├── createRegionGeoJSON.m
 ├── createDataSet_Table.m
 ├── createDataSet_Summary.m
-├── createDataSetStatus/
-│   ├── createDataSetStatus_FunctionMetadata.m
-│   ├── createDataSetStatus_FunctionProfiles.m
-│   ├── createDataSetStatus_FunctionTechnicalData.m
-│   ├── createDataSetStatus_FunctionSections.m
-│   ├── createDataSetStatus_FunctionFigures.m
-│   ├── createDataSetStatus_FunctionReport.m
-│   └── createDataSetStatus_FunctionTrajectory.m
+├── createDataSetStatus.m
+├── createDataSetStatus_Function*.m     # float status page modules
+├── read*.m                             # readers for Argo NetCDF files
+├── sendDataSetReport.m                 # email report
 ├── data/
-├── html/
+├── html/                               # generated web products
+├── html_web/                           # static Leaflet pages
+├── tools/
 └── log/
 ```
 
@@ -65,19 +66,19 @@ Main components:
 The processing chain transforms operational Argo data into monitoring and visualization products for the Argo Spain website.
 
 ```text
-Argo GDAC Data
+Argo GDAC Data (getArgoData.sh) + float lists (createLists)
          │
          ▼
 Dataset Generation (createDataSet)
          │
          ▼
-Map Generation (createDataSetMap / createDataSetMapLLet)
+Map Generation (createDataSet_GeoJSON / createRegionGeoJSON)
          │
          ▼
-Tables and Statistics (createDataSetTable)
+Tables and Statistics (createDataSet_Table)
          │
          ▼
-Operational Summary (createDataSetSummary)
+Operational Summary (createDataSet_Summary)
          │
          ▼
 Float Status Pages (createDataSetStatus)
@@ -156,14 +157,6 @@ These datasets include:
 
 ### Map Generation
 
-#### Static Maps
-
-Generates gJson files that are read by the hmtl files static visualizations of float trajectories and positions.
-
-```matlab
-createDataSetMap.m
-```
-
 #### Interactive Maps
 
 Creates Leaflet-based interactive maps integrated into the web interface.
@@ -216,7 +209,12 @@ createDataSetStatus_FunctionSections.m
 createDataSetStatus_FunctionFigures.m
 createDataSetStatus_FunctionReport.m
 createDataSetStatus_FunctionTrajectory.m
+createDataSetStatus_FunctionTrajectoryZoom.m
+createDataSetStatus_FunctionTS.m
+createDataSetStatus_FunctionWebPage.m
 ```
+
+For each float a web page `NNNNNNN.html` is generated (`createDataSetStatus_FunctionWebPage`), where each figure has a title and a caption and can be enlarged by clicking on it.
 
 These modules generate:
 
