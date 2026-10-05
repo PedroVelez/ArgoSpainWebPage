@@ -1,4 +1,4 @@
-function [FileOutA,FileOutAz,FileOutB,FileOutC]=createDataSetStatus_FunctionFigures(WMO,GlobalDS)
+function [FileOutA,FileOutB,FileOutC]=createDataSetStatus_FunctionFigures(WMO,GlobalDS)
 
 if nargin==1
     GlobalDS.Regionnombre{1}='GLOB';
@@ -135,15 +135,6 @@ createDataSetStatus_FunctionTS(OneFloatData,GlobalDS,Limits,hTSPosition);
 createDataSetStatus_FunctionProfiles(OneFloatData,Limits);
 FileOutA=sprintf('%s/%sA.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutA)
-
-%Map of trajectories_Zoom
-figureA_Zoom=figure('visible','off','clipping','on');
-if GlobalDS.Visible==1
-    set(gcf,'visible','on')
-end
-createDataSetStatus_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
-FileOutAz=sprintf('%s/%sA_Zoom.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
-orient portrait;print(gcf,'-dpng',FileOutAz)
 
 %% FigureB - Vertical Sections
 figureB=figure('visible','off');

@@ -1,4 +1,4 @@
-%function [FileOutA,FileOutAz,FileOutB,FileOutC]=ArgoEsStatusGraficos_Figures(WMO,GlobalDS)
+%function [FileOutA,FileOutB,FileOutC]=ArgoEsStatusGraficos_Figures(WMO,GlobalDS)
 WMO=6901264;
 
 GlobalDS.DirOutGraph='./Plots';
@@ -143,15 +143,6 @@ ArgoEsStatusGraficos_FunctionTS(OneFloatData,GlobalDS,Limits,hTSPosition);
 ArgoEsStatusGraficos_FunctionProfiles(OneFloatData,Limits);
 FileOutA=sprintf('%s/%sA.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
 orient portrait;print(gcf,'-dpng',FileOutA)
-
-%Map of trajectories_Zoom
-figureA_Zoom=figure('visible','off','clipping','on');
-if GlobalDS.Visible==1
-    set(gcf,'visible','on')
-end
-ArgoEsStatusGraficos_FunctionTrajectoryZoom(OneFloatData,GlobalDS,Limits);
-FileOutAz=sprintf('%s/%sA_Zoom.png',GlobalDS.DirOutGraph,deblank(num2str(FloatData.WMOf)));
-orient portrait;print(gcf,'-dpng',FileOutAz)
 
 %% FigureB - Vertical Sections
 figureB=figure('visible','off');

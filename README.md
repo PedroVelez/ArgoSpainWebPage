@@ -209,12 +209,11 @@ createDataSetStatus_FunctionSections.m
 createDataSetStatus_FunctionFigures.m
 createDataSetStatus_FunctionReport.m
 createDataSetStatus_FunctionTrajectory.m
-createDataSetStatus_FunctionTrajectoryZoom.m
 createDataSetStatus_FunctionTS.m
 createDataSetStatus_FunctionWebPage.m
 ```
 
-For each float a web page `NNNNNNN.html` is generated (`createDataSetStatus_FunctionWebPage`), where each figure has a title and a caption and can be enlarged by clicking on it.
+For each float a web page `NNNNNNN.html` is generated (`createDataSetStatus_FunctionWebPage`), with an interactive Leaflet map of the float trajectory (positions embedded in the page, coloured by date) and the figures, each with a title and a caption, that can be enlarged by clicking on them.
 
 These modules generate:
 
