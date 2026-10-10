@@ -14,7 +14,8 @@ end
 PUD=find(DataArgoEs.FechaUltimoPerfil>=now-DiasAnalisis);
 PUDT=[];
 for ipud=1:length(PUD)
-    PUDT=[PUDT sprintf('        https://www.argoespana.es/float/%7d.html\n',DataArgoEs.WMO(PUD(ipud)))];
+    PUDT=[PUDT sprintf('        https://www.argoespana.es/float/%7d.html  último dato recibido: %s\n', ...
+        DataArgoEs.WMO(PUD(ipud)),datestr(DataArgoEs.FechaUltimoPerfil(PUD(ipud)),'dd-mmm-yyyy HH:MM'))];
 end
 
 %Write the new report
