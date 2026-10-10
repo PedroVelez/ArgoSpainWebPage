@@ -41,11 +41,11 @@ end
 axis([Limits.minS Limits.maxS Limits.minT Limits.maxT]);
 
 %Add Profiles
-%CTD profile in the case is was sampled during deployment.
+%CTD profile in case it was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
     plot(OneFloatData.CTD0.salt,OneFloatData.CTD0.ptmp,':','color',cl(1,:),'linewidth',3);hold on
 end
-%Fist profile
+%First profile
 plot(OneFloatData.salsA(:,1),OneFloatData.ptemsA(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
 %Following profiles
 for j=2:size(OneFloatData.salsA,2)

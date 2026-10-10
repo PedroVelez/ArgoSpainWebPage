@@ -130,7 +130,7 @@ end
 %cl=flipud(parula);
 cl=parula;
 
-%% FigureA - Map of trajectories, TS Diagram, T, S and O perfiles
+%% FigureA - Map of trajectories, TS Diagram, T, S and O profiles
 hTraPosition=[0.05 0.54 0.38 0.38];
 hTSPosition=[0.50 0.54 0.42 0.42];
 

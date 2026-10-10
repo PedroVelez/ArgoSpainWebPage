@@ -106,7 +106,7 @@
         transform: rotate(180deg);
       }
 
-      /*Contenido despegable*/
+      /*Contenido desplegable*/
       .legend-collapsible {
         overflow: hidden;
         max-height: 0;
@@ -260,8 +260,8 @@
     }
 
     // ─────────────────────────────────────────────────────────────────────
-    // Carga de los 3 GeoJSON
-    // Los ficheros con sufijo "2" los produce createRegionGeoJSON2.toImplement.m
+    // Carga de los 3 GeoJSON y el resumen
+    // Los ficheros los produce createRegionGeoJSON.m
     // ─────────────────────────────────────────────────────────────────────
     Promise.all([
       fetch('data/TrajectoryAS.geojson').then(r => r.json()),
@@ -269,10 +269,10 @@
       fetch('data/PosicionBoyas.geojson').then(r => r.json()),
       fetch("data/Summary.txt").then(r => r.text())
     ]).then(function (datosGJSON) {
-      // datos es un array con los 3 GeoJSON, en el mismo orden que el Promise.all:
-      //   datosGJSON[0] -> TrajectoryAS2.geojson
-      //   datosGJSON[1] -> TrajectoryAI2.geojson
-      //   datosGJSON[2] -> PosicionBoyas2.geojson
+      // datosGJSON es un array con los 3 GeoJSON y el resumen, en el mismo orden que el Promise.all:
+      //   datosGJSON[0] -> TrajectoryAS.geojson
+      //   datosGJSON[1] -> TrajectoryAI.geojson
+      //   datosGJSON[2] -> PosicionBoyas.geojson
       //   datosGJSON[3] -> Summary.txt
       var trajAS = datosGJSON[0];
       var trajAI = datosGJSON[1];

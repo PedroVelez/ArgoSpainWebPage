@@ -3,7 +3,7 @@ function ArgoEsStatusGraficos_FunctionProfiles(OneFloatData,Limits)
 cl=parula;
 color=linspace(1,64,size(OneFloatData.salsA,2));
 
-%Postions
+%Positions
 RepresentaOxigen=0;
 hPTPosition=[0.14 0.05 0.30 0.42];
 hPSPosition=[0.56 0.05 0.30 0.42];
@@ -25,11 +25,11 @@ else
     hT=subplot(1,3,1);set(hT,'clipping','on');
 end
 
-%CTD profile in the case is was sampled during deployment.
+%CTD profile in case it was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
     plot(OneFloatData.CTD0.ptmp,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
 end
-%Fist profile
+%First profile
 plot(OneFloatData.ptemsA(:,1),-OneFloatData.presA(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
 %Following profiles
 for j=1:size(OneFloatData.temsA,2)
@@ -63,11 +63,11 @@ else
     hS=subplot(1,3,2);set(hS,'clipping','on');
 end
 
-%CTD profile in the case is was sampled during deployment.
+%CTD profile in case it was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
     plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,':','color',cl(1,:),'linewidth',3);hold on
 end
-%Fist profile
+%First profile
 plot(OneFloatData.salsA(:,1),-OneFloatData.presA(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
 %Following profiles
 for j=1:size(OneFloatData.temsA,2)
@@ -101,7 +101,7 @@ if RepresentaOxigen==1
         hO=subplot(1,3,3);set(hO,'clipping','on');
     end
 
-    %Fist profile
+    %First profile
     plot(OneFloatData.oxysA(:,1),-OneFloatData.presA(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
     %Following profiles
     for j=1:size(temsA,2)

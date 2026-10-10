@@ -5,9 +5,9 @@ clear all;close all
 %valido. Cada cambio va marcado inline con un comentario "% Cambio: ...".
 %
 %Salida (junto a argoregionstatus.html):
-%   <ScriptDir>/data/TrajectoryAS2.geojson
-%   <ScriptDir>/data/TrajectoryAI2.geojson
-%   <ScriptDir>/data/PosicionBoyas2.geojson
+%   <ScriptDir>/data/TrajectoryAS.geojson
+%   <ScriptDir>/data/TrajectoryAI.geojson
+%   <ScriptDir>/data/PosicionBoyas.geojson
 
 %% Read configuration
 configWebPage
