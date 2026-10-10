@@ -1,4 +1,4 @@
-% Read the data from the Argo Spaon data set
+% Read the data from the Argo Spain data set
 clear all;close all
 
 %% Read configuration
@@ -70,6 +70,7 @@ for NumDatSet = NumberOfDatSets
             UltimoVoltaje(ibData)=FloatData.UltimoVoltajef;
             UltimoSurfaceOffset(ibData)=FloatData.UltimoSurfaceOffsetf;
             Age(ibData)=FloatData.Agef;
+            LatUltimoPerfil(ibData)=ultimaLatitudValida(HID{ibData}.lats);
             activa(ibData)=2;
             fprintf('last profile %s\n',datestr(nanmax(HID{ibData}.julds)))
         elseif exist(fileM,'file')>0 && exist(fileTe,'file')>0 && exist(fileHi,'file')>0
@@ -127,9 +128,15 @@ for NumDatSet = NumberOfDatSets
 
                 FechaUltimoPerfil(ibData)=HID{ibData}.julds(end);
                 FechaPrimerPerfil(ibData)=HID{ibData}.julds(1);
+                LatUltimoPerfil(ibData)=ultimaLatitudValida(HID{ibData}.lats);
                 Age(ibData)=(FechaUltimoPerfil(ibData)-FechaPrimerPerfil(ibData))/365;
-                %Boyas Acticas
-                if max(HID{ibData}.julds) > (now-InterDiasEmision) %Solo actualizo las boyas nuevas
+                %Boyas Activas
+                if abs(LatUltimoPerfil(ibData)) > LatitudPolar
+                    InterDiasEmisionFloat = InterDiasEmisionPolar;
+                else
+                    InterDiasEmisionFloat = InterDiasEmision;
+                end
+                if max(HID{ibData}.julds) > (now-InterDiasEmisionFloat) %Solo actualizo las boyas nuevas
                     activa(ibData)=1;
                 end
                 fprintf('last profile %s\n',datestr(HID{ibData}.julds(end)))
@@ -184,6 +191,7 @@ for NumDatSet = NumberOfDatSets
     UltimoSurfaceOffset = UltimoSurfaceOffset(IndiceOrdena);
     FechaPrimerPerfil = FechaPrimerPerfil(IndiceOrdena);
     Age = Age(IndiceOrdena);
+    LatUltimoPerfil = LatUltimoPerfil(IndiceOrdena);
     UltimoVoltaje(UltimoVoltaje == 0) = NaN;
     iactiva =length(find(activa == 1));
     iinactiva =length(find(activa == 2));
@@ -193,8 +201,18 @@ for NumDatSet = NumberOfDatSets
     %Saving the data
     save(strcat(PaginaWebDir,'/data/data',DataSetName),'WMO','activa','FechaUltimoPerfil', ...
         'FechaPrimerPerfil','InterDiasEmision','UltimoVoltaje','UltimoSurfaceOffset','iactiva', ...
-        'iinactiva','inodesplegada','Age')
-    clear HID TRD TED MTD WMO activa FechaUltimoPerfil FechaPrimerPerfil UltimoVoltaje
+        'iinactiva','inodesplegada','Age','LatUltimoPerfil')
+    clear HID TRD TED MTD WMO activa FechaUltimoPerfil FechaPrimerPerfil UltimoVoltaje LatUltimoPerfil
     clear UltimoSurfaceOffset iactiva iinactiva inodesplegada Age boyasAS ib
 end
 fprintf('%s <<<<< \n',mfilename)
+
+function lat = ultimaLatitudValida(lats)
+%Devuelve la latitud del ultimo perfil con posicion valida (NaN si no hay ninguna)
+iv = find(~isnan(lats),1,'last');
+if isempty(iv)
+    lat = NaN;
+else
+    lat = lats(iv);
+end
+end

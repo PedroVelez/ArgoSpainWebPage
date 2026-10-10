@@ -124,12 +124,12 @@ fprintf(fTxt,'Estado; WMO; Proyecto; Primer perfil; ultimo perfil; Edad; Tipo de
 %Lee los datos de las boyas para poder crear la tabla de datos
 %iactiva=0;iinactiva=0;inodesplegada=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
-    MD = createDataSetStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData);
+    MD = createDataSetStatus_FunctionMetadata(DataArgoEs.WMO(ifloat),DirArgoData,LatitudPolar);
     if DataArgoEs.activa(ifloat)>=1 %Activa o Inactiva con datos
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         if DataArgoEs.activa(ifloat)==1
             fprintf('     > ACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s;%s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner)
-            fprintf(fTxt,'Activa; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,FloatData.HIDf.lons(end),FloatData.HIDf.lats(end) );
+            fprintf(fTxt,'Activa; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,MD.LastLon,MD.LastLat );
             if mod(ifloat,2);
                 fprintf(fidT,'<tr height: 55px; bgcolor="#e5e5e5">\n');
             else
@@ -147,7 +147,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
             fprintf(fidT,'</tr>');
         else
             fprintf('     > INACTIVA %7d; %12s; first:%s; last:%s; Age:%s; %s \n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel)
-            fprintf(fTxt,'Inactiva; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,FloatData.HIDf.lons(end),FloatData.HIDf.lats(end));
+            fprintf(fTxt,'Inactiva; %7d; %12s; %s; %s; %s; %s; %s; %6.3f; %6.3f\n',MD.WMOFloat,MD.ProjectName,datestr(FloatData.HIDf.julds(1),22),datestr(FloatData.HIDf.julds(end),22),MD.Age,MD.PlatformModel,MD.FloatOwner,MD.LastLon,MD.LastLat);
             if mod(ifloat,2);
                 fprintf(fidT,'<TR height: 55px; bgcolor="#e5e5e5">\n');
             else
@@ -264,7 +264,7 @@ fprintf('     > Uploading  %s, %s \n',FileHtmlArgoEsStatus,strrep(FileHtmlArgoEs
 mput(ftpobj,strrep(FileHtmlArgoEsStatus,'.html','_tabla.txt'));
 fprintf('     > Uploading  %s, %s \n',FileHtmlArgoEsStatus,strrep(FileHtmlArgoEsStatus,'.html','_tabla.txt'));
 
-%% Writting Informe
+%% Writing Informe
 if exist(FileNameInforme,'file')>0
     InformeOld=load(FileNameInforme);
     Incremento=DataArgoEs.iactiva-InformeOld.iactiva;

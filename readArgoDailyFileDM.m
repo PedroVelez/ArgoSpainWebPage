@@ -41,7 +41,7 @@ if isempty(t)==0
     positionqc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'POSITION_QC'));
     pres=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PRES'))';
     presqc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PRES_QC'))';
-    pres_ad=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PRES_ADJUSTED'))'; %Valores ajustado en DM
+    pres_ad=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PRES_ADJUSTED'))'; %Valores ajustados en DM
     pres_adqc=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'PRES_ADJUSTED_QC'))';
     if itemp==1
         tems=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'TEMP'))';
@@ -75,11 +75,11 @@ if isempty(t)==0
     %QC=3 An adjustment has been applied, but the value may still be bad.
     %Test 15 or Test 16 or Test 17 failed and all other real-time QC tests
     %passed. These data are not to be used without scientific correction.
-    %A flag �3� may be assigned by an operator during additional visual QC for
+    %A flag '3' may be assigned by an operator during additional visual QC for
     %bad data that may be corrected in delayed mode.
     %QC=4 Bad data. Not adjustable.
     %Data have failed one or more of the real-time QC tests, excluding Test 16.
-    %A flag �4� may be assigned by an operator during additional visual QC for
+    %A flag '4' may be assigned by an operator during additional visual QC for
     %bad data that are not correctable
     %QC=9 Missing value
     pres(presqc=='0' | presqc=='3' | presqc=='4' |  presqc=='9')=NaN; %Bad data
@@ -92,7 +92,7 @@ if isempty(t)==0
     %Delayed Mode QC used to NaN values
     %QC=0 No QC was performed
     %QC=3 An adjustment has been applied, but the value may still be
-    %bad..(I keep this data!!)s
+    %bad (I keep this data!!)
     %QC=4 Bad data. Not adjustable.
     %QC=9 Missing value
     pres_ad(pres_adqc=='4' | pres_adqc=='9')=NaN; %Bad data

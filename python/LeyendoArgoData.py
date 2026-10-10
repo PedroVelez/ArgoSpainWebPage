@@ -70,7 +70,7 @@ def ncdump(nc_fid, verb=True):
 ncfile='/Users/pvb/Data/Argo/geo/atlantic_ocean/2018/01/20180131_prof.nc'
 
 nc_fid = netCDF4.Dataset(ncfile, 'r')  # Dataset is the class behavior to open the file
-                                 # and create an instance of the ncCDF4 class
+                                 # and create an instance of the netCDF4 class
 nc_attrs, nc_dims, nc_vars = ncdump(nc_fid)
 # Extract data from NetCDF file
 lats = nc_fid.variables['LATITUDE'][:]  # extract/copy the data

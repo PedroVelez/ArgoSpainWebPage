@@ -1,6 +1,6 @@
 function  FileOutFHtml=createDataSetStatus_FunctionWebPage(WMO,GlobalDS)
 % Float web page (NNNNNNN.html). 
-% Each figure has a title and a caption, and clicking a figure &
+% Each figure has a title and a caption, and clicking a figure
 % opens it enlarged (lightbox).
 
 if nargin==1
@@ -12,8 +12,8 @@ configWebPage
 
 fprintf('web page, ')
 
-%% Read Metada data
-MD=createDataSetStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData);
+%% Read metadata
+MD=createDataSetStatus_FunctionMetadata(WMO,GlobalDS.DirArgoData,LatitudPolar);
 
 % Initial CTD available? (same test as createDataSetStatus_FunctionFigures)
 fileCTD0=fullfile(GlobalDS.DirArgoData,'Floats','CTD',strcat(num2str(WMO),'CTD0.mat'));

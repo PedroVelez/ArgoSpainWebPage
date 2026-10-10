@@ -43,7 +43,7 @@ def ReadArgoFloatFileDM(fichero_boya):
     return lons,lats,juld,pres,temp
 
 #------------------------------------------------------------------------------
-# Incio
+# Inicio
 #------------------------------------------------------------------------------
 
 # Configuracion
@@ -85,7 +85,7 @@ FileHtmlArgoAtlanticStatus = 'ArgoStatusAtlantic.html'
 #Titulo
 TituloArgoIbStatus = 'en las aguas que rodean Espa&ntilde;a'
 
-#Create hmtl map in folim
+#Create html map in folium
 #-----------------
 map_osm  =  folium.Map(location = [FoCentroArgoIb[1],FoCentroArgoIb[0]],
                 detect_retina = 'True',
@@ -117,7 +117,7 @@ for iPro in range(0,2):
     elif iPro  ==  1:
         AIWMO=APWMO
 
-    #Read trajectoriess
+    #Read trajectories
     for ifloats in range(0,len(APWMO)):
         fichero_float = '{}/{:7.0f}/{:7.0f}_prof.nc'.format(DataDirFloat,APWMO[ifloats],APWMO[ifloats])
         if os.path.exists(fichero_float):

@@ -17,7 +17,7 @@ GlobalDS.DirOutGraph=DirOutGraph;
 GlobalDS.DirOutGraph=DirOutGraph;
 GlobalDS.DirArgoData=DirArgoData;
 
-%Coast and Batimetry
+%Coast and Bathymetry
 GlobalDS.filecoast='./data/SpainCoast.mat';% Fichero con la costa de la zona
 GlobalDS.filebat='./data/SpainBat.mat';TMP=load(GlobalDS.filebat);
 GlobalDS.batylon=TMP.batylon;
@@ -87,8 +87,11 @@ GlobalDS.RegionmaxAP(4)=2000;
 fprintf('>>>>> %s\n',mfilename)
 for NumDatSet = NumberOfDatSets
     DataSetName = DataSetNameM{NumDatSet};
-    DataArgoEs = load(strcat(PaginaWebDir,'/data/data',DataSetName,'.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','UltimoVoltaje');
+    DataArgoEs = load(strcat(PaginaWebDir,'/data/data',DataSetName,'.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','UltimoVoltaje','LatUltimoPerfil');
     fprintf('     >> Dataset %s\n',DataSetName)
+    if ~isfield(DataArgoEs,'LatUltimoPerfil')
+        DataArgoEs.LatUltimoPerfil = NaN(size(DataArgoEs.WMO));
+    end
     
     if SubeFTP == 1
         ftpobj=FtpArgoespana;
@@ -97,7 +100,13 @@ for NumDatSet = NumberOfDatSets
     
     %Figures and web page for each active float
     for ifloat = 1:1:size(DataArgoEs.WMO,2)
-        if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisis && DataArgoEs.activa(ifloat)>=1
+        %Boyas polares (ultimo perfil al sur de -LatitudPolar o al norte de LatitudPolar) usan un periodo mas largo
+        if abs(DataArgoEs.LatUltimoPerfil(ifloat)) > LatitudPolar
+            DiasAnalisisFloat = DiasAnalisisPolar;
+        else
+            DiasAnalisisFloat = DiasAnalisis;
+        end
+        if DataArgoEs.FechaUltimoPerfil(ifloat)>now-DiasAnalisisFloat && DataArgoEs.activa(ifloat)>=1
             fprintf('     \n> WMO %d (%d of %d) ',DataArgoEs.WMO(ifloat),ifloat,size(DataArgoEs.WMO,2))
             [FileOutA,FileOutB,FileOutC] = createDataSetStatus_FunctionFigures(DataArgoEs.WMO(ifloat),GlobalDS);
             FileOutFHtml = createDataSetStatus_FunctionWebPage(DataArgoEs.WMO(ifloat),GlobalDS);

@@ -33,9 +33,9 @@ for ifloat=1:size(DataArgoEs.WMO,2)
     end
 end
 
-%% Writting leaflet file
+%% Writing leaflet file
 
-%Add current status of tthe Argo Spain Contribution
+%Add current status of the Argo Spain Contribution
 fid=fopen(fullfile(OutDir,'SummaryDataSet.txt'),'w');
 fprintf(fid,'Cobertura del programa <b>Argo Espa&ntilde;a</b> el %s a las %s <br/>\n',datestr(now,1),datestr(now,13));
 fprintf(fid,'(%d) perfiladores Activos, (%d) No desplegados y (%d) Inactivos. Último dato recibido el %s <br />\n',DataArgoEs.iactiva,DataArgoEs.inodesplegada,DataArgoEs.iinactiva,datestr(max(DataArgoEs.FechaUltimoPerfil)) );
@@ -87,11 +87,10 @@ iBoyasDS=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
     if DataArgoEs.activa(ifloat)==1 %Active
         FloatData = load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
-        lats=FloatData.HIDf.lats(end);
-        lons=FloatData.HIDf.lons(end);
-        ind=find(isnan(lats)==0 & isnan(lons)==0);
-        lats=lats(ind);
-        lons=lons(ind);
+        %Ultima posicion valida (las boyas bajo el hielo no tienen posicion)
+        ind=find(isnan(FloatData.HIDf.lats)==0 & isnan(FloatData.HIDf.lons)==0,1,'last');
+        lats=FloatData.HIDf.lats(ind);
+        lons=FloatData.HIDf.lons(ind);
         if ~isempty(lons) && ~isempty(lats)
             iBoyasDS=iBoyasDS+1;
             PosicionBoyas.type='FeatureCollection';
@@ -106,11 +105,10 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         end
     else
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
-        lats=FloatData.HIDf.lats(end);
-        lons=FloatData.HIDf.lons(end);
-        ind=find(isnan(lats)==0 & isnan(lons)==0);
-        lats=lats(ind);
-        lons=lons(ind);
+        %Ultima posicion valida (las boyas bajo el hielo no tienen posicion)
+        ind=find(isnan(FloatData.HIDf.lats)==0 & isnan(FloatData.HIDf.lons)==0,1,'last');
+        lats=FloatData.HIDf.lats(ind);
+        lons=FloatData.HIDf.lons(ind);
         if ~isempty(lons) && ~isempty(lats)
             iBoyasDS=iBoyasDS+1;
             PosicionBoyas.type='FeatureCollection';
@@ -154,7 +152,7 @@ ftpobj=FtpArgoespana;
 cd(ftpobj,strcat(ftp_dir_html,'/data'));
 mput(ftpobj,fullfile(OutDir,'SummaryDataSet.txt'));
 
-%% Writting Informe
+%% Writing Informe
 if exist(FileNameInforme,'file')>0
     InformeOld=load(FileNameInforme);
     Incremento=DataArgoEs.iactiva-InformeOld.iactiva;

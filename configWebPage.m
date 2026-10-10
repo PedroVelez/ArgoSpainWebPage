@@ -8,8 +8,8 @@ RegionNameL='Cuenca Iberica-Canaria';
 DataSetNameM{1} = 'ArgoSpain'; %Names of the DataSets to monitor
 DataSetNameM{2} = 'ArgoInterest';  
 Verbose=0;
-Visible=0;      %Flag to outpun in the screen the figures
-SubeFTP=1;      %1 to upload from matlab de figures and web page to the ftp.
+Visible=0;      %Flag to output the figures on the screen
+SubeFTP=1;      %1 to upload from matlab the figures and web page to the ftp.
 NumberOfDatSets=[1 2]; %Number of DataSets to monitor
 
 %% Input Directories and files
@@ -18,14 +18,14 @@ DirArgoData=GlobalSU.ArgoData;
 DataDirGeo=fullfile(DirArgoData,'geo','atlantic_ocean');
 DataDirFloats=fullfile(DirArgoData,'Floats');
 
-% Directory where the matlab scripts than update the Argo web page area
+% Directory where the matlab scripts that update the Argo web page are
 % located
 PaginaWebDir=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage');
 
 % Directory with list of floats for each program to monitor
 DirFloatLists=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage');
 
-%% Climatoly file
+%% Climatology file
 ClimatologyFile=strcat(GlobalSU.ProPath,'/ArgoSpainWebpage/data/WOA05.mat');
 
 %% Output Directories and files
@@ -40,6 +40,8 @@ FileTableArgoEsSummary  = strcat(PaginaWebDir,'/html/','argoessummary.html');
 
 %% createDataSet
 InterDiasEmision=60; %Dias sin emision a partir de los cuales considero que una boya ha dejado de operar
+InterDiasEmisionPolar=200; %Idem para boyas polares (pueden pasar meses bajo el hielo)
+LatitudPolar=58;     %Boyas con ultimo perfil al sur de -LatitudPolar o al norte de LatitudPolar se consideran polares
 ForceDataUpdate=1;   %1 to force to re-read the netcdf files
 
 %% createRegionLLet
@@ -72,6 +74,7 @@ ftp_dir_html='/html';
 
 %% StatusGraficos
 POSBorder=2;  %Margen [en grados] adicional para el mapa de la trayectoria
+DiasAnalisisPolar=200; %Days to look for to update the figures (polar floats)
 DiasAnalisis=1.2; %Days to look for to update the figures
 
 %% About sending reports

@@ -1,11 +1,11 @@
 clear all;close all
-%Crea la pagina argoesstatus.html con el google mapa de las posiciones de
+%Crea la pagina argoesstatus.html con el mapa de Google de las posiciones de
 %las boyas Argo-Es y las Argo-In
 
 %% Read configuration
 configWebPage
 
-%CoberturaArgoGlobal, para calcular el porcentajes
+%CoberturaArgoGlobal, para calcular los porcentajes
 CoberturaArgoGlobal=4000; 
 
 %CoberturaArgoMed

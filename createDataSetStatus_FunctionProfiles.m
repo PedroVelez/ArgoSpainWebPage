@@ -5,7 +5,7 @@ color=linspace(1,length(cl),size(OneFloatData.sals,2));
 
 fprintf('profiles, ')
 
-%Postions
+%Positions
 RepresentaOxigen=0;
 hPTPosition=[0.14 0.05 0.30 0.42];
 hPSPosition=[0.56 0.05 0.30 0.42];
@@ -27,12 +27,12 @@ else
     hT=subplot(1,3,1);set(hT,'clipping','on');
 end
 
-%CTD profile in the case is was sampled during deployment.
+%CTD profile in case it was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
     hCTD0=plot(OneFloatData.CTD0.ptmp,-OneFloatData.CTD0.pres,'-','color',[0.75 0.75 0.75],'linewidth',3);hold on
 end
 
-%Fist profile
+%First profile
 hfp=plot(OneFloatData.ptms(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
 
 %Following profiles
@@ -75,11 +75,11 @@ else
     hS=subplot(1,3,2);set(hS,'clipping','on');
 end
 
-%CTD profile in the case is was sampled during deployment.
+%CTD profile in case it was sampled during deployment.
 if isfield(OneFloatData,'CTD0')==1
     hCTD0=plot(OneFloatData.CTD0.salt,-OneFloatData.CTD0.pres,'-','color',[0.75 0.75 0.75],'linewidth',3);hold on
 end
-%Fist profile
+%First profile
 hfp=plot(OneFloatData.sals(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
 
 %Following profiles
@@ -122,7 +122,7 @@ if RepresentaOxigen==1
         hO=subplot(1,3,3);set(hO,'clipping','on');
     end
 
-    %Fist profile
+    %First profile
     plot(OneFloatData.oxys(:,1),-OneFloatData.pres(:,1),'color',cl(ceil(color(1)),:),'linewidth',1.25);hold on
     %Following profiles
     for j=1:size(tems,2)

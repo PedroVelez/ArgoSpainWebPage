@@ -9,12 +9,12 @@ function flt = readArgoFloatProfilesDM(inpath,Verbose)
 if nargin < 2
     Verbose=1;
 end
-profiles = 0:1000;  % set up large vector or possible profile #s
+profiles = 0:1000;  % set up large vector of possible profile #s
 
 grdir = dir([inpath,'/R*.nc']);
 gddir = dir([inpath,'/D*.nc']);
 NR = length(grdir); % number of R files
-ND = length(gddir); % numbe of D files
+ND = length(gddir); % number of D files
 
 if Verbose==1
     fprintf('>>>>> Reading WMO %s with %d (%d RT, %d DM) profiles \n',inpath(end-16:end-10),NR+ND,NR,ND)
@@ -30,7 +30,7 @@ for i1 = 1:NR+ND;
     else
         fname = gddir(i1-NR).name;
     end
-    %Check to see if this nunber matches those to load
+    %Check to see if this number matches those to load
     %Nprof = str2double(fname(10:13));
     Nprof = str2double(fname(10:12));
     if any(Nprof == profiles)
@@ -47,7 +47,7 @@ end
 %eliminate structure elements that never got filled and sort by cycle number
 fkill = cellfun('isempty',{flt_prof.data_mode});
 flt_prof = flt_prof(~fkill);
-[~,I] = sort([flt_prof.cycle_number]); %Reordena la estructura por numeo de ciclos
+[~,I] = sort([flt_prof.cycle_number]); %Reordena la estructura por número de ciclos
 flt = flt_prof(I);  % assign output structure
 if Verbose==1
     fprintf('    > From %s and procesed at %s \n', deblank(flt(1).project_name),deblank(flt(1).data_centre))
@@ -66,11 +66,11 @@ function flt_prof = ReadArgoFloatProfile(ncfile)
 ncid= netcdf.open(ncfile, 'NC_NOWRITE');
 
 inprof=1;
-[~,n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimenson ID 8
+[~,n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimension ID 8
 
 for inp=1:n_prof
-    [~,flt_prof(inprof).n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimenson ID 8
-    [~,flt_prof(inprof).n_param]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PARAM')); %Dimenson ID 9
+    [~,flt_prof(inprof).n_prof]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PROF')); %Dimension ID 8
+    [~,flt_prof(inprof).n_param]=netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_PARAM')); %Dimension ID 9
     [~,flt_prof(inprof).n_levels] = netcdf.inqDim(ncid,netcdf.inqDimID(ncid,'N_LEVELS'));% Dimension ID 10
 
     %% General information on the profile file This section contains information about the whole file.
@@ -198,7 +198,7 @@ for inp=1:n_prof
     %flt_prof(inprof).scientific_calib_coefficient=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'SCIENTIFIC_CALIB_COEFFICIENT'));
     %flt_prof(inprof).scientific_calib_comment=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'SCIENTIFIC_CALIB_COMMENT'));
     %flt_prof(inprof).scientific_calib_date=netcdf.getVar(ncid,netcdf.inqVarID(ncid,'SCIENTIFIC_CALIB_DATE'));
-    %     %Si if N_CALIB is set to 1 por compatibilidad creo las matrices con el tama?o adecuado
+    %     %Si N_CALIB is set to 1 por compatibilidad creo las matrices con el tamaño adecuado
     %     if flt_prof(inprof).n_calib==1
     %         for ipara=1:flt_prof(inprof).n_param
     %             if strncmp(flt_prof(inprof).station_parameters(:,ipara)','PRES',4)

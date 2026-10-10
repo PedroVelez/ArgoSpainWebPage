@@ -122,7 +122,7 @@ if isfield(FloatData.HIDf,'oxys') == 1
     end
 end
 
-%% FigureA - TS Diagram (centred, the trajectory is in the interactive map of the web page), T, S and O perfiles
+%% FigureA - TS Diagram (centred, the trajectory is in the interactive map of the web page), T, S and O profiles
 hTSPosition=[0.29 0.54 0.42 0.42];
 
 figureA=figure('visible','off','clipping','on');

@@ -1,4 +1,4 @@
-function MD=createDataSetStatus_FunctionMetadata(WMO,DirArgoData)
+function MD=createDataSetStatus_FunctionMetadata(WMO,DirArgoData,LatitudPolar)
 %     TransmisionSystem: 'ARGOS'
 %     PlatformID: '4797'
 %     PlatformModel: ' APEX APF9A 6609'
@@ -33,7 +33,7 @@ Data=load(fullfile(DirArgoData,'Floats',num2str(WMO)));
 
 % WMO Number
 MD.WMOFloat=WMO;
-% Transmision system
+% Transmission system
 MD.TransmisionSystem=Data.MTDf.TRANS_SYSTEM;
 % FloatID
 MD.PlatformID=Data.MTDf.FLOAT_SERIAL_NO;
@@ -152,8 +152,15 @@ MD.LaunchPosition=sprintf('Lat %4.2f Lon %4.2f',Data.MTDf.LAUNCH_LATITUDE,Data.M
 % LastSurfacingDate
 MD.LastSurfacingDate=datestr(max(Data.HIDf.julds),0);
 
-% Last postion
-MD.LastSurfacingPosition=sprintf('Lat %4.2f Lon %4.2f',Data.HIDf.lats(end),Data.HIDf.lons(end));
+% Last position (boyas polares: ultima posicion valida, bajo el hielo no hay posicion)
+MD.LastLat=Data.HIDf.lats(end);
+MD.LastLon=Data.HIDf.lons(end);
+iv=find(isnan(Data.HIDf.lats)==0 & isnan(Data.HIDf.lons)==0,1,'last');
+if nargin>2 && ~isempty(iv) && abs(Data.HIDf.lats(iv))>LatitudPolar
+    MD.LastLat=Data.HIDf.lats(iv);
+    MD.LastLon=Data.HIDf.lons(iv);
+end
+MD.LastSurfacingPosition=sprintf('Lat %4.2f Lon %4.2f',MD.LastLat,MD.LastLon);
 
 % DataCentre
 MD.DataCentre=sprintf('%s (%s)',Data.MTDf.DATA_CENTRE,strtrim(Data.MTDf.FORMAT_VERSION));

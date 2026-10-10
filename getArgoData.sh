@@ -24,7 +24,7 @@ PaginaWebDir=$DirRaiz/Proyectos/ArgoSpainWebpage
 /bin/rm -f $PaginaWebDir/log/*.log
 
 #---------------------------------------
-#Crea listas de Argo a partir del google spreadsheets
+#Crea listas de Argo a partir de la hoja de calculo de Google
 #---------------------------------------
 printf "  Crea listas de Argo a apartir del google spreadsheets\n"
 cd $PaginaWebDir;$MatVersion -nodisplay -nosplash -r 'createLists;exit'
@@ -62,7 +62,7 @@ do
 done
 
 # Boyas Interest
-# No se hace en background para noabrir multiples instacinas de FTP
+# No se hace en background para no abrir multiples instancias de FTP
 for dacboya in $(cat $PaginaWebDir/floatsArgoInterest.dat)
 do
     dacboyaT=`echo "$dacboya" | sed 's/\//\-/g'`

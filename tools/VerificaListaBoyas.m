@@ -1,4 +1,4 @@
-%Read the data from the Argo Spaon data set
+%Read the data from the Argo Spain data set
 clear all;close all
 
 %% Read configuration

@@ -1,10 +1,10 @@
 clear all;close all
-%Crea los GeoJSON que consume argoregionstatus2.html. Replica la estructura
+%Crea los GeoJSON que consume argoregionstatus.html. Replica la estructura
 %y la nomenclatura del createRegionGeoJSON.m original (raiz del repositorio)
 %y solo aplica los cambios estrictamente necesarios para producir GeoJSON
 %valido. Cada cambio va marcado inline con un comentario "% Cambio: ...".
 %
-%Salida (junto a argoregionstatus2.html):
+%Salida (junto a argoregionstatus.html):
 %   <ScriptDir>/data/TrajectoryAS2.geojson
 %   <ScriptDir>/data/TrajectoryAI2.geojson
 %   <ScriptDir>/data/PosicionBoyas2.geojson
@@ -29,7 +29,10 @@ configWebPage
 %% Inicio
 %Read data
 
-DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','iactiva','FechaUltimoPerfil');
+DataArgoEs=load(strcat(PaginaWebDir,'/data/dataArgoSpain.mat'),'WMO','activa','iactiva','FechaUltimoPerfil','LatUltimoPerfil');
+if ~isfield(DataArgoEs,'LatUltimoPerfil')
+    DataArgoEs.LatUltimoPerfil = NaN(size(DataArgoEs.WMO));
+end
 DataArgoIn=load(strcat(PaginaWebDir,'/data/dataArgoInterest.mat'),'WMO','activa','FechaUltimoPerfil');
 
 NTotalPerfiles=0;
@@ -54,10 +57,17 @@ if exist(OutDir,'dir')==0
     mkdir(OutDir);
 end
 
-%% Trajectoria de las Argo Espana
+%% Trayectoria de las Argo España
 iTrajectoryAS=0;
 for ifloat=1:size(DataArgoEs.WMO,2)
-    if DataArgoEs.FechaUltimoPerfil(ifloat)>now-TrajectorySpanArgo && DataArgoEs.activa(ifloat)==1
+    %Boyas polares activas: trayectoria de los TrajectorySpanArgo dias previos a su ultimo perfil
+    EsPolar = abs(DataArgoEs.LatUltimoPerfil(ifloat)) > LatitudPolar;
+    if (DataArgoEs.FechaUltimoPerfil(ifloat)>now-TrajectorySpanArgo || EsPolar) && DataArgoEs.activa(ifloat)==1
+        if EsPolar
+            FechaRef = DataArgoEs.FechaUltimoPerfil(ifloat);
+        else
+            FechaRef = now;
+        end
         FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))));
         lon=FloatData.HIDf.lons;
         lat=FloatData.HIDf.lats;
@@ -66,7 +76,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
         lon=lon(ind);
         lat=lat(ind);
         julds=julds(ind);
-        ind=find((julds-(now-TrajectorySpanArgo))>0);
+        ind=find((julds-(FechaRef-TrajectorySpanArgo))>0);
         lon=lon(ind);
         lat=lat(ind);
         if numel(lon)>=2
@@ -81,7 +91,7 @@ for ifloat=1:size(DataArgoEs.WMO,2)
     end
 end
 
-%% Trajectoria de las Argo Interes
+%% Trayectoria de las Argo Interés
 iTrajectoryAI=0;
 for ifloat=1:size(DataArgoIn.WMO,2)
     if DataArgoIn.FechaUltimoPerfil(ifloat)>now-TrajectorySpanArgo && DataArgoIn.activa(ifloat)==1
@@ -233,6 +243,32 @@ for ifecha=FechaF:-1:FechaI
 end
 
 
+%% Boyas Argo Espana activas que no estan en los ficheros diarios (boyas polares
+%% que llevan tiempo bajo el hielo). Se usa su ultima posicion valida.
+for ifloat=1:size(DataArgoEs.WMO,2)
+    if DataArgoEs.activa(ifloat)==1 && (ntper==0 || isempty(find(platformes==DataArgoEs.WMO(ifloat), 1)))
+        FloatData=load(fullfile(DirArgoData,'Floats',num2str(DataArgoEs.WMO(ifloat))),'HIDf','MTDf');
+        iv=find(isnan(FloatData.HIDf.lats)==0 & isnan(FloatData.HIDf.lons)==0,1,'last');
+        if ~isempty(iv)
+            ntper=ntper+1;
+            ntperes=ntperes+1;
+            platformes(ntper)=DataArgoEs.WMO(ifloat);
+            PosicionBoyas.type='FeatureCollection';
+            PosicionBoyas.features{ntper}.type='Feature';
+            PosicionBoyas.features{ntper}.properties.WMO=num2str(DataArgoEs.WMO(ifloat));
+            PosicionBoyas.features{ntper}.properties.Description=deblank(FloatData.MTDf.PROJECT_NAME);
+            PosicionBoyas.features{ntper}.properties.Date=datestr(FloatData.HIDf.julds(end));
+            PosicionBoyas.features{ntper}.properties.SurfaceValue='';
+            PosicionBoyas.features{ntper}.properties.BottomValue='';
+            PosicionBoyas.features{ntper}.geometry.type='Point';
+            PosicionBoyas.features{ntper}.geometry.coordinates=[FloatData.HIDf.lons(iv),FloatData.HIDf.lats(iv)];
+            PosicionBoyas.features{ntper}.properties.Icon=1;
+            PosicionBoyas.features{ntper}.properties.href = strcat('https://www.argoespana.es/float/',num2str(DataArgoEs.WMO(ifloat)),'.html');
+            PosicionBoyas.features{ntper}.properties.stroke='#ff0000'; % Argo España
+            fprintf('     > Added %d (not in daily files), last valid position %s\n',DataArgoEs.WMO(ifloat),datestr(FloatData.HIDf.julds(iv)))
+        end
+    end
+end
 
 fid=fopen(fullfile(OutDir,'Summary.txt'),'w');
 fprintf(fid,'<b>Argo Espa&ntilde;a: %d boyas y %d perfiles oceanogr&aacute;ficos medidos </b><br/>\n',DataArgoEs.iactiva,sum(NTotalPerfiles));
@@ -278,8 +314,8 @@ cd(ftpobj,strcat(ftp_dir_html,'/data'));
 mput(ftpobj,fullfile(OutDir,'Summary.txt'));
 
 
-%% Writting Informe
-% Para el infome Selecciono solo aquellos dentro de la region IB
+%% Writing Informe
+% Para el informe selecciono solo aquellos dentro de la region IB
 ipIB=find(lonsIB>lon_minIB & lonsIB<lon_maxIB & latsIB>lat_minIB & latsIB<lat_maxIB);
 platformes=platformes(ipIB);
 juldsIB=juldsIB(ipIB);

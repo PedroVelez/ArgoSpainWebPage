@@ -1,4 +1,4 @@
-%% Writting Report
+%% Writing Report
 
 %Read previous report
 FileNameInforme=strcat(PaginaWebDir,'/data/report',DataSetName,'Status.mat');

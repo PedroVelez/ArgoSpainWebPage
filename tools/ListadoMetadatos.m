@@ -1,4 +1,4 @@
-%Este script lee los daots de las boyas del programa ArgoEspana
+%Este script lee los datos de las boyas del programa ArgoEspana
 clear all;close all;load Globales
 clc
 
